@@ -71,18 +71,18 @@
     "social": {
       "github": {
         "title": "Github profile",
-        "url": "https://github.com/",
-        "user": "username"
+        "url": "https://github.com/justin-phxm/",
+        "user": "justin-phxm"
       },
       "facebook": {
         "title": "Facebook profile",
-        "url": "https://facebook.com/",
-        "user": "username"
+        "url": "https://www.facebook.com/profile.php?id=100009637969718",
+        "user": "Justin Pham"
       },
       "twitter": {
         "title": "Twitter account",
-        "url": "https://twitter.com/",
-        "user": "username"
+        "url": "https://twitter.com/phamx04/",
+        "user": "Justin Pham"
       }
     },
     "find_me_also_in": {
@@ -93,20 +93,15 @@
           "url": "https://www.youtube.com/",
           "user": "username"
         },
-        "gurushots": {
-          "title": "GuruShots profile",
-          "url": "https://gurushots.com/",
-          "user": "username"
-        },
         "instagram": {
           "title": "Instagram account",
-          "url": "https://instagram.com/",
-          "user": "username"
+          "url": "https://www.instagram.com/justinphxm/",
+          "user": "justinphxm"
         },
         "twitch": {
           "title": "Twitch profile",
-          "url": "https://twitch.com/",
-          "user": "username"
+          "url": "https://www.twitch.tv/cheziboi/",
+          "user": "cheziboi"
         }
       }
     }
