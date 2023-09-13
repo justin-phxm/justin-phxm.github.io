@@ -17,21 +17,20 @@ export default function Footer() {
   social.twitter.icon = <AiFillTwitterCircle />;
   return (
     <>
-      <footer class="rounded-lg shadow m-4 text-slate-500 dark:bg-gray-800">
-        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-          <span class="text-sm sm:text-center dark:text-gray-400">
-            find me in:
-          </span>
-          <ul class="flex flex-wrap items-center mt-3 text-sm font-medium dark:text-gray-400 sm:mt-0">
-            {Object.values(social).map((item, index) => (
-              <li key={index}>
-                <a href={item.url} className="hover:underline">
-                  {item.icon ? item.icon : item.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <footer class="w-full mx-auto max-w-screen-xl flex justify-between md:items-center md:justify-between rounded-lg shadow text-slate-500 dark:bg-gray-800">
+        <span class="sm:text-center dark:text-gray-400 p-3">find me in:</span>
+        <ul class="flex flex-wrap items-center text-2xl font-medium dark:text-gray-400">
+          {Object.values(social).map((item, index) => (
+            <li
+              key={index}
+              class="p-3 border-slate-800 border-t-0 border-r-0 border-b-0 border"
+            >
+              <a href={item.url} className="hover:underline" target="_blank">
+                {item.icon ? item.icon : item.title}
+              </a>
+            </li>
+          ))}
+        </ul>
       </footer>
     </>
   );
