@@ -39,7 +39,7 @@ export default function NavBar() {
                       current == item.current
                         ? "bg-slate-950 text-white border-orange-300 border-r-0"
                         : "text-gray-300 border-b-0  hover:bg-gray-700 hover:text-white",
-                      "bg-inherit border-t-0 border-l-0 border-slate-800 rounded-none px-6 py-2 text-sm font-medium"
+                      "bg-inherit border-t-0 border-l-0  rounded-none px-6 py-2 text-sm font-medium"
                     )}
                     onClick={() => setCurrent(index)}
                   >
