@@ -40,8 +40,6 @@ export default function Game() {
       setBoard(newBoard);
     }
     setMoves(0);
-    // setStartTime(Date.now());
-    // setTime(0);
   }
 
   // Helper function to find the empty cell
@@ -180,19 +178,25 @@ export default function Game() {
   return (
     <>
       <section
-        class="bg-green-300 rounded-md  cursor-pointer hover:outline focus:outline outline-green-500"
+        class="rounded-lg w-full cursor-pointer hover:outline focus:outline outline-green-500"
         onKeyDown={getKeyAndMove}
         tabIndex={0}
       >
         {board.map((row: number[]) => (
-          <div className=" font-bold text-8xl p-2 ">
+          <div className="p-1 ">
             {row.map((cell: number) => (
               <button
-                className={`p-2 m-2 ${
-                  cell === 0 ? "bg-gray-200" : "bg-green-200"
-                }`}
+                className={`w-16 h-16 mx-1 text-white rounded-lg border border-white justify-center items-center inline-flex ${
+                  cell === 0 ? " bg-transparent" : "bg-teal-600"
+                } `}
               >
+                {/* <button
+                  className={` text-white ${
+                    cell === 0 ? "bg-gray-200" : "bg-teal-600"
+                  }`}
+                > */}
                 {cell}
+                {/* </button> */}
               </button>
             ))}
           </div>

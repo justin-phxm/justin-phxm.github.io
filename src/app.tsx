@@ -5,7 +5,9 @@ export function App() {
   return (
     <>
       <NavBar />
-      <Game />
+      <section class="hidden md:inline-block w-full">
+        <Game />
+      </section>
       <Footer />
     </>
   );
