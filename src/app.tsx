@@ -5,7 +5,7 @@ export function App() {
   return (
     <>
       <NavBar />
-      <section class="hidden md:inline-block w-full">
+      <section class="hidden md:inline-block w-full md:flex-row md:flex">
         <Game />
       </section>
       <Footer />

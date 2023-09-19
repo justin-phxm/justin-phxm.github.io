@@ -178,7 +178,7 @@ export default function Game() {
   return (
     <>
       <section
-        class="rounded-lg w-full cursor-pointer hover:outline focus:outline outline-green-500"
+        class="py-4 rounded-lg w-full cursor-pointer hover:outline focus:outline outline-green-500"
         onKeyDown={getKeyAndMove}
         tabIndex={0}
       >
@@ -190,36 +190,41 @@ export default function Game() {
                   cell === 0 ? " bg-transparent" : "bg-teal-600"
                 } `}
               >
-                {/* <button
-                  className={` text-white ${
-                    cell === 0 ? "bg-gray-200" : "bg-teal-600"
-                  }`}
-                > */}
                 {cell}
-                {/* </button> */}
               </button>
             ))}
           </div>
         ))}
       </section>
-      <div>Use Arrow Keys to play</div>
-      <div id="buttons" class="w-full flex flex-col items-center gap-1 pt-5">
-        <button id="console-button" class="bg-green-300" onClick={moveUp}>
-          <img src="arrow-button.svg" alt="" />
-        </button>
-        <div class="grid grid-cols-3 gap-1">
-          <button id="console-button" class=" bg-green-300 " onClick={moveLeft}>
-            <img src="arrow-button.svg" alt="" class="-rotate-90 " />
+      <div className="py-4 flex flex-col w-full bg-opacity-20 text-white text-sm items-center rounded-lg">
+        <div className=" text-left">
+          <p>// use keyboard </p>
+          <p>// arrows to play</p>
+        </div>
+
+        <div id="buttons" class="w-full flex flex-col items-center gap-1 pt-5">
+          <button id="console-button" class=" bg-gray-950" onClick={moveUp}>
+            <img src="arrow-button.svg" alt="" />
           </button>
-          <button id="console-button" class="bg-green-300" onClick={moveDown}>
-            <img src="arrow-button.svg" alt="" class="rotate-180" />
-          </button>
-          <button id="console-button" class="bg-green-300" onClick={moveRight}>
-            <img src="arrow-button.svg" alt="" class="rotate-90 " />
-          </button>
+          <div class="grid grid-cols-3 gap-1">
+            <button id="console-button" class=" bg-gray-950" onClick={moveLeft}>
+              <img src="arrow-button.svg" alt="" class="-rotate-90 " />
+            </button>
+            <button id="console-button" class="bg-gray-950" onClick={moveDown}>
+              <img src="arrow-button.svg" alt="" class="rotate-180" />
+            </button>
+            <button id="console-button" class="bg-gray-950" onClick={moveRight}>
+              <img src="arrow-button.svg" alt="" class="rotate-90 " />
+            </button>
+          </div>
+        </div>
+        <div class="border border-white rounded-lg inline-flex m-2 p-2 items-center">
+          moves &emsp;
+          <div className="border border-white rounded-lg p-4 -m-2 inline-flex">
+            {moves}
+          </div>
         </div>
       </div>
-      <div>Moves: {moves}</div>
     </>
   );
 }
