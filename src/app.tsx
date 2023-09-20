@@ -7,8 +7,33 @@ export function App() {
     <>
       <NavBar />
       <div className="flex flex-row">
-        <section class="w-full items-center content-center">
-          {devInfo.name}
+        <section class="w-full items-center content-center p-4">
+          <p class="text-slate-200 text-lg">Welcome. I am</p>
+          <p class="text-slate-200 text-6xl">{devInfo.name}</p>
+          <p class="text-indigo-600 text-3xl">&gt; Full-stack web developer</p>
+          <p class="text-slate-500 text-base ">
+            // complete the game to continue
+          </p>
+          <p class="text-slate-500 text-base ">
+            // you can also see it on my Github page
+          </p>
+          <div>
+            <span class="text-indigo-600 text-base font-medium ">const</span>
+            <span class="text-white text-base font-medium "> </span>
+            <span class="text-emerald-400 text-base font-medium ">
+              githubLink
+            </span>
+            <span class="text-white text-base font-medium "> = </span>
+            <span class="text-rose-400 text-base font-medium ">“</span>
+            <a
+              href="https://github.com/justin-phxm"
+              target="_blank"
+              class="text-rose-400 text-base font-medium  underline"
+            >
+              https://github.com/justin-phxm
+            </a>
+            <span class="text-rose-400 text-base font-medium ">”</span>
+          </div>
         </section>
         <section class="hidden w-full md:flex-row md:flex relative">
           <div class=" bg-emerald-400 w-96 h-96 absolute top-0 left-0 z-0 transform rotate-45 opacity-40 shadow-2xl filter blur-2xl " />
