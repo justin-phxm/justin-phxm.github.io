@@ -17,7 +17,7 @@ export default function Footer() {
   social.twitter.icon = <AiFillTwitterCircle />;
   return (
     <>
-      <footer class="w-full mx-auto max-w-screen-xl flex border border-b-0 border-l-0 border-r-0 border-slate-800 justify-between md:items-center md:justify-between shadow text-slate-500 dark:bg-gray-800">
+      <footer class="w-full flex border border-b-0 border-l-0 border-r-0 border-slate-800 justify-between md:items-center md:justify-between shadow text-slate-500 dark:bg-gray-800">
         <span class="sm:text-center dark:text-gray-400 p-3">find me in:</span>
         <ul class="flex flex-wrap items-center text-2xl font-medium dark:text-gray-400">
           {Object.values(social).map((item, index) => (

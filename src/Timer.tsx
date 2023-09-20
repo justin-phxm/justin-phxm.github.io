@@ -50,12 +50,17 @@ export default function Timer(props: TimerProps) {
           {formatTime(minutes)}: {formatTime(seconds)}
         </div>
       </div>
-      <button
-        onClick={resetTime}
-        class=" text-black bg-orange-300 m-4 hover:opacity-80 rounded-md outline-none transition-all duration-300"
-      >
-        restart-game
-      </button>
+      <div className="flex flex-row gap-2">
+        <button
+          onClick={resetTime}
+          class=" text-black bg-orange-300 hover:opacity-80 rounded-md outline-none transition-all duration-300"
+        >
+          restart-game
+        </button>
+        <button class=" rounded-lg border bg-transparent border-white justify-center items-center text-white text-sm">
+          skip
+        </button>
+      </div>
     </>
   );
 }
