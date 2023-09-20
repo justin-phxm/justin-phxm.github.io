@@ -1,4 +1,5 @@
 import { useState, useEffect } from "preact/hooks";
+import Timer from "./Timer";
 export default function Game() {
   const myArray: number[][] = [
     [1, 2, 3],
@@ -186,8 +187,8 @@ export default function Game() {
           <div className="p-1 ">
             {row.map((cell: number) => (
               <button
-                className={`w-16 h-16 mx-1 text-white rounded-lg border border-white justify-center items-center inline-flex ${
-                  cell === 0 ? " bg-transparent" : "bg-teal-600"
+                className={`w-16 h-16 mx-1 text-white transition rounded-lg border border-white justify-center items-center inline-flex ${
+                  cell === 0 ? " bg-transparent scale-95 " : "bg-teal-600"
                 } `}
               >
                 {cell}
@@ -224,6 +225,7 @@ export default function Game() {
             {moves}
           </div>
         </div>
+        <Timer shuffleArray={shuffleArray} myArray={myArray} />
       </div>
     </>
   );
