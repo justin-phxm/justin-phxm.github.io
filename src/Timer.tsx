@@ -52,7 +52,7 @@ export default function Timer(props: TimerProps) {
       </div>
       <button
         onClick={resetTime}
-        class="bg-orange-300 m-4 hover:opacity-80 rounded-md outline-none transition-all duration-300"
+        class=" text-black bg-orange-300 m-4 hover:opacity-80 rounded-md outline-none transition-all duration-300"
       >
         restart-game
       </button>
