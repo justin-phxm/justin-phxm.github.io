@@ -7,7 +7,7 @@ export function App() {
     <>
       <NavBar />
       <div className="flex flex-row">
-        <section class="w-full items-center content-center p-4">
+        <section class="w-full p-20 ">
           <p class="text-slate-200 text-lg">Welcome. I am</p>
           <p class="text-slate-200 text-6xl">{devInfo.name}</p>
           <p class="text-indigo-600 text-3xl">&gt; Full-stack web developer</p>

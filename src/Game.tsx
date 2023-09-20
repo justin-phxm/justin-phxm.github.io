@@ -179,15 +179,15 @@ export default function Game() {
   return (
     <>
       <section
-        class="p-4  rounded-lg w-full cursor-pointer bg-slate-900 bg-opacity-80 shadow-inner hover:outline focus:outline outline-green-500"
+        class="p-4 rounded-lg w-full flex gap-4 flex-col cursor-pointer bg-slate-900 bg-opacity-80 shadow-inner hover:outline focus:outline outline-green-500"
         onKeyDown={getKeyAndMove}
         tabIndex={0}
       >
         {board.map((row: number[]) => (
-          <div className="p-1 items-center content-center">
+          <div className=" flex justify-between">
             {row.map((cell: number) => (
               <button
-                className={`w-16 h-16 mx-1 text-white transition rounded-lg border border-white justify-center items-center inline-flex ${
+                className={`w-16 h-16 text-white transition rounded-lg border border-white justify-center items-center inline-flex ${
                   cell === 0 ? " bg-transparent scale-95 " : "bg-teal-600"
                 } `}
               >
@@ -196,6 +196,9 @@ export default function Game() {
             ))}
           </div>
         ))}
+        <button class="p-3 bg-orange-300 rounded-lg justify-center items-center">
+          <div class=" text-gray-950 text-sm ">start-game</div>
+        </button>
       </section>
       <div className="py-4 flex flex-col w-full bg-opacity-20 text-white text-sm items-center rounded-lg">
         <div class="p-4 bg-slate-900 bg-opacity-20 rounded-lg">
