@@ -1,3 +1,3 @@
-export default function Contact({ path }: { path: string }) {
+export default function Contact({}: { path: string }) {
   return <div>Contact</div>;
 }

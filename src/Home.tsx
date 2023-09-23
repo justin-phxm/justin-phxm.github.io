@@ -2,7 +2,7 @@ import Game from "./Game.tsx";
 import devInfo from "../devInfo.json";
 import { RxCrossCircled } from "react-icons/rx";
 
-export default function Home({ path }: { path: string }) {
+export default function Home({}: { path: string }) {
   return (
     <div className="flex flex-row">
       <section class="w-full p-20 xl:p-28 ">

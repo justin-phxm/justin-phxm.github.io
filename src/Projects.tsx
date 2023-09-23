@@ -1,3 +1,3 @@
-export default function Projects({ path }: { path: string }) {
+export default function Projects({}: { path: string }) {
   return <div>Projects</div>;
 }

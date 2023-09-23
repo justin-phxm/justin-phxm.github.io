@@ -1,3 +1,3 @@
-export default function AboutMe({ path }: { path: string }) {
+export default function AboutMe({}: { path: string }) {
   return <div>AboutMe</div>;
 }
