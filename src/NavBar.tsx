@@ -4,12 +4,12 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "preact/hooks";
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
-  const [navigation, setNavigation] = useState([
+  const navigation = [
     { name: "_hello", href: "#", current: 0 },
     { name: "_about-me", href: "#", current: 1 },
     { name: "_projects", href: "#", current: 2 },
     // { name: "_contact-me", href: "#", current: false },
-  ]);
+  ];
   const [current, setCurrent] = useState(0);
   const handleItemClick = (index: number) => {
     setCurrent(index);
