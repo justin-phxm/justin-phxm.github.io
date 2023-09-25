@@ -5,9 +5,9 @@ import Footer from "./Footer.tsx";
 // import { RxCrossCircled } from "react-icons/rx";
 import { Router } from "preact-router";
 import Home from "./Home.tsx";
-import AboutMe from "./AboutMe.tsx";
-import Projects from "./Projects.tsx";
-import Contact from "./Contact.tsx";
+import AboutMe from "./_about-me/AboutMe.tsx";
+import Projects from "./_projects/Projects.tsx";
+import Contact from "./_contact-me/Contact.tsx";
 
 export function App() {
   return (

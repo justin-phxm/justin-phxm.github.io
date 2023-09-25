@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import axios from "axios";
-import devInfo from "../devInfo.json";
+import devInfo from "../../devInfo.json";
 export default function Projects({}: { path: string }) {
   interface Repo {
     id: number;

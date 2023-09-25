@@ -1,4 +1,4 @@
-import Game from "./Game.tsx";
+import Game from "./_hello/Game.tsx";
 import devInfo from "../devInfo.json";
 import { RxCrossCircled } from "react-icons/rx";
 
