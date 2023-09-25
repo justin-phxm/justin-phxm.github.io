@@ -1,5 +1,5 @@
-import Game from "./_hello/Game.tsx";
-import devInfo from "../devInfo.json";
+import Game from "./Game.tsx";
+import devInfo from "../../devInfo.json";
 import { RxCrossCircled } from "react-icons/rx";
 
 export default function Home({}: { path: string }) {
