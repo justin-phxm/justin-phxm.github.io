@@ -1,6 +1,11 @@
 import { useEffect, useState } from "preact/hooks";
+import hljs from "highlight.js";
+import typescript from "highlight.js/lib/languages/typescript";
+import "highlight.js/styles/github-dark-dimmed.css";
 import axios from "axios";
 import devInfo from "../../devInfo.json";
+
+hljs.registerLanguage("typescript", typescript);
 
 export default function CodeSnippets() {
   const [gistData, setGistData] = useState<any>([]);
@@ -18,6 +23,8 @@ export default function CodeSnippets() {
         });
     });
   }, []);
+  hljs.initHighlightingOnLoad();
+
   return (
     <>
       <div className="flex flex-col p-4">
@@ -28,10 +35,11 @@ export default function CodeSnippets() {
             <div>
               {Object.keys(gist.files).map((file) => (
                 <div class="bg-black">
-                  <div>{gist.files[file].filename}</div>
-                  <div>
-                    <div>{gist.files[file].content}</div>
-                  </div>
+                  <pre key={file}>
+                    <code class="language-typescript bg-black">
+                      {gist.files[file].content}
+                    </code>
+                  </pre>
                 </div>
               ))}
             </div>
