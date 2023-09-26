@@ -9,7 +9,6 @@ import { useState, useEffect } from "preact/hooks";
 
 export default function UserInfo() {
   const [aboutSection, setAboutSection] = useState(devInfo.about.sections[0]);
-  const [info, setInfo] = useState(aboutSection.info[0]);
   const folderColors = ["text-rose-400", "text-emerald-400", "text-indigo-800"];
   const sectionIcons = [<AiFillCode />, <BiSolidUser />, <FaGamepad />];
   return (
@@ -40,7 +39,6 @@ export default function UserInfo() {
         </div>
         <div className="cursor-pointer gap-1 border border-l-0 border-r-0 border-slate-800 p-2 flex flex-row items-center">
           <BiSolidDownArrow />
-
           <p>contacts</p>
         </div>
         <div className=" text-slate-500 text-sm">
@@ -56,7 +54,7 @@ export default function UserInfo() {
       </div>
 
       <div className="border border-l-0 border-t-0 border-b-0 border-slate-800">
-        <InfoView />
+        <InfoView aboutSection={aboutSection} />
       </div>
     </>
   );

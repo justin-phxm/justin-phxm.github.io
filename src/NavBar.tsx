@@ -117,21 +117,6 @@ export default function NavBar() {
                 </Disclosure.Button>
               </a>
             ))}
-            {/* <Disclosure.Button
-              className={classNames(
-                current === 3
-                  ? "  text-white"
-                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                "block rounded-none  text-base font-medium w-full text-left"
-              )}
-              onClick={() => {
-                setCurrent(3);
-                setIsMenuOpen(true);
-              }}
-              href="/contact"
-            >
-              _contact-me
-            </Disclosure.Button> */}
           </div>
         </Disclosure.Panel>
       </Disclosure>
