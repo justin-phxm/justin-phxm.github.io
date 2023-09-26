@@ -197,7 +197,12 @@ export default function Game() {
           </div>
         ))}
         <button class="p-3 bg-orange-300 rounded-lg justify-center items-center">
-          <div class=" text-gray-950 text-sm ">start-game</div>
+          <div
+            onClick={() => shuffleArray(board)}
+            class=" text-gray-950 text-sm "
+          >
+            start-game
+          </div>
         </button>
       </section>
       <div className="py-4 flex flex-col w-full bg-opacity-20 text-white text-sm items-center rounded-lg">

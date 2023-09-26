@@ -58,7 +58,7 @@ export default function Timer(props: TimerProps) {
           restart-game
         </button>
         <button class=" rounded-lg border bg-transparent border-white justify-center items-center text-white text-sm">
-          skip
+          <a href={"/about-me"}>skip</a>
         </button>
       </div>
     </>
