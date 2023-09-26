@@ -9,6 +9,7 @@ import { useState, useEffect } from "preact/hooks";
 
 export default function UserInfo() {
   const [aboutSection, setAboutSection] = useState(devInfo.about.sections[0]);
+  const [infoDescription, setInfoDescription] = useState(aboutSection.info[0]);
   const folderColors = ["text-rose-400", "text-emerald-400", "text-indigo-800"];
   const sectionIcons = [<AiFillCode />, <BiSolidUser />, <FaGamepad />];
   return (
@@ -30,7 +31,10 @@ export default function UserInfo() {
         </div>
         <div className="text-sm">
           {aboutSection.info.map((info, index) => (
-            <div className="p-1 cursor-pointer flex flex-row gap-2 text-center content-center items-center hover:bg-gray-700">
+            <div
+              onClick={() => setInfoDescription(info)}
+              className="p-1 cursor-pointer flex flex-row gap-2 text-center content-center items-center hover:bg-gray-700"
+            >
               <MdKeyboardArrowRight />
               <BsFolder2 class={folderColors[index % folderColors.length]} />
               <p class="  ">{info.title}</p>
@@ -54,7 +58,10 @@ export default function UserInfo() {
       </div>
 
       <div className="border border-l-0 border-t-0 border-b-0 border-slate-800">
-        <InfoView aboutSection={aboutSection} />
+        <InfoView
+          infoDescription={infoDescription}
+          aboutSection={aboutSection}
+        />
       </div>
     </>
   );
