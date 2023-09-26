@@ -3,9 +3,15 @@ import { AiFillCode, AiOutlineMail } from "react-icons/ai";
 import { BiSolidUser, BiSolidDownArrow } from "react-icons/bi";
 import { FaGamepad } from "react-icons/fa";
 import { BsFolder2, BsTelephoneFill } from "react-icons/bs";
-import { MdKeyboardArrowRight, MdKeyboardArrowDown } from "react-icons/md";
+import {
+  MdKeyboardArrowRight,
+  // MdKeyboardArrowDown
+} from "react-icons/md";
 import InfoView from "./InfoView";
-import { useState, useEffect } from "preact/hooks";
+import {
+  useState,
+  //  useEffect
+} from "preact/hooks";
 
 export default function UserInfo() {
   const [aboutSection, setAboutSection] = useState(devInfo.about.sections[0]);

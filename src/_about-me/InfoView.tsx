@@ -11,8 +11,8 @@ interface InfoDescription {
 }
 export default function InfoView({
   infoDescription,
-  aboutSection,
-}: {
+}: // aboutSection,
+{
   infoDescription: InfoDescription;
   aboutSection: any;
 }) {
