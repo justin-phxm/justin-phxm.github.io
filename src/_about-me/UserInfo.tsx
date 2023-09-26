@@ -5,41 +5,38 @@ import { FaGamepad } from "react-icons/fa";
 import { BsFolder2, BsTelephoneFill } from "react-icons/bs";
 import { MdKeyboardArrowRight, MdKeyboardArrowDown } from "react-icons/md";
 import InfoView from "./InfoView";
+import { useState, useEffect } from "preact/hooks";
+
 export default function UserInfo() {
+  const [aboutSection, setAboutSection] = useState(devInfo.about.sections[0]);
+  const [info, setInfo] = useState(aboutSection.info[0]);
+  const folderColors = ["text-rose-400", "text-emerald-400", "text-indigo-800"];
+  const sectionIcons = [<AiFillCode />, <BiSolidUser />, <FaGamepad />];
   return (
     <>
       <div className=" border border-l-0 border-t-0 border-b-0 border-slate-800">
-        <div className=" text-3xl hover:bg-gray-700 p-2">
-          <AiFillCode />
-        </div>
-        <div className=" text-3xl hover:bg-gray-700 p-2">
-          <BiSolidUser />
-        </div>
-        <div className=" text-3xl hover:bg-gray-700 p-2">
-          <FaGamepad />
-        </div>
+        {devInfo.about.sections.map((section, index) => (
+          <div
+            className="cursor-pointer text-3xl hover:bg-gray-700 p-2"
+            onClick={() => setAboutSection(section)}
+          >
+            {sectionIcons[index]}
+          </div>
+        ))}
       </div>
       <div className=" text-white border border-l-0 border-t-0 border-b-0 border-slate-800">
         <div className="cursor-pointer gap-1 border border-l-0 border-t-0 border-r-0 border-slate-800 flex flex-row items-center p-2">
           <BiSolidDownArrow />
-          <p>personal-info</p>
+          <p>{aboutSection.title}</p>
         </div>
         <div className="text-sm">
-          <div className="p-1 cursor-pointer flex flex-row gap-2 text-center content-center items-center hover:bg-gray-700">
-            <MdKeyboardArrowRight />
-            <BsFolder2 class=" text-rose-400" />
-            <p class="  ">bio</p>
-          </div>
-          <div className="p-1 cursor-pointer flex flex-row gap-2 text-center content-center items-center hover:bg-gray-700">
-            <MdKeyboardArrowDown />
-            <BsFolder2 class=" text-emerald-400" />
-            <p class="">interests</p>
-          </div>
-          <div className="p-1 cursor-pointer flex flex-row gap-2 text-center content-center items-center hover:bg-gray-700">
-            <MdKeyboardArrowDown />
-            <BsFolder2 class=" text-indigo-800" />
-            <p class="">education</p>
-          </div>
+          {aboutSection.info.map((info, index) => (
+            <div className="p-1 cursor-pointer flex flex-row gap-2 text-center content-center items-center hover:bg-gray-700">
+              <MdKeyboardArrowRight />
+              <BsFolder2 class={folderColors[index % folderColors.length]} />
+              <p class="  ">{info.title}</p>
+            </div>
+          ))}
         </div>
         <div className="cursor-pointer gap-1 border border-l-0 border-r-0 border-slate-800 p-2 flex flex-row items-center">
           <BiSolidDownArrow />
