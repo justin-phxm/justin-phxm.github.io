@@ -1,7 +1,7 @@
 import devInfo from "../devInfo.json";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useState } from "preact/hooks";
+import { useState, useEffect } from "preact/hooks";
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const navigation = [
@@ -11,6 +11,22 @@ export default function NavBar() {
     { name: "_contact-me", href: "/contact", current: 3 },
   ];
   const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    // Get the current pathname from the URL
+    const currentPathname = window.location.pathname;
+
+    // Find the matching navigation item based on the href
+    const matchingNavItem = navigation.find(
+      (item) => item.href === currentPathname
+    );
+
+    if (matchingNavItem) {
+      // If a matching item is found, update 'current' to its 'current' value
+      setCurrent(matchingNavItem.current);
+    }
+  }, []);
+
   const handleItemClick = (index: number) => {
     setCurrent(index);
   };
