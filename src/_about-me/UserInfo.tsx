@@ -23,7 +23,10 @@ export default function UserInfo() {
       <div className=" border border-l-0 border-t-0 border-b-0 border-slate-800">
         {devInfo.about.sections.map((section, index) => (
           <div
-            className="cursor-pointer text-3xl hover:bg-gray-700 p-2"
+            className={
+              "cursor-pointer text-3xl hover:bg-gray-700 p-2" +
+              (section === aboutSection ? " text-gray-600" : "")
+            }
             onClick={() => setAboutSection(section)}
           >
             {sectionIcons[index]}

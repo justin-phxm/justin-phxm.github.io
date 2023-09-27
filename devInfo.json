@@ -10,15 +10,15 @@
         "info": [
           {
             "title": "experience",
-            "description": "Hello, I'm Justin Pham, a third-year software engineering student with a passion for web development. My coding journey began when I was first introduced to Python in my freshman year of university. I immediately showed interest in being able to write robust and beautiful code. In the future, I hope I can find an exciting career in web-development where I can tackle challenging problems and come up with creative solutions."
+            "description": "I have a background in game development where I worked at a coding academy called Code Ninjas. I taught young students from the ages of 5 to 15 the basics of coding and game development. I also have experience in web development where I worked with a team of other university students in the 'Calgary Solar Car Club' where I developed their telemetry site and inventory portal."
           },
           {
             "title": "hard-skills",
-            "description": "<br>As a front-end developer, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <br><br> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+            "description": "As a front-end developer, I have experience with NextJS and Angular. When developing the frontend, I prefer to use TailwindCSS but I also have experience in Bulma and Bootstrap. I'm always looking to import a new Node library to spice up my website. As for back-end development, I mainly use Python, AWS, mySQL, and sometimes Firebase. On top of my web development skills, I also have experience in a multitude of different languages such as C, C++, Java, and Assembly. While I typically prefer web development, I take great interest in embedded hardware and software programming. I also have skills in version control, most notably git, and when working with others, I frequently use Figma and Jira. Currently, I am learning about the MERN stack and investigating in machine learning."
           },
           {
             "title": "soft-skills",
-            "description": "<br>I bring more than Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br><br> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+            "description": "I bring more than a tech stack to the table. When it comes to working with others I like to convey my ideas through drawings, diagrams, and neatly presented slide decks. I like to resolve conflict immediately and cannot leave grudges in the back of my mind. I love it when I feel like I am contributing to something greater than myself. Problem solving comes naturally to me, especially when given the right tools and information. I prefer to be a listener rather than a talker, I'm an introvert and like to carefully sort out my thoughts before thinking. When it comes to building relationships with others, I am not afraid to ask the hard questions and invite others to challenge me."
           }
         ]
       },
@@ -32,14 +32,14 @@
           },
           {
             "title": "interests",
-            "description": "<br>I am constantly learning and lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+            "description": "I am quite interested in learning about the relationship between technology and society, specifically on how technology can be used to improve equity, diversity, and inclusion. I am currently taking a class on the subject and am learning about how artifical intelligence has been used to disrupt the status quo. I am hoping that I can use my skills in software engineering to make technology more accessible and available to those in need."
           },
           {
             "title": "education",
-            "description": "<br>I have always been passionate about lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <br><br> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+            "description": "I am currently enrolled in the University of Calgary, taking the Bachelors of Science in Software Engineering. I am hoping to graduate in 2025 or 2026. Some relevant courses I have taken include Data Structures and Algorithms, Object Oriented Programming, Principles of Software design and Computer Organization, Operating Systems, Machine Learning, and Full-Stack web development.",
             "files": {
-              "high-school": "I have been in 'Las viñas'...",
-              "university": "The university..."
+              "high-school": "",
+              "university": ""
             }
           }
         ]
@@ -49,12 +49,12 @@
         "icon": "icons/info-hobbies.svg",
         "info": [
           {
-            "title": "sports",
-            "description": "<br>I am an avid sports enthusiast and lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+            "title": "clubs",
+            "description": " You can find me at a vareity of different clubs at the university, such as the Calgary Solar Car club, where I am busy developing the Telemetry system for the car. I am also a member of the Vietnamese Student Association (VSA), where I am planning the next volleyball tournament. And I also am a member of the Live Event Production club, where I am learning about the different aspects of live event production and helping the team run a light show."
           },
           {
             "title": "favorite-games",
-            "description": "<br>I am a passionate gamer with Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <br><br> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            "description": "One of my favorite games at the moment is Team Fight Tactics, developed by Riot Games. It is a strategy type game similar to Chess where you assemble your units to defeat your opponents. I am happy to have reached a competitive level in that game, reaching Masters (top 1% playerbase) in Set 3. When I am feeling more relaxed, I like to play Pokemon Go on the university campus and catch Pokemon with my friends."
           }
         ]
       }
