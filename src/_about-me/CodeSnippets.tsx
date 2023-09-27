@@ -1,6 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
 import hljs from "highlight.js";
-import typescript from "highlight.js/lib/languages/typescript";
 import "highlight.js/styles/github-dark-dimmed.css";
 import axios from "axios";
 import devInfo from "../../devInfo.json";
