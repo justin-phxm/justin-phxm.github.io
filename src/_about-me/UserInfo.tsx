@@ -25,14 +25,14 @@ export default function UserInfo() {
   const sectionIcons = [<AiFillCode />, <BiSolidUser />, <FaGamepad />];
   return (
     <>
-      <div className=" sm:border-r border-slate-800">
-        <div className="text-white leading-tight p-2 sm:hidden">_about-me</div>
+      <div className=" lg:border-r border-slate-800">
+        <div className="text-white leading-tight p-2 lg:hidden">_about-me</div>
         {/* Mobile Section icons */}
         {devInfo.about.sections.map((section, index) => (
           <>
             <div
               onClick={() => setAboutSection(section)}
-              className="text-white my-1 text-sm sm:hidden cursor-pointer gap-1 bg-slate-800 p-2 flex flex-row items-center"
+              className="text-white my-1 text-sm lg:hidden cursor-pointer gap-1 bg-slate-800 p-2 flex flex-row items-center"
             >
               {section === aboutSection ? (
                 <BiSolidDownArrow />
@@ -42,7 +42,7 @@ export default function UserInfo() {
               <p>{section.title}</p>
             </div>
             {section === aboutSection && (
-              <div className="text-sm sm:hidden">
+              <div className="text-sm lg:hidden">
                 {aboutSection.info.map((info, index) => (
                   <div
                     onClick={() => setInfoDescription(info)}
@@ -62,7 +62,7 @@ export default function UserInfo() {
             {/* Desktop section icons */}
             <div
               className={
-                "hidden sm:block cursor-pointer text-3xl hover:bg-gray-700 p-2" +
+                "hidden lg:block cursor-pointer text-3xl hover:bg-gray-700 p-2" +
                 (section === aboutSection ? " text-gray-600" : "")
               }
               onClick={() => setAboutSection(section)}
@@ -74,12 +74,12 @@ export default function UserInfo() {
       </div>
       <div className=" text-white border-r border-slate-800">
         {/* desktop */}
-        <div className="hidden cursor-pointer gap-2 border-b border-slate-800 sm:flex flex-row items-center p-2">
+        <div className="hidden cursor-pointer gap-2 border-b border-slate-800 lg:flex flex-row items-center p-2">
           <BiSolidDownArrow />
           <p class="whitespace-nowrap">{aboutSection.title}</p>
         </div>
         {/* desktop */}
-        <div className="text-sm hidden sm:block whitespace-nowrap">
+        <div className="text-sm hidden lg:block whitespace-nowrap">
           {aboutSection.info.map((info, index) => (
             <div
               onClick={() => setInfoDescription(info)}
@@ -99,7 +99,7 @@ export default function UserInfo() {
         </div>
         <div
           onClick={() => setContactVisible(!contactVisible)}
-          className=" bg-slate-800 sm:bg-inherit text-sm sm:text-normal cursor-pointer gap-1 border-t border-b border-slate-800 p-2 flex flex-row items-center"
+          className=" bg-slate-800 lg:bg-inherit text-sm lg:text-normal cursor-pointer gap-1 border-t border-b border-slate-800 p-2 flex flex-row items-center"
         >
           {contactVisible ? <BiSolidDownArrow /> : <BiSolidRightArrow />}
           <p>contacts</p>
@@ -118,7 +118,7 @@ export default function UserInfo() {
         )}
       </div>
 
-      <div className="sm:border-r border-slate-800">
+      <div className="lg:border-r border-slate-800 w-full">
         <InfoView
           infoDescription={infoDescription}
           aboutSection={aboutSection}

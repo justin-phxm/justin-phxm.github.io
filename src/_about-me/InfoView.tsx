@@ -46,17 +46,17 @@ export default function InfoView({
   }
   return (
     <>
-      <div className="sm:border-b border-slate-800 ">
-        <div className="p-2 w-52 flex flex-row justify-between items-center sm:border-r border-slate-800 ">
+      <div className="lg:border-b border-slate-800 ">
+        <div className="p-2 w-52 flex flex-row justify-between items-center lg:border-r border-slate-800 ">
           <div className="inline whitespace-nowrap">
-            <span class="text-white sm:hidden">// {aboutSection.title}</span>
+            <span class="text-white lg:hidden">// {aboutSection.title}</span>
             <span class="text-slate-500 ">
-              <span class="text-slate-500 sm:hidden"> / </span>
+              <span class="text-slate-500 lg:hidden"> / </span>
               {infoDescription.title}
             </span>
           </div>
 
-          <GrFormClose class="hidden sm:block cursor-pointer hover:bg-gray-700" />
+          <GrFormClose class="hidden lg:block cursor-pointer hover:bg-gray-700" />
         </div>
       </div>
       <div>
