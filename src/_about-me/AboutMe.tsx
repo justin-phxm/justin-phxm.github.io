@@ -6,7 +6,7 @@ import UserInfo from "./UserInfo";
 export default function AboutMe({}: { path: string }) {
   return (
     <>
-      <div className="flex flex-row">
+      <div className="flex flex-col sm:flex-row">
         <UserInfo />
         <CodeSnippets />
       </div>

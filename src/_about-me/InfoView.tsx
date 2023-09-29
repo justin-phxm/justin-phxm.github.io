@@ -9,23 +9,60 @@ interface InfoDescription {
         university: string;
       };
 }
+interface aboutSection {
+  title: string;
+  icon: string;
+  info: (
+    | {
+        title: string;
+        description: string;
+        files?: undefined;
+      }
+    | {
+        title: string;
+        description: string;
+        files: {
+          "high-school": string;
+          university: string;
+        };
+      }
+  )[];
+}
 export default function InfoView({
   infoDescription,
-}: // aboutSection,
-{
+  aboutSection,
+}: {
   infoDescription: InfoDescription;
-  aboutSection: any;
+  aboutSection: aboutSection;
 }) {
+  function addAsteriskAfterLineWrap(text: string) {
+    // Use a regular expression to match line continuations (lines starting with whitespace)
+    const regex = /(\n\s+)/g;
+
+    // Replace each line continuation with '* ' followed by the whitespace
+    const modifiedText = text.replace(regex, (match) => `*\xA0${match}`);
+
+    return modifiedText;
+  }
   return (
     <>
-      <div className=" border border-t-0 border-l-0 border-r-0 border-slate-800 ">
-        <div className=" w-52 flex flex-row justify-between items-center border border-t-0 border-l-0 border-b-0 border-slate-800 ">
-          <p className="p-2">{infoDescription.title}</p>
-          <GrFormClose class=" cursor-pointer hover:bg-gray-700" />
+      <div className="sm:border-b border-slate-800 ">
+        <div className="p-2 w-52 flex flex-row justify-between items-center sm:border-r border-slate-800 ">
+          <div className="inline whitespace-nowrap">
+            <span class="text-white sm:hidden">// {aboutSection.title}</span>
+            <span class="text-slate-500 ">
+              <span class="text-slate-500 sm:hidden"> / </span>
+              {infoDescription.title}
+            </span>
+          </div>
+
+          <GrFormClose class="hidden sm:block cursor-pointer hover:bg-gray-700" />
         </div>
       </div>
       <div>
-        <p class="p-2 overflow-hidden">{infoDescription.description}</p>
+        <p class="p-2 overflow-hidden">
+          {addAsteriskAfterLineWrap(infoDescription.description)}
+        </p>
       </div>
     </>
   );
