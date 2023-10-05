@@ -1,48 +1,30 @@
 import { useEffect, useState } from "preact/hooks";
 import axios from "axios";
 import devInfo from "../../devInfo.json";
+import ProjectCard from "./ProjectCard";
+import repoInterface from "../assets/repoInterface";
+// import userInterface from "../assets/userInterface";
+import ProjectFilter from "./ProjectFilter";
 export default function Projects({}: { path: string }) {
-  interface Repo {
-    id: number;
-    name: string;
-    description: string;
-  }
-  interface User {
-    login: string;
-    followers: number;
-    public_repos: number;
-  }
-  const [userData, setUserData] = useState<User>({
-    login: "",
-    followers: 0,
-    public_repos: 0,
-  });
-  const [repos, setRepos] = useState<Repo[]>([
-    {
-      id: 0,
-      name: "",
-      description: "",
-    },
-  ]);
+  // const [userData, setUserData] = useState<userInterface>({});
+  const [repos, setRepos] = useState<repoInterface[]>([{}]);
 
   useEffect(() => {
-    // Replace 'YOUR_GITHUB_USERNAME' with your actual GitHub username
     const githubUsername = devInfo.contacts.social.github.user;
 
-    // Fetch user data
-    axios
-      .get(`https://api.github.com/users/${githubUsername}`)
-      .then((response) => {
-        setUserData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-      });
+    // axios
+    //   .get(`https://api.github.com/users/${githubUsername}`)
+    //   .then((response) => {
+    //     setUserData(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching user data:", error);
+    //   });
 
-    // Fetch user's repositories
     axios
       .get(`https://api.github.com/users/${githubUsername}/repos`)
       .then((response) => {
+        console.log(response.data);
         setRepos(response.data);
       })
       .catch((error) => {
@@ -51,21 +33,19 @@ export default function Projects({}: { path: string }) {
   }, []);
 
   return (
-    <div>
-      <h1>GitHub Profile</h1>
-      <p>Username: {userData.login}</p>
-      <p>Followers: {userData.followers}</p>
-      <p>Repos: {userData.public_repos}</p>
-
-      <h2>Repositories</h2>
-      <ul>
-        {repos.map((repo: Repo) => (
+    <div class="flex flex-col lg:flex-row h-full w-full">
+      <ProjectFilter />
+      <ol class="flex flex-row flex-wrap gap-4 p-4">
+        {repos.map((repo: repoInterface, index: number) => (
           <li key={repo.id}>
-            <strong>{repo.name}</strong>:{" "}
-            {repo.description || "No description available"}
+            <div className="flex flex-row gap-2">
+              <div className=" text-indigo-500 p-2">Project {index + 1}</div>
+              <div className="p-2">// _{repo.name}</div>
+            </div>
+            <ProjectCard {...repo} />
           </li>
         ))}
-      </ul>
+      </ol>
     </div>
   );
 }
