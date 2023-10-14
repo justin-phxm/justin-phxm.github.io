@@ -13,13 +13,16 @@ export default function SideBar() {
 
   return (
     <div className=" text-white border-r border-slate-800">
+      <div className=" sm:hidden py-4 px-3 text-sm">_contact-me</div>
       <div
         onClick={() => setContactVisible(!contactVisible)}
         className=" bg-slate-800 lg:bg-inherit text-sm lg:text-normal cursor-pointer gap-1 border-t border-b border-slate-800 p-2 flex flex-row items-center"
       >
         {contactVisible ? <BiSolidDownArrow /> : <BiSolidRightArrow />}
+
         <p class="whitespace-nowrap">{aboutSection.title}</p>
       </div>
+      {/* contact info */}
       {contactVisible && (
         <div className=" text-slate-500 text-sm">
           {otherContactLinks.map(([key, value]) => (
@@ -40,9 +43,13 @@ export default function SideBar() {
       {findMeVisible && (
         <div className=" text-slate-500 text-sm">
           {otherSocialLinks.map(([key, value]) => (
-            <div className="p-2 cursor-pointer flex flex-row items-center gap-1 hover:text-white">
+            <div className="p-2 cursor-pointer flex flex-row text-slate-500 items-center gap-1 hover:text-white">
               <FaExternalLinkAlt />
-              <a href={value.url} target={"_blank"} class="hover:text-white">
+              <a
+                href={value.url}
+                target={"_blank"}
+                class=" text-slate-500 hover:text-white"
+              >
                 {value.title}
               </a>
             </div>
