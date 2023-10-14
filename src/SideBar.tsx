@@ -25,7 +25,7 @@ export default function SideBar() {
       {/* contact info */}
       {contactVisible && (
         <div className=" text-slate-500 text-sm">
-          {otherContactLinks.map(([key, value]) => (
+          {otherContactLinks.map(([, value]) => (
             <div className="p-2 cursor-pointer flex flex-row items-center gap-1 hover:text-white">
               <FaExternalLinkAlt />
               <div class="hover:text-white">{value}</div>
@@ -42,7 +42,7 @@ export default function SideBar() {
       </div>
       {findMeVisible && (
         <div className=" text-slate-500 text-sm">
-          {otherSocialLinks.map(([key, value]) => (
+          {otherSocialLinks.map(([, value]) => (
             <div className="p-2 cursor-pointer flex flex-row text-slate-500 items-center gap-1 hover:text-white">
               <FaExternalLinkAlt />
               <a

@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { GrFormClose } from "react-icons/gr";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect } from "preact/hooks";
 import hljs from "highlight.js";
 import ContactView from "./ContactView";
 type Inputs = {
