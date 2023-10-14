@@ -33,19 +33,22 @@ export default function Projects({}: { path: string }) {
   }, []);
 
   return (
-    <div class="flex flex-col lg:flex-row h-full w-full">
-      <ProjectFilter />
-      <ol class="flex flex-row flex-wrap gap-4 p-4">
-        {repos.map((repo: repoInterface, index: number) => (
-          <li key={repo.id}>
-            <div className="flex flex-row gap-2">
-              <div className=" text-indigo-500 p-2">Project {index + 1}</div>
-              <div className="p-2">// _{repo.name}</div>
-            </div>
-            <ProjectCard {...repo} />
-          </li>
-        ))}
-      </ol>
-    </div>
+    <>
+      <div class="flex flex-col lg:flex-row h-full w-full">
+        <div className="text-white sm:hidden py-4 px-3 text-sm">_projects</div>
+        <ProjectFilter />
+        <ol class="flex flex-row flex-wrap gap-4 p-4">
+          {repos.map((repo: repoInterface, index: number) => (
+            <li key={repo.id}>
+              <div className="flex flex-row gap-2">
+                <div className=" text-indigo-500 p-2">Project {index + 1}</div>
+                <div className="p-2">// _{repo.name}</div>
+              </div>
+              <ProjectCard {...repo} />
+            </li>
+          ))}
+        </ol>
+      </div>
+    </>
   );
 }

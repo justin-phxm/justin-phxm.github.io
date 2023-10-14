@@ -26,7 +26,6 @@ export default function UserInfo() {
   return (
     <>
       <div className=" lg:border-r border-slate-800">
-        <div className="text-white leading-tight p-2 lg:hidden">_about-me</div>
         {/* Mobile Section icons */}
         {devInfo.about.sections.map((section, index) => (
           <>
@@ -117,7 +116,6 @@ export default function UserInfo() {
           </div>
         )}
       </div>
-
       <div className="lg:border-r border-slate-800 w-full">
         <InfoView
           infoDescription={infoDescription}
