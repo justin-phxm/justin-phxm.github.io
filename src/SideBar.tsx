@@ -2,7 +2,8 @@ import devInfo from "../devInfo.json";
 import { BiSolidDownArrow, BiSolidRightArrow } from "react-icons/bi";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { useState } from "preact/hooks";
-
+import AOS from "aos";
+AOS.init({ duration: 1000 });
 export default function SideBar() {
   const aboutSection = devInfo.contacts.direct;
   const otherSocials = devInfo.contacts.find_me_also_in;
@@ -12,7 +13,10 @@ export default function SideBar() {
   const [contactVisible, setContactVisible] = useState(true);
 
   return (
-    <div className=" text-white border-r border-slate-800">
+    <div
+      data-aos="fade-right"
+      className=" text-white border-r border-slate-800"
+    >
       <div className=" sm:hidden py-4 px-3 text-sm">_contact-me</div>
       <div
         onClick={() => setContactVisible(!contactVisible)}

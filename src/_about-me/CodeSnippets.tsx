@@ -24,6 +24,8 @@ interface Gist {
   html_url: string;
   // You can add more properties from the API response if needed
 }
+import AOS from "aos";
+AOS.init({ duration: 1000 });
 export default function CodeSnippets() {
   // hljs.registerLanguage("typescript", typescript);
 
@@ -64,11 +66,11 @@ export default function CodeSnippets() {
 
   return (
     <>
-      <div className=" flex flex-col  ">
+      <div data-aos="fade-left" className=" flex flex-col  ">
         <div className=" inline-block border-b border-slate-800 p-5 w-full" />
         <div className="p-4 w-full max-w-full">
           <div class=" pb-4 text-white ">// Code snippet showcase:</div>
-          <div className="flex flex-col overflow-scroll max-h-96 w-full">
+          <div className="flex flex-col overflow-auto max-h-96 w-full">
             {gistData.map((gist: Gist, index) => (
               <div class="py-2">
                 <div className="flex flex-row justify-between">

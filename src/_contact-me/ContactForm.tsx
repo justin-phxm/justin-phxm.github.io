@@ -3,6 +3,8 @@ import { GrFormClose } from "react-icons/gr";
 import { useEffect } from "preact/hooks";
 import hljs from "highlight.js";
 import ContactView from "./ContactView";
+import AOS from "aos";
+AOS.init({ duration: 1000 });
 type Inputs = {
   example: string;
   email: string;
@@ -35,7 +37,7 @@ export default function ContactForm() {
           <GrFormClose class="hidden lg:block cursor-pointer hover:bg-gray-700" />
         </div>
         <div class="lg:border-t flex flex-row border-slate-800">
-          <div className="w-1/2">
+          <div data-aos="fade-up" className="w-1/2">
             <form
               onSubmit={handleSubmit(onSubmit)}
               class="flex-col p-4 text-slate-500"
@@ -78,7 +80,10 @@ export default function ContactForm() {
               </div>
             </form>
           </div>
-          <div className="hidden p-4 w-1/2 lg:flex lg:flex-col border-l border-slate-800 items-center content-center">
+          <div
+            data-aos="fade-left"
+            className="hidden p-4 w-1/2 lg:flex lg:flex-col border-l border-slate-800 items-center content-center"
+          >
             <ContactView name={name} email={email} message={message} />
           </div>
         </div>

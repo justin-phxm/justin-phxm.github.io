@@ -8,13 +8,14 @@ import {
 } from "react-icons/bi";
 import { SiNextdotjs } from "react-icons/si";
 import { useState } from "preact/hooks";
-
+import AOS from "aos";
+AOS.init({ duration: 1000 });
 export default function ProjectFilter() {
   const languages = ["React", "Angular", "Nextjs", "Typescript", "Python"];
   const [filterVisible, setFilterVisible] = useState(true);
   return (
     <>
-      <div class="border-r border-slate-800">
+      <div data-aos="fade-right" class="border-r border-slate-800">
         <div
           onClick={() => setFilterVisible(!filterVisible)}
           className=" text-white bg-slate-800 lg:bg-inherit text-sm lg:text-normal cursor-pointer gap-1 border-t border-b border-slate-800 p-2 flex flex-row items-center"

@@ -5,6 +5,8 @@ import ProjectCard from "./ProjectCard";
 import repoInterface from "../assets/repoInterface";
 // import userInterface from "../assets/userInterface";
 import ProjectFilter from "./ProjectFilter";
+import AOS from "aos";
+AOS.init({ duration: 1000 });
 export default function Projects({}: { path: string }) {
   // const [userData, setUserData] = useState<userInterface>({});
   const [repos, setRepos] = useState<repoInterface[]>([{}]);
@@ -37,7 +39,10 @@ export default function Projects({}: { path: string }) {
       <div class="flex flex-col lg:flex-row h-full w-full">
         <div className="text-white sm:hidden py-4 px-3 text-sm">_projects</div>
         <ProjectFilter />
-        <ol class="flex flex-row flex-wrap gap-4 p-4">
+        <ol
+          data-aos="fade-left"
+          class="flex flex-row flex-wrap gap-4 p-4 overflow-auto h-96"
+        >
           {repos.map((repo: repoInterface, index: number) => (
             <li key={repo.id}>
               <div className="flex flex-row gap-2">

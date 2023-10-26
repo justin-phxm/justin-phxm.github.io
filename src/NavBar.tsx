@@ -2,6 +2,7 @@ import devInfo from "../devInfo.json";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "preact/hooks";
+import { Link } from "preact-router";
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const navigation = [
@@ -50,7 +51,7 @@ export default function NavBar() {
               <div className="flex ">
                 {navigation.map((item, index) =>
                   item.href != "/contact" ? (
-                    <a
+                    <Link
                       key={item.name}
                       href={item.href}
                       className={classNames(
@@ -62,7 +63,7 @@ export default function NavBar() {
                       onClick={() => setCurrent(index)}
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ) : (
                     ""
                   )
@@ -82,7 +83,7 @@ export default function NavBar() {
             )}
           </Disclosure.Button>
 
-          <a
+          <Link
             className={classNames(
               current === 3
                 ? " bg-slate-950 text-white border-orange-300 border-l-0"
@@ -93,13 +94,13 @@ export default function NavBar() {
             href="/contact"
           >
             _contact-me
-          </a>
+          </Link>
         </div>
         {/* Mobile Panel Buttons */}
         <Disclosure.Panel className="sm:hidden">
           <div className="space-y-1 px-2 pb-3 pt-2 ">
             {navigation.map((item, index) => (
-              <a href={item.href}>
+              <Link href={item.href}>
                 <Disclosure.Button
                   key={item.name}
                   className={classNames(
@@ -115,7 +116,7 @@ export default function NavBar() {
                 >
                   {item.name}
                 </Disclosure.Button>
-              </a>
+              </Link>
             ))}
           </div>
         </Disclosure.Panel>

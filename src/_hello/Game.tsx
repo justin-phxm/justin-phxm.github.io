@@ -1,5 +1,6 @@
 import { useState, useEffect } from "preact/hooks";
 import Timer from "./Timer";
+import { route } from "preact-router";
 export default function Game() {
   const myArray: number[][] = [
     [1, 2, 3],
@@ -63,7 +64,7 @@ export default function Game() {
         }
       }
     }
-    alert(`You win! You completed the puzzle in ${moves} moves`);
+    route("/about-me");
   }
   function getKeyAndMove(e: { which: any; keyCode: any }) {
     var key_code = e.which || e.keyCode;

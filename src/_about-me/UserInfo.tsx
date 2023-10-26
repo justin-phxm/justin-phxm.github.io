@@ -16,6 +16,8 @@ import {
   useState,
   //  useEffect
 } from "preact/hooks";
+import AOS from "aos";
+AOS.init({ duration: 1000 });
 
 export default function UserInfo() {
   const [aboutSection, setAboutSection] = useState(devInfo.about.sections[0]);
@@ -71,7 +73,10 @@ export default function UserInfo() {
           </>
         ))}
       </div>
-      <div className=" text-white border-r border-slate-800">
+      <div
+        data-aos="fade-right"
+        className=" text-white border-r border-slate-800"
+      >
         {/* desktop */}
         <div className="hidden cursor-pointer gap-2 border-b border-slate-800 lg:flex flex-row items-center p-2">
           <BiSolidDownArrow />
@@ -116,7 +121,7 @@ export default function UserInfo() {
           </div>
         )}
       </div>
-      <div className="lg:border-r border-slate-800 w-full">
+      <div data-aos="fade-up" className="lg:border-r border-slate-800 w-full">
         <InfoView
           infoDescription={infoDescription}
           aboutSection={aboutSection}
