@@ -47,7 +47,7 @@ export default function Projects({}: { path: string }) {
             <li key={repo.id}>
               <div className="flex flex-row gap-2">
                 <div className=" text-indigo-500 p-2">Project {index + 1}</div>
-                <div className="p-2">// _{repo.name}</div>
+                <div className="p-2 text-white">// _{repo.name}</div>
               </div>
               <ProjectCard {...repo} />
             </li>

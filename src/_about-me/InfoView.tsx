@@ -40,18 +40,18 @@ export default function InfoView({
     const regex = /(\n\s+)/g;
 
     // Replace each line continuation with '* ' followed by the whitespace
-    const modifiedText = text.replace(regex, (match) => `*\xA0${match}`);
-
+    const modifiedText = text.replace(regex, (match) => `\n*${match.trim()}`);
     return modifiedText;
   }
+
   return (
     <>
       <div className="lg:border-b border-slate-800 ">
         <div className="p-2 w-52 flex flex-row justify-between items-center lg:border-r border-slate-800 ">
           <div className="inline whitespace-nowrap">
             <span class="text-white lg:hidden">// {aboutSection.title}</span>
-            <span class="text-slate-500 ">
-              <span class="text-slate-500 lg:hidden"> / </span>
+            <span class="text-white ">
+              <span class="text-white lg:hidden"> / </span>
               {infoDescription.title}
             </span>
           </div>
@@ -60,7 +60,7 @@ export default function InfoView({
         </div>
       </div>
       <div>
-        <p class="p-2 overflow-hidden">
+        <p class="p-2 overflow-hidden text-white">
           {addAsteriskAfterLineWrap(infoDescription.description)}
         </p>
       </div>
