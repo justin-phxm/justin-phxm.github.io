@@ -7,18 +7,20 @@ AOS.init({ duration: 1000 });
 export default function Home({}: { path: string }) {
   return (
     <div className="flex flex-row h-full">
-      <section data-aos="fade-right" class="w-full p-20 xl:p-28 ">
+      <section data-aos="fade-right" class="w-full p-4 xl:p-28 ">
         <p class="text-slate-200 text-lg">Welcome. I am</p>
-        <p class="text-slate-200 text-6xl">{devInfo.name}</p>
+        <p class="text-slate-200 text-4xl sm:text-6xl">{devInfo.name}</p>
         <p class="text-indigo-600 text-3xl">&gt; Full-stack web developer</p>
         <div className=" py-4"></div>
-        <p class="text-slate-500 text-base ">
-          // complete the game to continue
-        </p>
-        <p class="text-slate-500 text-base ">
-          // you can also see it on my Github page
-        </p>
-        <div>
+        <div className="hidden sm:block">
+          <p class="text-slate-500 text-base  ">
+            // complete the game to continue
+          </p>
+          <p class="text-slate-500 text-base ">
+            // you can also see it on my Github page
+          </p>
+        </div>
+        <div className="">
           <span class="text-indigo-600 text-base font-medium ">const</span>
           <span class="text-white text-base font-medium "> </span>
           <span class="text-emerald-400 text-base font-medium ">
