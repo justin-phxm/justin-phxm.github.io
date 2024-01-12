@@ -6,7 +6,7 @@ import AOS from "aos";
 AOS.init({ duration: 1000 });
 export default function Home({}: { path: string }) {
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row h-full">
       <section data-aos="fade-right" class="w-full p-20 xl:p-28 ">
         <p class="text-slate-200 text-lg">Welcome. I am</p>
         <p class="text-slate-200 text-6xl">{devInfo.name}</p>
