@@ -1,8 +1,12 @@
 import devInfo from "../devInfo.json";
 import { AiFillGithub } from "react-icons/ai";
-import { BsFacebook } from "react-icons/bs";
+import { BsFacebook, BsDownload } from "react-icons/bs";
 import { AiFillTwitterCircle } from "react-icons/ai";
 import { JSX } from "preact/jsx-runtime";
+
+const SOCIAL_CSS =
+  "p-3 border-slate-800 border-t-0 border-r-0 border-b-0 border";
+
 export default function Footer() {
   type socialType = {
     [key: string]: {
@@ -20,11 +24,14 @@ export default function Footer() {
       <footer class="w-full flex border border-b-0 border-l-0 border-r-0 border-slate-800 justify-between md:items-center md:justify-between shadow text-slate-500 dark:bg-gray-800">
         <span class="sm:text-center dark:text-gray-400 p-3">find me in:</span>
         <ul class="flex flex-wrap items-center text-2xl font-medium dark:text-gray-400">
+          <li key={"CV"} class={SOCIAL_CSS}>
+            <a href={"../CV.pdf"} className="hover:underline" target="_blank">
+              <BsDownload />
+            </a>
+          </li>
+
           {Object.values(social).map((item, index) => (
-            <li
-              key={index}
-              class="p-3 border-slate-800 border-t-0 border-r-0 border-b-0 border"
-            >
+            <li key={index} class={SOCIAL_CSS}>
               <a href={item.url} className="hover:underline" target="_blank">
                 {item.icon ? item.icon : item.title}
               </a>
