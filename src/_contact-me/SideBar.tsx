@@ -1,4 +1,4 @@
-import devInfo from "../devInfo.json";
+import devInfo from "../../devInfo.json";
 import { BiSolidDownArrow, BiSolidRightArrow } from "react-icons/bi";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { useState } from "preact/hooks";

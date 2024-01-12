@@ -1,4 +1,4 @@
-import SideBar from "../SideBar.tsx";
+import SideBar from "./SideBar.tsx";
 import ContactForm from "./ContactForm.tsx";
 
 export default function Contact({}: { path: string }) {

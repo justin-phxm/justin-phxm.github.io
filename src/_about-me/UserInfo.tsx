@@ -27,7 +27,7 @@ export default function UserInfo() {
   const sectionIcons = [<AiFillCode />, <BiSolidUser />, <FaGamepad />];
   return (
     <>
-      <div className=" lg:border-r border-slate-800">
+      <div className=" lg:border-r border-slate-800" data-aos="fade-right">
         {/* Mobile Section icons */}
         {devInfo.about.sections.map((section, index) => (
           <>
