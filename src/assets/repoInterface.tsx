@@ -5,4 +5,5 @@ export default interface Repo {
   html_url?: string;
   homepage?: string;
   languages_url?: string;
+  language?: string;
 }

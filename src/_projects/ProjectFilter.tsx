@@ -41,23 +41,31 @@ export default function ProjectFilter({
         <div className="flex flex-col">
           <ul>
             {filterVisible &&
-              Object.entries(languages).map(([language, value]) => (
-                <li className="flex flex-row p-2 cursor-pointer text-2xl gap-2 text-center content-center items-center hover:bg-gray-700">
-                  <input
-                    id={language}
-                    type="checkbox"
-                    checked={value}
-                    onChange={() => toggleLanguage(language)}
-                  />
-                  {language === "React" && <BiLogoReact />}
-                  {language === "Python" && <BiLogoPython />}
-                  {language === "Java" && <BiLogoJava />}
-                  {language === "C/C++" && <BiLogoCPlusPlus />}
-                  <label for={language} className="text-slate-500 text-base">
-                    {language}
-                  </label>
-                </li>
-              ))}
+              Object.entries(languages).map(
+                ([language, value]) =>
+                  language !== "HTML" &&
+                  language !== "Javascript" &&
+                  language !== "Typescript" && (
+                    <li className="flex flex-row p-2 cursor-pointer text-2xl gap-2 text-center content-center items-center hover:bg-gray-700">
+                      <input
+                        id={language}
+                        type="checkbox"
+                        checked={value}
+                        onChange={() => toggleLanguage(language)}
+                      />
+                      {language === "React" && <BiLogoReact />}
+                      {language === "Python" && <BiLogoPython />}
+                      {language === "Java" && <BiLogoJava />}
+                      {language === "C/C++" && <BiLogoCPlusPlus />}
+                      <label
+                        for={language}
+                        className="text-slate-500 text-base"
+                      >
+                        {language}
+                      </label>
+                    </li>
+                  )
+              )}
           </ul>
         </div>
       </div>

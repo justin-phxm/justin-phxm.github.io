@@ -9,7 +9,8 @@ import AOS from "aos";
 AOS.init({ duration: 1000 });
 export default function Projects({}: { path: string }) {
   // const [userData, setUserData] = useState<userInterface>({});
-  const [repos, setRepos] = useState<repoInterface[]>([{}]);
+  const [repos, setRepos] = useState<repoInterface[]>([]);
+  const [viewedRepos, setViewedRepos] = useState<repoInterface[]>([]);
   const [filterLanguages, setFilterLanguages] = useState<{
     [key: string]: boolean;
   }>({
@@ -17,7 +18,10 @@ export default function Projects({}: { path: string }) {
     Python: true,
     Java: true,
     "C/C++": true,
+    Javascript: true,
+    Typescript: true,
   });
+
   useEffect(() => {
     console.log(filterLanguages);
   }, [filterLanguages]);
@@ -37,13 +41,23 @@ export default function Projects({}: { path: string }) {
       .get(`https://api.github.com/users/${githubUsername}/repos`)
       .then((response) => {
         console.log(response.data);
+        setViewedRepos(response.data);
         setRepos(response.data);
       })
       .catch((error) => {
         console.error("Error fetching repositories:", error);
       });
   }, []);
-
+  useEffect(() => {
+    const filteredRepos = repos.filter((repo) => {
+      if (repo.language) {
+        return filterLanguages[repo.language];
+      } else {
+        return false;
+      }
+    });
+    setViewedRepos(filteredRepos);
+  }, [viewedRepos]);
   return (
     <>
       <div class="flex flex-col lg:flex-row h-full w-full">
