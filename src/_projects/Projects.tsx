@@ -68,7 +68,7 @@ export default function Projects({}: { path: string }) {
         />
         <ol
           data-aos="fade-left"
-          class="flex flex-row flex-wrap gap-4 p-4 overflow-y-auto overflow-x-hidden max-h-96"
+          class="flex flex-row justify-evenly flex-wrap gap-4 p-4 overflow-y-auto overflow-x-hidden max-h-96"
         >
           {repos.map((repo: repoInterface, index: number) => (
             <ProjectCard repo={repo} index={index} />
