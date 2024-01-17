@@ -1,18 +1,33 @@
 import {
   BiSolidDownArrow,
   BiLogoReact,
-  BiLogoAngular,
+  // BiLogoAngular,
   BiLogoPython,
-  BiLogoTypescript,
+  // BiLogoTypescript,
   BiSolidRightArrow,
+  BiLogoJava,
+  BiLogoCPlusPlus,
 } from "react-icons/bi";
-import { SiNextdotjs } from "react-icons/si";
-import { useState } from "preact/hooks";
+// import { SiNextdotjs } from "react-icons/si";
+import { StateUpdater, useState } from "preact/hooks";
 import AOS from "aos";
 AOS.init({ duration: 1000 });
-export default function ProjectFilter() {
-  const languages = ["React", "Angular", "Nextjs", "Typescript", "Python"];
-  const [filterVisible, setFilterVisible] = useState(true);
+export default function ProjectFilter({
+  filterLanguages: languages,
+  setFilterLanguages,
+}: {
+  filterLanguages: { [key: string]: boolean };
+  setFilterLanguages: StateUpdater<{
+    [key: string]: boolean;
+  }>;
+}) {
+  const [filterVisible, setFilterVisible] = useState(false);
+  const toggleLanguage = (language: string) => {
+    setFilterLanguages((prevLanguages) => ({
+      ...prevLanguages,
+      [language]: !prevLanguages[language],
+    }));
+  };
   return (
     <>
       <div data-aos="fade-right" class="border-r border-slate-800">
@@ -26,15 +41,21 @@ export default function ProjectFilter() {
         <div className="flex flex-col">
           <ul>
             {filterVisible &&
-              languages.map((language) => (
+              Object.entries(languages).map(([language, value]) => (
                 <li className="flex flex-row p-2 cursor-pointer text-2xl gap-2 text-center content-center items-center hover:bg-gray-700">
-                  <input type="checkbox" />
+                  <input
+                    id={language}
+                    type="checkbox"
+                    checked={value}
+                    onChange={() => toggleLanguage(language)}
+                  />
                   {language === "React" && <BiLogoReact />}
-                  {language === "Angular" && <BiLogoAngular />}
-                  {language === "Nextjs" && <SiNextdotjs />}
-                  {language === "Typescript" && <BiLogoTypescript />}
                   {language === "Python" && <BiLogoPython />}
-                  <p className="text-slate-500 text-base">{language}</p>
+                  {language === "Java" && <BiLogoJava />}
+                  {language === "C/C++" && <BiLogoCPlusPlus />}
+                  <label for={language} className="text-slate-500 text-base">
+                    {language}
+                  </label>
                 </li>
               ))}
           </ul>

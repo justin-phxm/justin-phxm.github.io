@@ -10,7 +10,17 @@ AOS.init({ duration: 1000 });
 export default function Projects({}: { path: string }) {
   // const [userData, setUserData] = useState<userInterface>({});
   const [repos, setRepos] = useState<repoInterface[]>([{}]);
-
+  const [filterLanguages, setFilterLanguages] = useState<{
+    [key: string]: boolean;
+  }>({
+    React: true,
+    Python: true,
+    Java: true,
+    "C/C++": true,
+  });
+  useEffect(() => {
+    console.log(filterLanguages);
+  }, [filterLanguages]);
   useEffect(() => {
     const githubUsername = devInfo.contacts.social.github.user;
 
@@ -38,7 +48,10 @@ export default function Projects({}: { path: string }) {
     <>
       <div class="flex flex-col lg:flex-row h-full w-full">
         <div className="text-white sm:hidden py-4 px-3 text-sm">_projects</div>
-        <ProjectFilter />
+        <ProjectFilter
+          filterLanguages={filterLanguages}
+          setFilterLanguages={setFilterLanguages}
+        />
         <ol
           data-aos="fade-left"
           class="flex flex-row flex-wrap gap-4 p-4 overflow-y-auto overflow-x-hidden max-h-96"
