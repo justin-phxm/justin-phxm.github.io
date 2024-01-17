@@ -10,14 +10,19 @@ export default function Home({}: { path: string }) {
       <section data-aos="fade-right" class="w-full p-4 xl:p-28 ">
         <p class="text-slate-200 text-lg">Welcome. I am</p>
         <p class="text-slate-200 text-4xl sm:text-6xl">{devInfo.name}</p>
-        <p class="text-indigo-600 text-3xl">&gt; Full-stack web developer</p>
+        <p class="text-indigo-600 text-3xl">&gt; Software Engineer</p>
         <div className=" py-4"></div>
-        <div className="hidden sm:block">
+        <div className="hidden lg:block">
           <p class="text-slate-500 text-base  ">
             // complete the game to continue
           </p>
           <p class="text-slate-500 text-base ">
             // you can also see it on my Github page
+          </p>
+        </div>
+        <div className="lg:hidden">
+          <p class="text-slate-500 text-base  ">
+            // View on desktop for the full experience
           </p>
         </div>
         <div className="">
