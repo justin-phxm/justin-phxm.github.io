@@ -1,11 +1,11 @@
 import repoInterface from "../assets/repoInterface.tsx";
 import {
-  BiSolidDownArrow,
+  // BiSolidDownArrow,
   BiLogoReact,
   // BiLogoAngular,
   BiLogoPython,
   // BiLogoTypescript,
-  BiSolidRightArrow,
+  // BiSolidRightArrow,
   BiLogoJava,
   BiLogoCPlusPlus,
 } from "react-icons/bi";
