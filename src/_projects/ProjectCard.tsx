@@ -18,11 +18,11 @@ export default function ProjectCard({
   index: number;
 }) {
   if (!repo.description) repo.description = `View ${repo.name} on Github`;
-  const reactImage = "../../public/React_Hero.png";
-  const pythonImage = "../../public/python.jpg";
-  const cImage = "../../public/C.png";
-  const javaImage = "../../public/java.png";
-  const fallBack = "../../public/fallback.jpg";
+  const reactImage = "/React_Hero.png";
+  const pythonImage = "/python.jpg";
+  const cImage = "/C.png";
+  const javaImage = "/java.png";
+  const fallBack = "/fallback.jpg";
   return (
     <>
       <li key={repo.id} className="w-80">
