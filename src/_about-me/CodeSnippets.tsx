@@ -88,7 +88,8 @@ export default function CodeSnippets() {
                         @{gist.owner.login}
                       </a>
                       <div className="text-xs text-slate-500">
-                        Created {gist.monthsAgo} months ago
+                        <span class="hidden md:block">Created</span>{" "}
+                        {gist.monthsAgo} months ago
                       </div>
                     </div>
                   </div>
@@ -132,7 +133,7 @@ export default function CodeSnippets() {
                   </pre>
                 ))}
                 {gist.showDescription && (
-                  <div className="border-t border-slate-800 pt-2 mt-4">
+                  <div className="border-t border-slate-800 pt-2 mt-4 text-white">
                     {gist.description}
                   </div>
                 )}

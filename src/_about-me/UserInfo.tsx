@@ -22,7 +22,7 @@ AOS.init({ duration: 1000 });
 export default function UserInfo() {
   const [aboutSection, setAboutSection] = useState(devInfo.about.sections[0]);
   const [infoDescription, setInfoDescription] = useState(aboutSection.info[0]);
-  const [contactVisible, setContactVisible] = useState(true);
+  const [contactVisible, setContactVisible] = useState(false);
   const folderColors = ["text-rose-400", "text-emerald-400", "text-indigo-800"];
   const sectionIcons = [<AiFillCode />, <BiSolidUser />, <FaGamepad />];
   return (
