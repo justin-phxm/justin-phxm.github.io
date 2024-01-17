@@ -21,7 +21,7 @@ export default function ProjectFilter() {
           className=" text-white bg-slate-800 lg:bg-inherit text-sm lg:text-normal cursor-pointer gap-1 border-t border-b border-slate-800 p-2 flex flex-row items-center"
         >
           {filterVisible ? <BiSolidDownArrow /> : <BiSolidRightArrow />}
-          <p class="whitespace-nowrap">projects</p>
+          <p class="whitespace-nowrap">Framework/Language</p>
         </div>
         <div className="flex flex-col">
           <ul>

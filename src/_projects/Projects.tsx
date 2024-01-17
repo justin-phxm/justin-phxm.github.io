@@ -41,16 +41,10 @@ export default function Projects({}: { path: string }) {
         <ProjectFilter />
         <ol
           data-aos="fade-left"
-          class="flex flex-row flex-wrap gap-4 p-4 overflow-auto h-96"
+          class="flex flex-row flex-wrap gap-4 p-4 overflow-y-auto overflow-x-hidden max-h-96"
         >
           {repos.map((repo: repoInterface, index: number) => (
-            <li key={repo.id}>
-              <div className="flex flex-row gap-2">
-                <div className=" text-indigo-500 p-2">Project {index + 1}</div>
-                <div className="p-2 text-white">// _{repo.name}</div>
-              </div>
-              <ProjectCard {...repo} />
-            </li>
+            <ProjectCard repo={repo} index={index} />
           ))}
         </ol>
       </div>
