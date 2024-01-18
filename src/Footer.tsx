@@ -19,13 +19,14 @@ export default function Footer() {
   social.github.icon = <AiFillGithub />;
   social.facebook.icon = <BsFacebook />;
   social.twitter.icon = <AiFillTwitterCircle />;
+  const RESUME_PDF = "/CV.pdf";
   return (
     <>
       <footer class="w-full flex border border-b-0 border-l-0 border-r-0 border-slate-800 justify-between md:items-center md:justify-between shadow text-slate-500 dark:bg-gray-800">
         <span class="sm:text-center dark:text-gray-400 p-3">find me in:</span>
         <ul class="flex flex-wrap items-center text-2xl font-medium dark:text-gray-400">
           <li key={"CV"} class={SOCIAL_CSS}>
-            <a href={"../CV.pdf"} className="hover:underline" target="_blank">
+            <a href={RESUME_PDF} className="hover:underline" target="_blank">
               <BsDownload />
             </a>
           </li>
