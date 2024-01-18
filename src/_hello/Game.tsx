@@ -185,7 +185,7 @@ export default function Game() {
         tabIndex={0}
       >
         {board.map((row: number[]) => (
-          <div className=" flex justify-between">
+          <div className=" flex justify-around">
             {row.map((cell: number) => (
               <button
                 className={`w-16 h-16 text-white transition rounded-lg border border-white justify-center items-center inline-flex ${

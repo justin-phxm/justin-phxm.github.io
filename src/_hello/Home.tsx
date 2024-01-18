@@ -48,7 +48,7 @@ export default function Home({}: { path: string }) {
         class="hidden w-full lg:flex-row lg:flex relative px-20 py-8 xl:px-28 xl:py-20"
       >
         <div class=" bg-emerald-400 xl:w-96 w-72 xl:h-96 h-72 absolute -top-24 -left-16 transform rotate-45 opacity-40 shadow-2xl filter blur-2xl rounded-full pointer-events-none" />
-        <div class="bg-indigo-600 xl:w-96 w-72 xl:h-96 h-72 absolute -bottom-32 -right-24 transform rotate-12 opacity-40 shadow-2xl filter blur-2xl rounded-full pointer-events-none"></div>
+        <div class="bg-indigo-600 xl:w-96 w-72 xl:h-96 h-72 absolute -bottom-0 -right-24 transform rotate-12 opacity-40 shadow-2xl filter blur-2xl rounded-full pointer-events-none"></div>
         <div class=" p-4 bg-gradient-to-br from-teal-900 via-transparent to-indigo-950 rounded-lg shadow-inner border border-neutral-900 backdrop-blur-3xl flex flex-row w-full ">
           <Game />
           <div class="w-4 h-4 left-1 top-1 absolute bg-teal-700 rounded-full shadow-inner">
