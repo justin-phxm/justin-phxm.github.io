@@ -34,14 +34,15 @@ export default function ContactForm() {
           <div className="text-slate-500 whitespace-nowrap hidden lg:block">
             contacts
           </div>
-          <GrFormClose class="hidden lg:block cursor-pointer hover:bg-gray-700" />
+          <button className="hidden bg-transparent rounded lg:block hover:bg-gray-700">
+            <GrFormClose />
+          </button>
         </div>
         <div class="lg:border-t flex flex-row border-slate-800">
           <div data-aos="fade-up" className="w-1/2">
             <form
               onSubmit={handleSubmit(onSubmit)}
-              class="flex-col p-4 text-slate-500"
-            >
+              class="flex-col p-4 text-slate-500">
               <div className="py-2">
                 <div className="pb-2">_name:</div>
                 <input
@@ -82,8 +83,7 @@ export default function ContactForm() {
           </div>
           <div
             data-aos="fade-left"
-            className="hidden p-4 w-1/2 lg:flex lg:flex-col border-l border-slate-800 items-center content-center"
-          >
+            className="hidden p-4 w-1/2 lg:flex lg:flex-col border-l border-slate-800 items-center content-center">
             <ContactView name={name} email={email} message={message} />
           </div>
         </div>

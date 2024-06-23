@@ -37,8 +37,6 @@ export default function CodeSnippets() {
       axios
         .get(`https://api.github.com/gists/${gistID}`)
         .then((response) => {
-          console.log(response.data);
-
           const createdDate = new Date(response.data.created_at);
           const currentDate = new Date();
           const monthsAgo =

@@ -3,12 +3,10 @@ import axios from "axios";
 import devInfo from "../../devInfo.json";
 import ProjectCard from "./ProjectCard";
 import repoInterface from "../assets/repoInterface";
-// import userInterface from "../assets/userInterface";
 import ProjectFilter from "./ProjectFilter";
 import AOS from "aos";
 AOS.init({ duration: 1000 });
 export default function Projects({}: { path: string }) {
-  // const [userData, setUserData] = useState<userInterface>({});
   const [repos, setRepos] = useState<repoInterface[]>([]);
   const [filterLanguages, setFilterLanguages] = useState<{
     [key: string]: boolean;
@@ -24,14 +22,10 @@ export default function Projects({}: { path: string }) {
   });
 
   useEffect(() => {
-    console.log(filterLanguages);
-  }, [filterLanguages]);
-  useEffect(() => {
     const githubUsername = devInfo.contacts.social.github.user;
     axios
       .get(`https://api.github.com/users/${githubUsername}/repos`)
       .then((response) => {
-        console.log(response.data);
         setRepos(response.data);
       })
       .catch((error) => {

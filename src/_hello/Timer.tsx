@@ -18,6 +18,9 @@ export default function Timer(props: TimerProps) {
     }, 1000);
 
     setIntervalId(newIntervalId); // Store the new interval ID
+    return () => {
+      clearInterval(newIntervalId); // Clear the interval on unmount
+    };
   }, []);
   useEffect(() => {
     if (seconds === 60) {
@@ -53,11 +56,10 @@ export default function Timer(props: TimerProps) {
       <div className="flex flex-row gap-2">
         <button
           onClick={resetTime}
-          class=" text-black bg-orange-300 hover:opacity-80 rounded-md outline-none transition-all duration-300"
-        >
+          class=" text-black p-2 bg-orange-300 hover:opacity-80 rounded-md outline-none transition-all duration-300">
           restart-game
         </button>
-        <button class=" rounded-lg border bg-transparent border-white justify-center items-center text-white text-sm">
+        <button class=" rounded-lg p-2 border bg-transparent border-white justify-center items-center text-white text-sm">
           <a href={"/about-me"}>skip</a>
         </button>
       </div>

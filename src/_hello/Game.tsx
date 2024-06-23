@@ -35,7 +35,6 @@ export default function Game() {
     setEmptyCell({ x: 1, y: 1 });
     // Check if reshuffling is needed and perform it only when necessary
     if (!isSo(newBoard)) {
-      console.log("reshuffling");
       shuffleArray(newBoard);
     } else {
       // Update the board state when no reshuffling is needed
@@ -64,7 +63,9 @@ export default function Game() {
         }
       }
     }
-    route("/about-me");
+    setTimeout(() => {
+      route("/about-me");
+    }, 1000);
   }
   function getKeyAndMove(e: { which: any; keyCode: any }) {
     var key_code = e.which || e.keyCode;
@@ -182,16 +183,14 @@ export default function Game() {
       <section
         class="p-4 rounded-lg w-full flex gap-4 flex-col cursor-pointer bg-slate-900 bg-opacity-80 shadow-inner hover:outline focus:outline outline-green-500"
         onKeyDown={getKeyAndMove}
-        tabIndex={0}
-      >
+        tabIndex={0}>
         {board.map((row: number[]) => (
           <div className=" flex justify-around">
             {row.map((cell: number) => (
               <button
                 className={`w-16 h-16 text-white transition rounded-lg border border-white justify-center items-center inline-flex ${
                   cell === 0 ? " bg-transparent scale-95 " : "bg-teal-600"
-                } `}
-              >
+                } `}>
                 {cell}
               </button>
             ))}
@@ -200,8 +199,7 @@ export default function Game() {
         <button class="p-3 bg-orange-300 rounded-lg justify-center items-center">
           <div
             onClick={() => shuffleArray(board)}
-            class=" text-gray-950 text-sm "
-          >
+            class=" text-gray-950 text-sm ">
             start-game
           </div>
         </button>
@@ -215,32 +213,19 @@ export default function Game() {
 
           <div
             id="buttons"
-            class="w-full flex flex-col items-center gap-1 pt-5"
-          >
-            <button id="console-button" class=" bg-gray-950" onClick={moveUp}>
+            class="w-full flex flex-col items-center gap-1 pt-5">
+            <button class=" p-2 bg-gray-950" onClick={moveUp}>
               <img src="arrow-button.svg" alt="" />
             </button>
             <div class="grid grid-cols-3 gap-1">
-              <button
-                id="console-button"
-                class=" bg-gray-950"
-                onClick={moveLeft}
-              >
-                <img src="arrow-button.svg" alt="" class="-rotate-90 " />
+              <button class=" bg-gray-950" onClick={moveLeft}>
+                <img src="arrow-button.svg" alt="" class="-rotate-90 p-2 " />
               </button>
-              <button
-                id="console-button"
-                class="bg-gray-950"
-                onClick={moveDown}
-              >
-                <img src="arrow-button.svg" alt="" class="rotate-180" />
+              <button class="bg-gray-950" onClick={moveDown}>
+                <img src="arrow-button.svg" alt="" class="rotate-180 p-2" />
               </button>
-              <button
-                id="console-button"
-                class="bg-gray-950"
-                onClick={moveRight}
-              >
-                <img src="arrow-button.svg" alt="" class="rotate-90 " />
+              <button class="bg-gray-950" onClick={moveRight}>
+                <img src="arrow-button.svg" alt="" class="rotate-90 p-2 " />
               </button>
             </div>
           </div>
