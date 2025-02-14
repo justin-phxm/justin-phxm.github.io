@@ -1,19 +1,13 @@
 "use client";
 import { devInfo } from "public/devInfo";
 import { AiFillCode, AiOutlineMail } from "react-icons/ai";
-import {
-  BiSolidUser,
-  BiSolidDownArrow,
-  BiSolidRightArrow,
-} from "react-icons/bi";
+import { BiSolidUser } from "react-icons/bi";
 import { FaGamepad } from "react-icons/fa";
-import { BsFolder2, BsTelephoneFill } from "react-icons/bs";
-import { MdKeyboardArrowRight } from "react-icons/md";
+import { BsTelephoneFill } from "react-icons/bs";
 import InfoView from "./InfoView";
 import { useState } from "react";
-import { FaFileAlt } from "react-icons/fa";
+import InfoSection from "./InfoSection";
 
-const folderColors = ["text-rose-400", "text-emerald-400", "text-indigo-800"];
 const sectionIcons = [
   <AiFillCode key="code" />,
   <BiSolidUser key="user" />,
@@ -27,89 +21,95 @@ export default function UserInfo() {
   return (
     <>
       <div className="flex flex-col gap-1 border-slate-800 lg:border-r">
-        {/* Mobile Section icons */}
-        {devInfo.about.sections.map((section, index) => (
-          <>
-            <button
-              onClick={() => setAboutSectionIndex(index)}
-              className="flex flex-row items-center gap-1 bg-slate-800 p-2 text-sm text-white lg:hidden"
+        {devInfo.about.sections.map((section, sectionMapIndex) => (
+          <details key={section.title}>
+            <summary
+              tabIndex={-1}
+              className="cursor-pointer bg-slate-800 px-2 lg:list-none lg:bg-inherit lg:px-0"
             >
-              {section === aboutSection ? (
-                <BiSolidDownArrow />
-              ) : (
-                <BiSolidRightArrow />
+              <span className="text-sm lg:hidden">{section.title}</span>
+              <button
+                className={`hidden border-b border-slate-800 p-2 text-3xl lg:block ${
+                  aboutSectionIndex !== sectionMapIndex && "text-gray-600"
+                }`}
+                onClick={() => {
+                  setAboutSectionIndex(sectionMapIndex);
+                  setInfoDescriptionIndex(0);
+                }}
+              >
+                {sectionIcons[sectionMapIndex]}
+              </button>
+            </summary>
+            <div className="text-sm lg:hidden">
+              {devInfo.about.sections[sectionMapIndex]?.info.map(
+                (info, infoMapIndex) => (
+                  <InfoSection
+                    key={info.title}
+                    infoTitle={info.title}
+                    infoMapIndex={infoMapIndex}
+                    sectionMapIndex={sectionMapIndex}
+                    infoDescriptionIndex={infoDescriptionIndex}
+                    setInfoDescriptionIndex={setInfoDescriptionIndex}
+                    aboutSectionIndex={aboutSectionIndex}
+                    setAboutSectionIndex={setAboutSectionIndex}
+                  />
+                ),
               )}
-              <p>{section.title}</p>
-            </button>
-            {section === aboutSection && (
-              <div className="text-sm lg:hidden">
-                {aboutSection.info.map((info, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setInfoDescriptionIndex(index)}
-                    className="flex flex-row content-center items-center gap-2 p-1 text-center hover:bg-gray-700 hover:text-white"
-                  >
-                    <MdKeyboardArrowRight />
-                    <BsFolder2
-                      className={folderColors[index % folderColors.length]}
-                    />
-                    <p className={info === infoDescription ? "text-white" : ""}>
-                      {info.title}
-                    </p>
-                  </button>
-                ))}
-              </div>
-            )}
-            {/* Desktop section icons */}
-            <div
-              className={
-                "hidden cursor-pointer p-2 text-3xl hover:bg-gray-700 lg:block" +
-                (section === aboutSection ? " text-gray-600" : "")
-              }
-              onClick={() => setAboutSectionIndex(index)}
-            >
-              {sectionIcons[index]}
             </div>
-          </>
+          </details>
         ))}
       </div>
       <div className="border-r border-slate-800 text-white">
         {/* desktop */}
         <details
           open
-          className="hidden cursor-pointer flex-row items-center gap-2 border-b border-slate-800 p-2 lg:block"
+          className="hidden cursor-pointer flex-row items-center gap-2 border-b border-slate-800 lg:block"
         >
-          <summary className="whitespace-nowrap">{aboutSection.title}</summary>
+          <summary className="mx-2 whitespace-nowrap">
+            {aboutSection.title}
+          </summary>
           <div className="hidden whitespace-nowrap text-sm lg:block">
-            {aboutSection.info.map((info, index) => (
+            {aboutSection.info.map((info, infoMapIndex) => (
+              <InfoSection
+                key={info.title}
+                infoTitle={info.title}
+                infoDescriptionIndex={infoDescriptionIndex}
+                setInfoDescriptionIndex={setInfoDescriptionIndex}
+                aboutSectionIndex={aboutSectionIndex}
+                sectionMapIndex={aboutSectionIndex}
+                infoMapIndex={infoMapIndex}
+                setAboutSectionIndex={setAboutSectionIndex}
+              />
+            ))}
+          </div>
+        </details>
+        <details
+          open
+          className="mt-1 flex cursor-pointer flex-col border-b border-slate-800 lg:mt-0"
+        >
+          <summary className="cursor-pointer bg-slate-800 px-2 lg:mx-2 lg:bg-inherit lg:px-0">
+            <span className="text-sm lg:text-base lg:capitalize">details</span>
+          </summary>
+          <div className="flex flex-col gap-1 border-slate-800">
+            {[
+              <AiOutlineMail key="email" />,
+              <BsTelephoneFill key="phone" />,
+            ].map((Icon, index) => (
               <button
-                key={index}
-                onClick={() => setInfoDescriptionIndex(index)}
-                className="flex flex-row content-center items-center gap-2 p-1 text-center hover:bg-gray-700"
+                key={Icon.key}
+                className="flex w-full flex-row items-center gap-2 px-2 py-1 text-sm text-slate-500 hover:bg-gray-700 hover:text-white lg:px-2"
               >
-                <FaFileAlt
-                  className={folderColors[index % folderColors.length]}
-                />
-                <p
-                  className={
-                    info === infoDescription ? "text-white" : "text-slate-500"
+                {Icon}
+                <p>
+                  {
+                    devInfo.contacts.direct.sources[
+                      index === 0 ? "email" : "phone"
+                    ]
                   }
-                >
-                  {info.title}
                 </p>
               </button>
             ))}
           </div>
-        </details>
-        <details className="flex cursor-pointer flex-col gap-1 border-y border-slate-800 bg-slate-800 p-2 text-sm text-white lg:bg-inherit lg:text-base">
-          <button className="flex flex-row items-center gap-1 py-2 text-xs text-slate-500 transition-colors hover:bg-gray-700 hover:text-white">
-            <AiOutlineMail />
-            <p>{devInfo.contacts.direct.sources.email}</p>
-          </button>
-          <button className="flex flex-row items-center gap-1 py-2 text-xs text-slate-500 transition-colors hover:bg-gray-700 hover:text-white">
-            <BsTelephoneFill />
-            <p>{devInfo.contacts.direct.sources.phone}</p>
-          </button>
         </details>
       </div>
       <div className="w-full border-slate-800 lg:border-r">

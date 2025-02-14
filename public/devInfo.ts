@@ -102,16 +102,16 @@ type Contacts = {
   social: Record<keyof typeof social, ContactSource>;
   find_me_also_in: Record<string, ContactSource>;
 };
-
-type DevInfo = {
+type AboutSection = {
+  title: string;
+  info: InfoSection[];
+};
+export type DevInfo = {
   name: string;
   logo_name: string;
   role: string;
   about: {
-    sections: {
-      title: string;
-      info: InfoSection[];
-    }[];
+    sections: AboutSection[];
   };
   contacts: Contacts;
   gists: string[];

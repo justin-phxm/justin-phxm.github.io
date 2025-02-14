@@ -7,13 +7,14 @@ import { getGists, type Gist } from "@/app/actions";
 import "highlight.js/styles/default.css";
 export default async function CodeSnippets() {
   const gistData = await getGists();
-  console.log(gistData);
   return (
-    <div className="flex size-full flex-col gap-4 text-white">
-      <h1>{"// Code snippet showcase:"}</h1>
-      <div className="flex max-h-min w-full flex-col gap-2 overflow-auto">
-        {gistData.map((gist, index) => (
-          <section key={index}>
+    <div className="flex size-full flex-col gap-1 text-white">
+      <h1 className="border-t border-slate-800 p-2 text-lg font-bold underline lg:border-t-0 lg:text-base lg:font-normal lg:no-underline">
+        {"Code snippet showcase:"}
+      </h1>
+      <div className="flex max-h-min w-full flex-col gap-2 overflow-auto px-2">
+        {gistData.map((gist) => (
+          <section key={gist.id}>
             <div className="flex flex-row justify-between">
               <GistAuthor gist={gist} />
               <div className="flex flex-row gap-2 text-sm text-slate-500">
@@ -47,7 +48,7 @@ export default async function CodeSnippets() {
             <pre>
               <div
                 dangerouslySetInnerHTML={{ __html: gist.code }}
-                className="whitespace-pre-wrap rounded-2xl border border-slate-800 bg-slate-950 shadow xl:whitespace-pre"
+                className="whitespace-pre-wrap rounded-2xl border border-slate-800 bg-slate-950 text-sm shadow md:text-base xl:whitespace-pre"
               />
             </pre>
 
