@@ -2,9 +2,9 @@ import Image from "next/image";
 import "highlight.js/styles/github-dark-dimmed.css";
 import Link from "next/link";
 import { AiFillStar } from "react-icons/ai";
-import { FaComment } from "react-icons/fa";
 import { getGists, type Gist } from "@/app/actions";
 import "highlight.js/styles/default.css";
+import CodeSnippetDetails from "./CodeSnippetDetails";
 export default async function CodeSnippets() {
   const gistData = await getGists();
   return (
@@ -17,27 +17,10 @@ export default async function CodeSnippets() {
           <section key={gist.id}>
             <div className="flex flex-row justify-between">
               <GistAuthor gist={gist} />
-              <div className="flex flex-row gap-2 text-sm text-slate-500">
-                <button
-                  className="flex flex-row items-center gap-2 hover:text-slate-400"
-                  // onClick={() => {
-                  //   setGistData((prevData: Gist[]) =>
-                  //     prevData.map((prevGist, prevIndex) => ({
-                  //       ...prevGist,
-                  //       showDescription:
-                  //         prevIndex === index
-                  //           ? !prevGist.showDescription
-                  //           : prevGist.showDescription,
-                  //     })),
-                  //   );
-                  // }}
-                >
-                  <FaComment />
-                  <p className="select-none">details</p>
-                </button>
+              <div className="flex text-sm font-bold text-slate-500">
                 <Link
                   href={gist.html_url}
-                  className="flex flex-row items-center gap-2 font-bold hover:text-slate-400"
+                  className="flex flex-row items-center gap-2 hover:text-slate-400"
                   target={"_blank"}
                 >
                   <AiFillStar />
@@ -45,6 +28,7 @@ export default async function CodeSnippets() {
                 </Link>
               </div>
             </div>
+            <CodeSnippetDetails gist={gist} />
             <pre>
               <div
                 dangerouslySetInnerHTML={{ __html: gist.code }}

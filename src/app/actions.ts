@@ -20,14 +20,20 @@ export async function getGists(): Promise<Gist[]> {
   const currentDate = new Date();
   try {
     const responses = await Promise.all(gistRequests);
-
+    console.log(responses);
     const result = await Promise.all(
       responses.map(async (response) => {
         if (!response.ok) {
           console.log(response);
           throw new Error("Error fetching gists");
         }
-        const data = (await response.json()) as GistReturnType;
+        let data: GistReturnType;
+        if (process.env.NODE_ENV === "development") {
+          const responseClone = response.clone();
+          data = (await responseClone.json()) as GistReturnType;
+        } else {
+          data = (await response.json()) as GistReturnType;
+        }
         const createdDate = new Date(data.created_at);
         const monthsAgo =
           currentDate.getMonth() -
@@ -52,7 +58,31 @@ export async function getGists(): Promise<Gist[]> {
     return [];
   }
 }
+export async function getGist(gistID: string) {
+  const currentDate = new Date();
+  try {
+    const response = await fetch(`https://api.github.com/gists/${gistID}`);
+    if (!response.ok) throw new Error("Error fetching gists");
 
+    const result = (await response.json()) as GistReturnType;
+    const createdDate = new Date(result.created_at);
+    const monthsAgo =
+      currentDate.getMonth() -
+      createdDate.getMonth() +
+      12 * (currentDate.getFullYear() - createdDate.getFullYear());
+
+    const code = hljs.highlightAuto(getGistCode(result), ["typescript"]).value;
+    return {
+      ...result,
+      monthsAgo: monthsAgo,
+      showDescription: false,
+      code,
+    } as Gist;
+  } catch (error) {
+    console.error(`Error fetching gist ${gistID}:`, error);
+    return null;
+  }
+}
 function getGistCode(gist: GistReturnType) {
   const gistFileName = Object.keys(gist.files)[0]!;
   const code = gist.files[gistFileName]!.content;
