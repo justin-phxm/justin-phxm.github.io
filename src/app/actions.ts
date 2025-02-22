@@ -6,25 +6,33 @@ import { devInfo } from "public/devInfo";
 import { type GistReturnType } from "./types";
 
 const gistIDs = devInfo.gists;
+const githubUsername = devInfo.contacts.social.github.user;
 
 const gistRequests = gistIDs.map((gistID) =>
   fetch(`https://api.github.com/gists/${gistID}`),
 );
 
+export type Repo = {
+  id: number;
+  name: string;
+  description: string;
+  html_url: string;
+  homepage: string;
+  languages_url: string;
+  language: string;
+};
 export type Gist = GistReturnType & {
   showDescription: boolean;
   monthsAgo: number;
   code: string;
 };
-export async function getGists(): Promise<Gist[]> {
+export async function getGists() {
   const currentDate = new Date();
   try {
     const responses = await Promise.all(gistRequests);
-    console.log(responses);
     const result = await Promise.all(
       responses.map(async (response) => {
         if (!response.ok) {
-          console.log(response);
           throw new Error("Error fetching gists");
         }
         let data: GistReturnType;
@@ -87,4 +95,17 @@ function getGistCode(gist: GistReturnType) {
   const gistFileName = Object.keys(gist.files)[0]!;
   const code = gist.files[gistFileName]!.content;
   return code;
+}
+
+export async function getRepos() {
+  try {
+    const res = await fetch(
+      `https://api.github.com/users/${githubUsername}/repos`,
+    );
+    if (!res.ok) throw new Error("Error fetching repos");
+    return (await res.json()) as Repo[];
+  } catch (error) {
+    console.error("Error fetching repos:", error);
+    return [];
+  }
 }
