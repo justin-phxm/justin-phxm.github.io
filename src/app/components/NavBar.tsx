@@ -2,7 +2,7 @@ import Link from "next/link";
 import { devInfo } from "public/devInfo";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-const navigation2 = {
+const navigation = {
   "_about-me": "/about-me",
   _projects: "/projects",
   "_contact-me": "/contact",
@@ -20,7 +20,7 @@ export default function NavBar() {
             {devInfo.logo_name}
           </Link>
           <ul className="hidden items-center sm:flex">
-            {Object.entries(navigation2)
+            {Object.entries(navigation)
               .slice(0, 2)
               .map(([item, value]) => (
                 <li key={item}>
@@ -36,9 +36,9 @@ export default function NavBar() {
         </div>
         <Link
           className="hidden px-4 py-2 text-sm font-medium text-gray-300 transition-colors hover:bg-slate-800 sm:flex"
-          href={navigation2["_contact-me"]}
+          href={navigation["_contact-me"]}
         >
-          {"_contact-me" as keyof typeof navigation2}
+          {"_contact-me" as keyof typeof navigation}
         </Link>
       </div>
       <details className="relative h-0 items-center px-4 transition-all open:h-24 sm:hidden">
@@ -46,7 +46,7 @@ export default function NavBar() {
           <RxHamburgerMenu />
         </summary>
         <ul className="absolute inset-0">
-          {Object.entries(navigation2).map(([item, value]) => (
+          {Object.entries(navigation).map(([item, value]) => (
             <li key={item}>
               <Link
                 href={value}
