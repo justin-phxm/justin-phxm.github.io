@@ -117,7 +117,7 @@ export type DevInfo = {
   gists: string[];
 };
 
-export const devInfo: DevInfo = {
+export const devInfo = {
   name: "Justin Pham",
   logo_name: "justin-pham",
   role: "Full-stack web developer",
@@ -153,4 +153,4 @@ export const devInfo: DevInfo = {
     "edbac6dc9f294fbe9c4a06aee2ed3d08",
     "0ca4b710774dabe87a73cc9bab63bf03",
   ],
-} as const;
+} as const satisfies DevInfo;

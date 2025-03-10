@@ -1,0 +1,50 @@
+import React from "react";
+import Details from "../_components/Details";
+import { devInfo } from "@/public/devInfo";
+import Link from "next/link";
+import { FaExternalLinkAlt } from "react-icons/fa";
+
+export default function ContactInfo() {
+  const { direct, find_me_also_in } = devInfo.contacts;
+  return (
+    <div className="flex flex-col gap-1 border-slate-800 lg:border-r">
+      <Details title={direct.title}>
+        <Contact
+          link={direct.sources.email}
+          title={direct.sources.email}
+          type={"mailto:"}
+        />
+        <Contact
+          link={direct.sources.phone}
+          title={direct.sources.phone}
+          type={"tel:"}
+        />
+      </Details>
+      <Details title={"find-me-also-in"}>
+        {Object.entries(find_me_also_in).map(([key, value]) => (
+          <Contact key={key} link={value.url} title={value.title} />
+        ))}
+      </Details>
+    </div>
+  );
+}
+
+const Contact = ({
+  link,
+  title,
+  type,
+}: {
+  link: string;
+  title: string;
+  type?: string;
+}) => {
+  return (
+    <Link
+      href={type + link}
+      className={`flex select-none items-center gap-2 border-b border-slate-800 p-2 text-sm outline-none hover:text-white focus:text-white focus:underline`}
+    >
+      <FaExternalLinkAlt />
+      {title}
+    </Link>
+  );
+};

@@ -1,12 +1,12 @@
 "use client";
 import { devInfo } from "public/devInfo";
-import { AiFillCode, AiOutlineMail } from "react-icons/ai";
+import { AiFillCode } from "react-icons/ai";
 import { BiSolidUser } from "react-icons/bi";
 import { FaGamepad } from "react-icons/fa";
-import { BsTelephoneFill } from "react-icons/bs";
 import InfoView from "./InfoView";
 import { useState } from "react";
 import InfoSection from "./InfoSection";
+import DesktopSidebar from "./DesktopSidebar";
 
 const sectionIcons = [
   <AiFillCode key="code" />,
@@ -59,59 +59,12 @@ export default function UserInfo() {
           </details>
         ))}
       </div>
-      <div className="border-r border-slate-800 text-white">
-        {/* desktop */}
-        <details
-          open
-          className="hidden cursor-pointer flex-row items-center gap-2 border-b border-slate-800 lg:block"
-        >
-          <summary className="mx-2 whitespace-nowrap">
-            {aboutSection.title}
-          </summary>
-          <div className="hidden whitespace-nowrap text-sm lg:block">
-            {aboutSection.info.map((info, infoMapIndex) => (
-              <InfoSection
-                key={info.title}
-                infoTitle={info.title}
-                infoDescriptionIndex={infoDescriptionIndex}
-                setInfoDescriptionIndex={setInfoDescriptionIndex}
-                aboutSectionIndex={aboutSectionIndex}
-                sectionMapIndex={aboutSectionIndex}
-                infoMapIndex={infoMapIndex}
-                setAboutSectionIndex={setAboutSectionIndex}
-              />
-            ))}
-          </div>
-        </details>
-        <details
-          open
-          className="mt-1 flex cursor-pointer flex-col border-b border-slate-800 lg:mt-0"
-        >
-          <summary className="cursor-pointer bg-slate-800 px-2 lg:mx-2 lg:bg-inherit lg:px-0">
-            <span className="text-sm lg:text-base lg:capitalize">details</span>
-          </summary>
-          <div className="flex flex-col gap-1 border-slate-800">
-            {[
-              <AiOutlineMail key="email" />,
-              <BsTelephoneFill key="phone" />,
-            ].map((Icon, index) => (
-              <button
-                key={Icon.key}
-                className="flex w-full flex-row items-center gap-2 px-2 py-1 text-sm text-slate-500 hover:bg-gray-700 hover:text-white lg:px-2"
-              >
-                {Icon}
-                <p>
-                  {
-                    devInfo.contacts.direct.sources[
-                      index === 0 ? "email" : "phone"
-                    ]
-                  }
-                </p>
-              </button>
-            ))}
-          </div>
-        </details>
-      </div>
+      <DesktopSidebar
+        aboutSectionIndex={aboutSectionIndex}
+        infoDescriptionIndex={infoDescriptionIndex}
+        setInfoDescriptionIndex={setInfoDescriptionIndex}
+        setAboutSectionIndex={setAboutSectionIndex}
+      />
       <div className="w-full border-slate-800 lg:border-r">
         <InfoView
           infoDescription={infoDescription}
