@@ -4,12 +4,107 @@ import { IoMdArrowDropup } from "react-icons/io";
 import { useEffect, useState } from "react";
 import Timer from "./Timer";
 import { useRouter } from "next/navigation";
+function move(
+  board: number[][],
+  emptyCell: { x: number; y: number },
+  direction: "up" | "right" | "down" | "left",
+) {
+  let newEmptyCell: { x: number; y: number };
+  switch (direction) {
+    case "up":
+      if (emptyCell.y > 0) {
+        newEmptyCell = { x: emptyCell.x, y: emptyCell.y - 1 };
+      } else {
+        return board;
+      }
+      break;
+    case "right":
+      if (emptyCell.x < 2) {
+        newEmptyCell = { x: emptyCell.x + 1, y: emptyCell.y };
+      } else {
+        return board;
+      }
+      break;
+    case "down":
+      if (emptyCell.y < 2) {
+        newEmptyCell = { x: emptyCell.x, y: emptyCell.y + 1 };
+      } else {
+        return board;
+      }
+      break;
+    case "left":
+      if (emptyCell.x > 0) {
+        newEmptyCell = { x: emptyCell.x - 1, y: emptyCell.y };
+      } else {
+        return board;
+      }
+      break;
+  }
+  const newBoard = [...board];
+  newBoard[emptyCell.y]![emptyCell.x] =
+    newBoard[newEmptyCell.y]![newEmptyCell.x]!;
+  newBoard[newEmptyCell.y]![newEmptyCell.x] = 0;
+  return newBoard;
+}
+// Must have an even number of inversions to be solvable
+function isSo(arr: number[][]) {
+  const puzzle = arr.flat();
+  const invCount = getInvCount(puzzle);
+  const isSolvable = invCount % 2 === 0;
+  return isSolvable;
+}
+function getInvCount(arr: number[]) {
+  return arr.reduce((acc, curr, i) => {
+    if (curr === 0) return acc;
+    return acc + arr.slice(i + 1).filter((x) => x < curr).length;
+  }, 0);
+}
 const myArray: number[][] = [
   [1, 2, 3],
   [4, 5, 6],
   [7, 8, 0],
 ];
 const ARRAY_SIZE = [myArray.length, myArray[0]!.length] as const;
+function checkWin(board: number[][]) {
+  board.forEach((row, y) => {
+    row.forEach((cell, x) => {
+      if (cell !== myArray[y]![x]) {
+        return false;
+      }
+    });
+  });
+  return true;
+}
+function findEmptyCell(array: number[][]) {
+  array.forEach((row, y) => {
+    row.forEach((cell, x) => {
+      if (cell === 0) {
+        return { x, y };
+      }
+    });
+  });
+  return { x: 0, y: 0 };
+}
+function shuffleArray(array: number[][]) {
+  const newBoard = [...array];
+  for (let y = ARRAY_SIZE[1] - 1; y > 0; y--) {
+    for (let x = ARRAY_SIZE[0] - 1; x > 0; x--) {
+      const j = Math.floor(Math.random() * (y + 1));
+      const k = Math.floor(Math.random() * (x + 1));
+      const temp = array[j]![k]!;
+      newBoard[j]![k] = array[y]![x]!;
+      newBoard[y]![x] = temp!;
+    }
+  }
+  const emptyCell = findEmptyCell(newBoard);
+  newBoard[emptyCell.y]![emptyCell.x] = newBoard[1]![1]!;
+  newBoard[1]![1] = 0;
+  // Check if reshuffling is needed and perform it only when necessary
+  if (!isSo(newBoard)) {
+    return shuffleArray(newBoard);
+  }
+  return newBoard;
+}
 export default function Game() {
   const router = useRouter();
   const [board, setBoard] = useState(myArray);
@@ -22,156 +117,44 @@ export default function Game() {
   /* Randomize array in-place using Durstenfeld shuffle algorithm */
   // https://stackoverflow.com/a/12646864/114157
   // Game cannot be solved if the number of inversions is odd
-  function shuffleArray(array: number[][]) {
-    const newBoard = [...array];
-    for (let y = ARRAY_SIZE[1] - 1; y > 0; y--) {
-      for (let x = ARRAY_SIZE[0] - 1; x > 0; x--) {
-        const j = Math.floor(Math.random() * (y + 1));
-        const k = Math.floor(Math.random() * (x + 1));
-        const temp = array[j]![k]!;
-        newBoard[j]![k] = array[y]![x]!;
-        newBoard[y]![x] = temp!;
-      }
-    }
-    const emptyCell = findEmptyCell(newBoard);
-    newBoard[emptyCell.y]![emptyCell.x] = newBoard[1]![1]!;
-    newBoard[1]![1] = 0;
-    setEmptyCell({ x: 1, y: 1 });
-    // Check if reshuffling is needed and perform it only when necessary
-    if (!isSo(newBoard)) {
-      shuffleArray(newBoard);
-    } else {
-      // Update the board state when no reshuffling is needed
-      setBoard(newBoard);
-    }
-    setMoves(0);
-  }
 
   // Helper function to find the empty cell
-  function findEmptyCell(array: number[][]) {
-    array.forEach((row, y) => {
-      row.forEach((cell, x) => {
-        if (cell === 0) {
-          return { x, y };
-        }
-      });
-    });
-    return { x: 0, y: 0 };
-  }
-  function checkWin() {
-    board.forEach((row, y) => {
-      row.forEach((cell, x) => {
-        if (cell !== myArray[y]![x]) {
-          return;
-        }
-      });
-    });
-
-    setTimeout(() => {
-      router.push("/about-me");
-    }, 1000);
-  }
   function getKeyAndMove(e: React.KeyboardEvent<HTMLElement>) {
     const key = e.key;
     switch (key) {
       case "ArrowLeft": //left arrow key
-        moveLeft();
-        checkWin();
+        move(board, emptyCell, "left");
+        if (checkWin(board)) {
+          setTimeout(() => {
+            router.push("/about-me");
+          }, 1000);
+        }
         break;
       case "ArrowUp": //Up arrow key
-        moveUp();
-        checkWin();
+        move(board, emptyCell, "up");
+        if (checkWin(board)) {
+          setTimeout(() => {
+            router.push("/about-me");
+          }, 1000);
+        }
         break;
       case "ArrowRight": //right arrow key
-        moveRight();
-        checkWin();
+        move(board, emptyCell, "right");
+        if (checkWin(board)) {
+          setTimeout(() => {
+            router.push("/about-me");
+          }, 1000);
+        }
         break;
       case "ArrowDown": //down arrow key
-        moveDown();
-        checkWin();
+        move(board, emptyCell, "down");
+        if (checkWin(board)) {
+          setTimeout(() => {
+            router.push("/about-me");
+          }, 1000);
+        }
         break;
     }
-  }
-  function moveLeft() {
-    if (emptyCell.x > 0) {
-      const newEmptyCell = { x: emptyCell.x - 1, y: emptyCell.y };
-
-      // Create a new board state by swapping the values
-      const newBoard = [...board];
-      newBoard[emptyCell.y]![emptyCell.x] =
-        newBoard[newEmptyCell.y]![newEmptyCell.x]!;
-      newBoard[newEmptyCell.y]![newEmptyCell.x] = 0;
-
-      // Update both the board and emptyCell states together
-      setBoard(newBoard);
-      setEmptyCell(newEmptyCell);
-      setMoves(moves + 1);
-    }
-  }
-  function moveUp() {
-    if (emptyCell.y > 0) {
-      // Calculate the new coordinates for the empty cell
-      const newEmptyCell = { x: emptyCell.x, y: emptyCell.y - 1 };
-
-      // Create a new board state by swapping the values
-      const newBoard = [...board];
-      newBoard[emptyCell.y]![emptyCell.x] =
-        newBoard[newEmptyCell.y]![newEmptyCell.x]!;
-      newBoard[newEmptyCell.y]![newEmptyCell.x] = 0;
-
-      // Update both the board and emptyCell states together
-      setBoard(newBoard);
-      setEmptyCell(newEmptyCell);
-      setMoves(moves + 1);
-    }
-  }
-
-  function moveRight() {
-    if (emptyCell.x < 2) {
-      const newEmptyCell = { x: emptyCell.x + 1, y: emptyCell.y };
-
-      // Create a new board state by swapping the values
-      const newBoard = [...board];
-      newBoard[emptyCell.y]![emptyCell.x] =
-        newBoard[newEmptyCell.y]![newEmptyCell.x]!;
-      newBoard[newEmptyCell.y]![newEmptyCell.x] = 0;
-
-      // Update both the board and emptyCell states together
-      setBoard(newBoard);
-      setEmptyCell(newEmptyCell);
-      setMoves(moves + 1);
-    }
-  }
-  function moveDown() {
-    if (emptyCell.y < 2) {
-      // Calculate the new coordinates for the empty cell
-      const newEmptyCell = { x: emptyCell.x, y: emptyCell.y + 1 };
-
-      // Create a new board state by swapping the values
-      const newBoard = [...board];
-      newBoard[emptyCell.y]![emptyCell.x] =
-        newBoard[newEmptyCell.y]![newEmptyCell.x]!;
-      newBoard[newEmptyCell.y]![newEmptyCell.x] = 0;
-
-      // Update both the board and emptyCell states together
-      setBoard(newBoard);
-      setEmptyCell(newEmptyCell);
-      setMoves(moves + 1);
-    }
-  }
-
-  // Must have an even number of inversions to be solvable
-  function isSo(arr: number[][] = board) {
-    const puzzle = arr.flat();
-    const invCount = getInvCount(puzzle);
-    const isSolvable = invCount % 2 === 0;
-    return isSolvable;
-  }
-  function getInvCount(arr: number[]) {
-    return arr.reduce((acc, curr, i) => {
-      if (curr === 0) return acc;
-      return acc + arr.slice(i + 1).filter((x) => x < curr).length;
-    }, 0);
   }
 
   return (
@@ -197,7 +180,10 @@ export default function Game() {
         ))}
         <button className="items-center justify-center rounded-lg bg-orange-300 p-3">
           <div
-            onClick={() => shuffleArray(board)}
+            onClick={() => {
+              setBoard(shuffleArray(board));
+              setMoves(0);
+            }}
             className="text-sm text-gray-950"
           >
             start-game
@@ -210,19 +196,28 @@ export default function Game() {
           <p className="whitespace-nowrap">{"// arrows to play"}</p>
         </div>
         <div className="flex w-full flex-col items-center gap-1">
-          <button className="rounded bg-gray-950 text-3xl" onClick={moveUp}>
+          <button
+            className="rounded bg-gray-950 text-3xl"
+            onClick={() => move(board, emptyCell, "up")}
+          >
             <IoMdArrowDropup />
           </button>
           <div className="space-x-1">
-            <button className="rounded bg-gray-950 text-3xl" onClick={moveLeft}>
+            <button
+              className="rounded bg-gray-950 text-3xl"
+              onClick={() => move(board, emptyCell, "left")}
+            >
               <IoMdArrowDropup className="-rotate-90" />
             </button>
-            <button className="rounded bg-gray-950 text-3xl" onClick={moveDown}>
+            <button
+              className="rounded bg-gray-950 text-3xl"
+              onClick={() => move(board, emptyCell, "down")}
+            >
               <IoMdArrowDropup className="rotate-180" />
             </button>
             <button
               className="rounded bg-gray-950 text-3xl"
-              onClick={moveRight}
+              onClick={() => move(board, emptyCell, "right")}
             >
               <IoMdArrowDropup className="rotate-90" />
             </button>
@@ -235,7 +230,11 @@ export default function Game() {
             {moves}
           </div>
         </div>
-        <Timer shuffleArray={shuffleArray} myArray={myArray} />
+        <Timer
+          shuffleArray={shuffleArray}
+          setMoves={setMoves}
+          myArray={myArray}
+        />
       </div>
     </div>
   );

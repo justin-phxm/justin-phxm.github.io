@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 interface TimerProps {
   shuffleArray: (array: number[][]) => void;
   myArray: number[][];
+  setMoves: React.Dispatch<React.SetStateAction<number>>;
 }
 function formatTime(time: number) {
   const formattedTime = time.toLocaleString("en-US", {
@@ -50,6 +51,7 @@ export default function Timer(props: TimerProps) {
     }, 1000);
     setIntervalId(newIntervalId); // Store the new interval ID
     props.shuffleArray(props.myArray);
+    props.setMoves(0);
   }
   return (
     <>
