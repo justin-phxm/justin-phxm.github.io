@@ -6,6 +6,7 @@ import {
 } from "react-hook-form";
 import ContactView from "./ContactView";
 import { twMerge } from "tailwind-merge";
+import AnimatedComponent from "@/styles/AnimatedComponent";
 type Inputs = {
   name: string;
   email: string;
@@ -24,20 +25,24 @@ export default function ContactForm() {
   const message = watch("message");
 
   return (
-    <div className="flex flex-1 flex-row divide-x-2 divide-slate-800 border-slate-800 lg:border-t">
+    <div className="flex flex-1 flex-col divide-x-2 divide-slate-800 border-slate-800 md:flex-row lg:border-t">
       <form
         onSubmit={submitData}
-        className="flex w-1/2 flex-col items-center justify-center gap-2 p-4 text-slate-500"
+        className="flex flex-col items-center justify-center gap-2 p-4 text-slate-500 md:w-1/2"
       >
-        <Input register={register} name={"name"} />
-        <Input register={register} name={"email"} required errors={errors} />
-        <Input register={register} name={"message"} className="h-36" />
-        <button type="submit" className="rounded-lg bg-slate-800 p-2">
-          Submit
-        </button>
+        <AnimatedComponent className="w-full">
+          <Input register={register} name={"name"} />
+          <Input register={register} name={"email"} required errors={errors} />
+          <Input register={register} name={"message"} className="py-8" />
+          <button type="submit" className="rounded-lg bg-slate-800 p-2">
+            Submit
+          </button>
+        </AnimatedComponent>
       </form>
-      <div className="hidden w-1/2 items-center justify-center p-4 lg:flex">
-        <ContactView name={name} email={email} message={message} />
+      <div className="flex items-center p-4 md:w-1/2 md:justify-center">
+        <AnimatedComponent variants="fadeLeft">
+          <ContactView name={name} email={email} message={message} />
+        </AnimatedComponent>
       </div>
     </div>
   );
@@ -58,13 +63,13 @@ const Input = ({
   errors?: FieldErrors<Inputs>;
   className?: string;
 }) => (
-  <div className="flex flex-col gap-2">
-    <p className="">_{name}:</p>
+  <div className="flex w-full flex-col gap-2">
+    <p>_{name}:</p>
     <input
       {...register(name, { required })}
       placeholder={name ?? placeholder}
       className={twMerge(
-        "h-10 w-full rounded-lg border border-slate-500 bg-slate-950 p-2 shadow sm:w-72",
+        "h-10 w-full min-w-72 rounded-lg border border-slate-500 bg-slate-950 p-2 shadow",
         className,
       )}
     />

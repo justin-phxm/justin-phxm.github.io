@@ -51,12 +51,15 @@ type VO = keyof typeof variantOptions;
 export default function FadeUpAnimation({
   children,
   variants = "fadeUp",
+  className,
 }: {
   children: React.ReactNode;
   variants?: VO;
+  className?: string;
 }) {
   return (
     <motion.div
+      className={className}
       variants={variantOptions[variants]}
       initial="initial"
       animate="animate"

@@ -7,7 +7,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 export default function ContactInfo() {
   const { direct, find_me_also_in } = devInfo.contacts;
   return (
-    <div className="flex flex-col gap-1 border-slate-800 lg:border-r">
+    <>
       <Details title={direct.title}>
         <Contact
           link={direct.sources.email}
@@ -25,7 +25,7 @@ export default function ContactInfo() {
           <Contact key={key} link={value.url} title={value.title} />
         ))}
       </Details>
-    </div>
+    </>
   );
 }
 

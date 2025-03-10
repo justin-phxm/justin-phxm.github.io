@@ -10,7 +10,7 @@ export default function ContactView({
   const currentDate = new Date();
   const formattedDate = currentDate.toDateString().slice(4);
   return (
-    <div className="w-96">
+    <>
       <span className="leading-relaxed text-purple-400">const</span>
       <span className="leading-relaxed text-slate-500"> </span>
       <span className="leading-relaxed text-indigo-500">button</span>
@@ -89,6 +89,6 @@ export default function ContactView({
         <br />
         &#125;)
       </span>
-    </div>
+    </>
   );
 }

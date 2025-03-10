@@ -4,48 +4,53 @@ import Game from "./components/Game";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import Circle from "./components/Circle";
+import AnimatedComponent from "@/styles/AnimatedComponent";
 const CROSS_STYLES = "absolute size-4 rounded-full shadow-inner opacity-20 ";
 export default function page() {
   return (
     <div className="m-4 flex flex-row md:m-12 lg:m-16 xl:m-24">
       <Hero />
-      <GameContainer />
+      <AnimatedComponent variants="fadeLeft" className="w-full">
+        <GameContainer />
+      </AnimatedComponent>
     </div>
   );
 }
 function Hero() {
   return (
-    <section className="w-full text-slate-500">
-      <p className="text-lg text-slate-200">Welcome. I am</p>
-      <p className="text-4xl text-slate-200 sm:text-6xl">{devInfo.name}</p>
-      <p className="text-2xl text-indigo-600 lg:text-3xl">
-        &gt; Software Engineer
-      </p>
-      <div className="hidden pt-8 lg:block">
-        <p>{"// complete the game to continue"}</p>
-        <p>{"// you can also see it on my Github page"}</p>
-      </div>
-      <p className="text-xs sm:text-base lg:hidden">
-        {"// View on desktop for the full experience"}
-      </p>
-      <div className="text-sm font-medium md:text-base">
-        <span className="text-indigo-600">const</span>
-        <span className="text-white"> </span>
-        <span className="text-emerald-400">githubLink</span>
-        <span className="text-white"> = </span>
-        <span className="text-rose-400">
-          “
-          <Link
-            href={devInfo.contacts.social.github.url}
-            target="_blank"
-            className="underline"
-          >
-            {devInfo.contacts.social.github.url}
-          </Link>
-          ”
-        </span>
-      </div>
-    </section>
+    <AnimatedComponent className="w-full" variants="fadeRight">
+      <section className="w-full text-slate-500">
+        <p className="text-lg text-slate-200">Welcome. I am</p>
+        <p className="text-4xl text-slate-200 sm:text-6xl">{devInfo.name}</p>
+        <p className="text-2xl text-indigo-600 lg:text-3xl">
+          &gt; Software Engineer
+        </p>
+        <div className="hidden pt-8 lg:block">
+          <p>{"// complete the game to continue"}</p>
+          <p>{"// you can also see it on my Github page"}</p>
+        </div>
+        <p className="text-xs sm:text-base lg:hidden">
+          {"// View on desktop for the full experience"}
+        </p>
+        <div className="text-sm font-medium md:text-base">
+          <span className="text-indigo-600">const</span>
+          <span className="text-white"> </span>
+          <span className="text-emerald-400">githubLink</span>
+          <span className="text-white"> = </span>
+          <span className="text-rose-400">
+            “
+            <Link
+              href={devInfo.contacts.social.github.url}
+              target="_blank"
+              className="underline"
+            >
+              {devInfo.contacts.social.github.url}
+            </Link>
+            ”
+          </span>
+        </div>
+      </section>
+    </AnimatedComponent>
   );
 }
 function GameContainer() {

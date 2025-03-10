@@ -16,7 +16,7 @@ export default function ProjectFilter({
     }));
   };
   return (
-    <details open className="border-r border-slate-800">
+    <details open>
       <summary className="cursor-pointer select-none flex-row items-center whitespace-nowrap bg-slate-800 p-2 text-sm text-white lg:text-base">
         Framework/Language
       </summary>
