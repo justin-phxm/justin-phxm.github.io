@@ -1,11 +1,5 @@
-import Link from "next/link";
 import { useState, useEffect } from "react";
 
-interface TimerProps {
-  shuffleArray: (array: number[][]) => void;
-  myArray: number[][];
-  setMoves: React.Dispatch<React.SetStateAction<number>>;
-}
 function formatTime(time: number) {
   const formattedTime = time.toLocaleString("en-US", {
     minimumIntegerDigits: 2,
@@ -13,12 +7,10 @@ function formatTime(time: number) {
   });
   return formattedTime;
 }
-export default function Timer(props: TimerProps) {
+export default function Timer() {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
-  const [intervalId, setIntervalId] = useState<undefined | NodeJS.Timeout>(
-    undefined,
-  );
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout>();
 
   useEffect(() => {
     clearInterval(intervalId); // Clear the previous interval
@@ -42,17 +34,6 @@ export default function Timer(props: TimerProps) {
       setMinutes((prevMinutes) => prevMinutes + 1);
     }
   }, [intervalId, minutes, seconds]);
-  function resetTime() {
-    clearInterval(intervalId); // Clear the current interval
-    setSeconds(0);
-    setMinutes(0);
-    const newIntervalId = setInterval(() => {
-      setSeconds((prevTime) => prevTime + 1);
-    }, 1000);
-    setIntervalId(newIntervalId); // Store the new interval ID
-    props.shuffleArray(props.myArray);
-    props.setMoves(0);
-  }
   return (
     <>
       <div className="grid w-40 grid-cols-2 items-center justify-around rounded-lg border border-white p-2">
@@ -60,20 +41,6 @@ export default function Timer(props: TimerProps) {
         <div className="flex h-8 w-12 items-center justify-center whitespace-nowrap rounded-lg border border-white">
           {formatTime(minutes)}: {formatTime(seconds)}
         </div>
-      </div>
-      <div className="flex w-40 flex-row gap-2">
-        <button
-          onClick={resetTime}
-          className="text-nowrap rounded-md bg-orange-300 p-2 text-black outline-none ring-white transition-opacity hover:opacity-80 focus:ring-2"
-        >
-          restart-game
-        </button>
-        <Link
-          className="flex flex-1 items-center justify-center rounded-lg border border-white p-2"
-          href={"/about-me"}
-        >
-          skip
-        </Link>
       </div>
     </>
   );
