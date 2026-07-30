@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import AnimatedComponent from "@/styles/AnimatedComponent";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Footer from "./components/Footer";
@@ -36,6 +37,7 @@ export default function RootLayout({
             <Footer />
           </AnimatedComponent>
         </main>
+        <Analytics />
       </body>
     </html>
   );
