@@ -1,0 +1,6 @@
+allowBuilds:
+  '@biomejs/biome': false
+  sharp: false
+minimumReleaseAgeExclude:
+  - '@types/react-dom@19.2.4'
+  - '@types/react@19.2.18'
