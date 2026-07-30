@@ -1,5 +1,5 @@
 import { IoMdArrowDropup } from "react-icons/io";
-import { type Direction } from "./GameLogic";
+import type { Direction } from "./GameLogic";
 
 export default function GameControls({
   move,

@@ -1,10 +1,10 @@
 "use client";
-import { type Repo } from "../actions";
+import AnimatedComponent from "@/styles/AnimatedComponent";
+import { useState } from "react";
+import type { Repo } from "../actions";
+import { languageMap } from "./LanguageMaps";
 import ProjectCard from "./ProjectCard";
 import ProjectFilter from "./ProjectFilter";
-import { useState } from "react";
-import { languageMap } from "./LanguageMaps";
-import AnimatedComponent from "@/styles/AnimatedComponent";
 
 const initialFilterState = Object.fromEntries(
   Object.keys(languageMap).map((key) => [key, true]),

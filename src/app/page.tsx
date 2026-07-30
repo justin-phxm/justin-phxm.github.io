@@ -1,10 +1,10 @@
+import AnimatedComponent from "@/styles/AnimatedComponent";
+import Link from "next/link";
 import { devInfo } from "public/devInfo";
 import { RxCrossCircled } from "react-icons/rx";
-import Game from "./components/Game";
-import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import Circle from "./components/Circle";
-import AnimatedComponent from "@/styles/AnimatedComponent";
+import Game from "./components/Game";
 const CROSS_STYLES = "absolute size-4 rounded-full shadow-inner opacity-20 ";
 export default function page() {
   return (

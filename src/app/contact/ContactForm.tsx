@@ -1,12 +1,12 @@
 "use client";
-import {
-  useForm,
-  type UseFormRegister,
-  type FieldErrors,
-} from "react-hook-form";
-import ContactView from "./ContactView";
-import { twMerge } from "tailwind-merge";
 import AnimatedComponent from "@/styles/AnimatedComponent";
+import {
+  type FieldErrors,
+  type UseFormRegister,
+  useForm,
+} from "react-hook-form";
+import { twMerge } from "tailwind-merge";
+import ContactView from "./ContactView";
 type Inputs = {
   name: string;
   email: string;

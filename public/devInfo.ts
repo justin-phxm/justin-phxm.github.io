@@ -19,7 +19,7 @@ const social = {
     url: "https://twitter.com/phamx04/",
     user: "Justin Pham",
   },
-};
+} as const;
 const about = {
   sections: [
     {
@@ -78,7 +78,7 @@ const about = {
       ],
     },
   ],
-};
+} as const satisfies { sections: AboutSection[] };
 
 type InfoSection = {
   title: string;

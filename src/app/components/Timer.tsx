@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function formatTime(time: number) {
   const formattedTime = time.toLocaleString("en-US", {

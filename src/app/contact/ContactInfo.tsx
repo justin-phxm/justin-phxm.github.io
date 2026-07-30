@@ -1,8 +1,8 @@
-import React from "react";
-import Details from "../_components/Details";
 import { devInfo } from "@/public/devInfo";
 import Link from "next/link";
+import React from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import Details from "../_components/Details";
 
 export default function ContactInfo() {
   const { direct, find_me_also_in } = devInfo.contacts;

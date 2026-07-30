@@ -1,15 +1,15 @@
-import CImage from "@/public/c.webp";
 import CppImage from "@/public/Cpp.png";
+import ReactImage from "@/public/React_Hero.png";
+import CImage from "@/public/c.webp";
 import FallbackImage from "@/public/fallback.jpg";
 import JavaImage from "@/public/java.png";
 import PythonImage from "@/public/python.jpg";
-import ReactImage from "@/public/React_Hero.png";
-import { type StaticImageData } from "next/image";
+import type { StaticImageData } from "next/image";
 import {
-  BiLogoReact,
-  BiLogoPython,
-  BiLogoJava,
   BiLogoCPlusPlus,
+  BiLogoJava,
+  BiLogoPython,
+  BiLogoReact,
   BiLogoTypescript,
 } from "react-icons/bi";
 import { SiCoursera } from "react-icons/si";

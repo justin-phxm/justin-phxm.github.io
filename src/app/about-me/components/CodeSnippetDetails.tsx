@@ -1,4 +1,4 @@
-import { type Gist } from "@/app/actions";
+import type { Gist } from "@/app/actions";
 
 export default function CodeSnippetDetails({ gist }: { gist: Gist }) {
   return (

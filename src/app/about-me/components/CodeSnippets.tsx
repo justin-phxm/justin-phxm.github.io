@@ -1,8 +1,8 @@
 import Image from "next/image";
 import "highlight.js/styles/github-dark-dimmed.css";
+import { type Gist, getGists } from "@/app/actions";
 import Link from "next/link";
 import { AiFillStar } from "react-icons/ai";
-import { getGists, type Gist } from "@/app/actions";
 import "highlight.js/styles/default.css";
 import CodeSnippetDetails from "./CodeSnippetDetails";
 export default async function CodeSnippets() {

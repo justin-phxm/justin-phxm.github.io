@@ -1,12 +1,12 @@
 "use client";
 import { devInfo } from "public/devInfo";
+import { useState } from "react";
 import { AiFillCode } from "react-icons/ai";
 import { BiSolidUser } from "react-icons/bi";
 import { FaGamepad } from "react-icons/fa";
-import InfoView from "./InfoView";
-import { useState } from "react";
-import InfoSection from "./InfoSection";
 import DesktopSidebar from "./DesktopSidebar";
+import InfoSection from "./InfoSection";
+import InfoView from "./InfoView";
 
 const sectionIcons = [
   <AiFillCode key="code" />,

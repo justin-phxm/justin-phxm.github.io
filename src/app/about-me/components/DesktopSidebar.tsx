@@ -1,7 +1,7 @@
-import InfoSection from "./InfoSection";
-import { devInfo } from "@/public/devInfo";
 import Details from "@/app/_components/Details";
 import ContactInfo from "@/app/contact/ContactInfo";
+import { devInfo } from "@/public/devInfo";
+import InfoSection from "./InfoSection";
 
 export default function DesktopSidebar(props: {
   aboutSectionIndex: number;

@@ -3,7 +3,7 @@ import hljs from "highlight.js/lib/core";
 import typescript from "highlight.js/lib/languages/typescript";
 hljs.registerLanguage("typescript", typescript);
 import { devInfo } from "public/devInfo";
-import { type GistReturnType } from "./types";
+import type { GistReturnType } from "./types";
 
 const gistIDs = devInfo.gists;
 const githubUsername = devInfo.contacts.social.github.user;

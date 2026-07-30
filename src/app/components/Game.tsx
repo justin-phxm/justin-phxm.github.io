@@ -1,19 +1,18 @@
 "use client";
-import { useEffect, useState } from "react";
-import Timer from "./Timer";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import Board from "./Board";
 import GameControls from "./GameControls";
 import {
+  type Direction,
+  WINNING_BOARD,
   checkWin,
   findEmptyCell,
-  isSo,
   move,
   shuffleArray,
-  WINNING_BOARD,
-  type Direction,
 } from "./GameLogic";
-import Board from "./Board";
-import Link from "next/link";
+import Timer from "./Timer";
 const KEY_MAP = {
   ArrowLeft: "left",
   ArrowUp: "up",
@@ -22,10 +21,21 @@ const KEY_MAP = {
 } satisfies Record<string, Direction>;
 export default function Game() {
   const router = useRouter();
-  const [board, setBoard] = useState(shuffleArray(WINNING_BOARD));
+  const [board, setBoard] = useState(WINNING_BOARD);
   const [emptyCell, setEmptyCell] = useState({ x: 2, y: 2 });
   const [moves, setMoves] = useState(0);
+  const [isReady, setIsReady] = useState(false);
+
   useEffect(() => {
+    setBoard(shuffleArray(WINNING_BOARD));
+    setIsReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isReady) {
+      return;
+    }
+
     if (checkWin(board)) {
       setTimeout(() => {
         router.push("/about-me");
@@ -33,7 +43,7 @@ export default function Game() {
     }
     const newEmptyCell = findEmptyCell(board);
     setEmptyCell(newEmptyCell);
-  }, [board, router]);
+  }, [board, router, isReady]);
   /* Randomize array in-place using Durstenfeld shuffle algorithm */
   // https://stackoverflow.com/a/12646864/114157
 
@@ -67,7 +77,10 @@ export default function Game() {
         tabIndex={0}
       >
         <Board board={board} />
-        <button className="items-center justify-center rounded-lg bg-orange-300 p-3">
+        <button
+          type="button"
+          className="items-center justify-center rounded-lg bg-orange-300 p-3"
+        >
           <div
             onClick={() => {
               setBoard(shuffleArray(board));
@@ -94,6 +107,7 @@ export default function Game() {
         <Timer />
         <div className="flex w-40 flex-row gap-2">
           <button
+            type="button"
             onClick={handleRestart}
             className="text-nowrap rounded-md bg-orange-300 p-2 text-black outline-none ring-white transition-opacity hover:opacity-80 focus:ring-2"
           >

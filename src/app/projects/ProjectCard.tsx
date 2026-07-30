@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { type Repo } from "../actions";
 import Link from "next/link";
+import type { Repo } from "../actions";
 import { fallback, languageMap } from "./LanguageMaps";
 export default function ProjectCard({
   repo,

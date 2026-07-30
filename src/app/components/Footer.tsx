@@ -1,9 +1,9 @@
+import Link from "next/link";
 import { devInfo } from "public/devInfo";
 import { AiFillGithub } from "react-icons/ai";
-import { BsFacebook, BsDownload } from "react-icons/bs";
 import { AiFillTwitterCircle } from "react-icons/ai";
+import { BsDownload, BsFacebook } from "react-icons/bs";
 import { FaLinkedin } from "react-icons/fa6";
-import Link from "next/link";
 const social = devInfo.contacts.social;
 const RESUME_PDF = "/CV.pdf";
 const ICON_PROPS = "transition-all hover:scale-150 hover:opacity-50";
