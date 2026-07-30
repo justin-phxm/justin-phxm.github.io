@@ -13,6 +13,7 @@ import {
   BiLogoTypescript,
 } from "react-icons/bi";
 import { SiCoursera } from "react-icons/si";
+import type { JSX } from "react";
 type LanguageMap = Record<
   string,
   {
