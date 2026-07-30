@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { devInfo } from "public/devInfo";
+import { devInfo } from "@/public/devInfo";
 import { AiFillGithub } from "react-icons/ai";
 import { AiFillTwitterCircle } from "react-icons/ai";
 import { BsDownload, BsFacebook } from "react-icons/bs";

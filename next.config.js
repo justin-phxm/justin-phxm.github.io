@@ -5,6 +5,9 @@ const config = {
       { protocol: "https", hostname: "avatars.githubusercontent.com" },
     ],
   },
+  experimental: {
+    useTypeScriptCli: true,
+  },
 };
 
 export default config;

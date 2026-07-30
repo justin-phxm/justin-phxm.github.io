@@ -1,6 +1,6 @@
 import AnimatedComponent from "@/styles/AnimatedComponent";
 import Link from "next/link";
-import { devInfo } from "public/devInfo";
+import { devInfo } from "@/public/devInfo";
 import { RxCrossCircled } from "react-icons/rx";
 import { twMerge } from "tailwind-merge";
 import Circle from "./components/Circle";
@@ -42,8 +42,7 @@ function Hero() {
             <Link
               href={devInfo.contacts.social.github.url}
               target="_blank"
-              className="underline"
-            >
+              className="underline">
               {devInfo.contacts.social.github.url}
             </Link>
             ”

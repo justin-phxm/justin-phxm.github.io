@@ -1,5 +1,5 @@
 "use client";
-import { devInfo } from "public/devInfo";
+import { devInfo } from "@/public/devInfo";
 import { useState } from "react";
 import { AiFillCode } from "react-icons/ai";
 import { BiSolidUser } from "react-icons/bi";
@@ -25,8 +25,7 @@ export default function UserInfo() {
           <details key={section.title}>
             <summary
               tabIndex={-1}
-              className="cursor-pointer bg-slate-800 px-2 lg:list-none lg:bg-inherit lg:px-0"
-            >
+              className="cursor-pointer bg-slate-800 px-2 lg:list-none lg:bg-inherit lg:px-0">
               <span className="text-sm lg:hidden">{section.title}</span>
               <button
                 className={`hidden border-b border-slate-800 p-2 text-3xl lg:block ${
@@ -35,8 +34,7 @@ export default function UserInfo() {
                 onClick={() => {
                   setAboutSectionIndex(sectionMapIndex);
                   setInfoDescriptionIndex(0);
-                }}
-              >
+                }}>
                 {sectionIcons[sectionMapIndex]}
               </button>
             </summary>

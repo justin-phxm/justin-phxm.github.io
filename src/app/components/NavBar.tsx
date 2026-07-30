@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { devInfo } from "public/devInfo";
+import { devInfo } from "@/public/devInfo";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 const navigation = {
@@ -15,8 +15,7 @@ export default function NavBar() {
         <div className="flex">
           <Link
             className="border-r border-slate-800 px-4 py-2 text-sm font-medium text-gray-300 transition-opacity hover:opacity-50 sm:px-12"
-            href="/"
-          >
+            href="/">
             {devInfo.logo_name}
           </Link>
           <ul className="hidden items-center sm:flex">
@@ -26,8 +25,7 @@ export default function NavBar() {
                 <li key={item}>
                   <Link
                     href={value}
-                    className="flex border-r border-slate-800 px-4 py-2 text-sm font-medium text-gray-300 transition-colors hover:bg-slate-800"
-                  >
+                    className="flex border-r border-slate-800 px-4 py-2 text-sm font-medium text-gray-300 transition-colors hover:bg-slate-800">
                     {item}
                   </Link>
                 </li>
@@ -36,8 +34,7 @@ export default function NavBar() {
         </div>
         <Link
           className="hidden px-4 py-2 text-sm font-medium text-gray-300 transition-colors hover:bg-slate-800 sm:flex"
-          href={navigation["_contact-me"]}
-        >
+          href={navigation["_contact-me"]}>
           {"_contact-me" as keyof typeof navigation}
         </Link>
       </div>
@@ -50,8 +47,7 @@ export default function NavBar() {
             <li key={item}>
               <Link
                 href={value}
-                className="flex bg-slate-800 py-1 focus:opacity-80 focus:outline-none focus:ring-2 focus:ring-slate-800"
-              >
+                className="flex bg-slate-800 py-1 focus:opacity-80 focus:outline-none focus:ring-2 focus:ring-slate-800">
                 {item}
               </Link>
             </li>
