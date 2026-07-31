@@ -15,6 +15,7 @@
     "format:check": "biome format --check ."
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
     "@vercel/analytics": "^2.0.1",
     "geist": "^1.7.2",
     "highlight.js": "^11.11.1",
@@ -28,7 +29,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.6",
-    "@types/highlight.js": "^10.1.0",
     "@types/node": "^26.1.2",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.4",
