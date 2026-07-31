@@ -43,8 +43,8 @@ importers:
         specifier: ^2.5.6
         version: 2.5.6
       '@types/highlight.js':
-        specifier: ^9.12.4
-        version: 9.12.4
+        specifier: ^10.1.0
+        version: 10.1.0
       '@types/node':
         specifier: ^26.1.2
         version: 26.1.2
@@ -342,8 +342,9 @@ packages:
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
 
-  '@types/highlight.js@9.12.4':
-    resolution: {integrity: sha512-t2szdkwmg2JJyuCM20e8kR2X59WCE5Zkl4bzm1u1Oukjm79zpbiAv+QjnwLnuuV0WHEcX2NgUItu0pAMKuOPww==}
+  '@types/highlight.js@10.1.0':
+    resolution: {integrity: sha512-77hF2dGBsOgnvZll1vymYiNUtqJ8cJfXPD6GG/2M0aLRc29PkvB7Au6sIDjIEFcSICBhCh2+Pyq6WSRS7LUm6A==}
+    deprecated: This is a stub types definition. highlight.js provides its own type definitions, so you do not need this installed.
 
   '@types/node@26.1.2':
     resolution: {integrity: sha512-Vu4a5UFA9rIIFJ7rB/Vaafh9lrCQszopTCx6KjFboXTGQbPNasehVR5TEiithSDGyd1DEiUByggTZsg8jukeIg==}
@@ -1121,7 +1122,9 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@types/highlight.js@9.12.4': {}
+  '@types/highlight.js@10.1.0':
+    dependencies:
+      highlight.js: 11.11.1
 
   '@types/node@26.1.2':
     dependencies:
