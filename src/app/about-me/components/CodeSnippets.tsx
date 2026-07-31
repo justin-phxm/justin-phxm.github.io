@@ -21,8 +21,7 @@ export default async function CodeSnippets() {
                 <Link
                   href={gist.html_url}
                   className="flex flex-row items-center gap-2 hover:text-slate-400"
-                  target={"_blank"}
-                >
+                  target={"_blank"}>
                   <AiFillStar />
                   <p>star</p>
                 </Link>
@@ -61,8 +60,7 @@ function GistAuthor({ gist }: { gist: Gist }) {
         <Link
           className="text-sm font-bold text-indigo-500"
           href={gist.owner.html_url}
-          target="_blank"
-        >
+          target="_blank">
           @{gist.owner.login}
         </Link>
         <div className="text-xs text-slate-500">
