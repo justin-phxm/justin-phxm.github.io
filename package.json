@@ -29,7 +29,7 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@types/highlight.js": "^9.12.4",
-    "@types/node": "^20.19.43",
+    "@types/node": "^26.1.2",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.4",
     "postcss": "^8.5.25",
