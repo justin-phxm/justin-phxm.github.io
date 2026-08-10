@@ -1,12 +1,12 @@
 "use server";
 
+import { put } from "@vercel/blob";
+
 export type ContactSubmission = {
   name: string;
   email: string;
   message: string;
 };
-
-const blobApiVersion = "11";
 
 function sanitizePathSegment(value: string) {
   return value
@@ -45,20 +45,12 @@ export async function saveContactSubmission(data: ContactSubmission) {
   const filename = `${submittedAt}-${sanitizePathSegment(submission.name)}.json`;
   const pathname = `contact-submissions/${filename}`;
 
-  const response = await fetch(`https://blob.vercel-storage.com/${pathname}`, {
-    method: "PUT",
-    headers: {
-      authorization: `Bearer ${token}`,
-      "content-type": "application/json",
-      "x-api-version": blobApiVersion,
-      "x-add-random-suffix": "1",
-    },
-    body: JSON.stringify({ ...submission, submittedAt }),
+  await put(pathname, JSON.stringify({ ...submission, submittedAt }), {
+    access: "private",
+    addRandomSuffix: true,
+    contentType: "application/json",
+    token,
   });
-
-  if (!response.ok) {
-    throw new Error("Unable to save your message right now. Please try again.");
-  }
 
   return { ok: true };
 }
