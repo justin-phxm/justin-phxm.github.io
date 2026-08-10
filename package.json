@@ -6,7 +6,7 @@
   "scripts": {
     "build": "next build",
     "check": "biome check . && tsc --noEmit",
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "lint:fix": "biome check --write .",
     "preview": "next build && next start",
     "start": "next start",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",
+    "@vercel/blob": "^2.3.0",
     "@vercel/analytics": "^2.0.1",
     "geist": "^1.7.2",
     "highlight.js": "^11.11.1",
