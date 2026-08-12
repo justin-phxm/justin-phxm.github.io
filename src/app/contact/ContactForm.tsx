@@ -7,6 +7,7 @@ import {
   useForm,
 } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
+import { tryCatch } from "../utils/tryCatch";
 import ContactView from "./ContactView";
 import { saveContactSubmission } from "./actions";
 type Inputs = {
@@ -30,17 +31,19 @@ export default function ContactForm() {
     setSubmitError(null);
 
     startTransition(async () => {
-      try {
-        await saveContactSubmission(data);
-        setSubmitMessage("Thanks! Your message was saved successfully.");
-        reset();
-      } catch (error) {
+      const { error } = await tryCatch(saveContactSubmission(data));
+
+      if (error) {
         setSubmitError(
           error instanceof Error
             ? error.message
             : "Unable to save your message right now. Please try again.",
         );
+        return;
       }
+
+      setSubmitMessage("Thanks! Your message was saved successfully.");
+      reset();
     });
   });
   const name = watch("name");
