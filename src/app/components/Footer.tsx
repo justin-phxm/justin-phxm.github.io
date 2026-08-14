@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { devInfo } from "@/public/devInfo";
-import { AiFillGithub } from "react-icons/ai";
-import { AiFillTwitterCircle } from "react-icons/ai";
+import { AiFillGithub, AiFillTwitterCircle } from "react-icons/ai";
 import { BsDownload, BsFacebook } from "react-icons/bs";
 import { FaLinkedin } from "react-icons/fa6";
+import { devInfo } from "@/public/devInfo";
+
 const social = devInfo.contacts.social;
 const RESUME_PDF = "/CV.pdf";
 const ICON_PROPS = "transition-all hover:scale-150 hover:opacity-50";
@@ -21,13 +21,13 @@ export default function Footer() {
       </span>
       <ul className="flex items-center text-2xl">
         <li className={"border-l border-slate-800 p-3"}>
-          <Link href={RESUME_PDF} target="_blank">
+          <Link href={RESUME_PDF} target="_blank" rel="noreferrer">
             <BsDownload className={ICON_PROPS} />
           </Link>
         </li>
         {Object.entries(social).map(([item, value]) => (
           <li key={item} className={"border-l border-slate-800 p-3"}>
-            <Link href={value.url} target="_blank">
+            <Link href={value.url} target="_blank" rel="noreferrer">
               {socialIconMap[item as keyof typeof social]}
             </Link>
           </li>

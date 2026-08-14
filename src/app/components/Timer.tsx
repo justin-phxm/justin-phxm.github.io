@@ -1,47 +1,48 @@
 import { useEffect, useState } from "react";
 
-function formatTime(time: number) {
-  const formattedTime = time.toLocaleString("en-US", {
-    minimumIntegerDigits: 2,
-    useGrouping: false,
-  });
-  return formattedTime;
+function formatTime(seconds: number) {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  return `${minutes.toString().padStart(2, "0")}:${remainingSeconds
+    .toString()
+    .padStart(2, "0")}`;
 }
-export default function Timer() {
-  const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout>();
+
+export default function Timer({
+  isRunning,
+  resetKey,
+}: {
+  isRunning: boolean;
+  resetKey: number;
+}) {
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
   useEffect(() => {
-    clearInterval(intervalId); // Clear the previous interval
+    setElapsedSeconds(0);
+  }, [resetKey]);
 
-    const newIntervalId = setInterval(() => {
-      setSeconds((prevTime) => prevTime + 1);
+  useEffect(() => {
+    if (!isRunning) {
+      return;
+    }
+
+    const intervalId = setInterval(() => {
+      setElapsedSeconds((time) => time + 1);
     }, 1000);
-
-    setIntervalId(newIntervalId); // Store the new interval ID
     return () => {
-      clearInterval(newIntervalId); // Clear the interval on unmount
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  useEffect(() => {
-    if (minutes === 59) {
       clearInterval(intervalId);
-    }
-    if (seconds === 60) {
-      setSeconds(0);
-      setMinutes((prevMinutes) => prevMinutes + 1);
-    }
-  }, [intervalId, minutes, seconds]);
+    };
+  }, [isRunning]);
+
   return (
-    <>
-      <div className="grid w-40 grid-cols-2 items-center justify-around rounded-lg border border-white p-2">
-        <div className="text-center">time</div>
-        <div className="flex h-8 w-12 items-center justify-center whitespace-nowrap rounded-lg border border-white">
-          {formatTime(minutes)}: {formatTime(seconds)}
-        </div>
+    <div className="grid w-40 grid-cols-2 items-center justify-around rounded-lg border border-white p-2">
+      <div className="text-center">time</div>
+      <div
+        className="flex h-8 w-16 items-center justify-center whitespace-nowrap rounded-lg border border-white"
+        aria-live="polite"
+      >
+        {formatTime(elapsedSeconds)}
       </div>
-    </>
+    </div>
   );
 }

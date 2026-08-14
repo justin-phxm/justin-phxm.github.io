@@ -1,8 +1,8 @@
 import "@/styles/globals.css";
-import AnimatedComponent from "@/styles/AnimatedComponent";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import AnimatedComponent from "@/styles/AnimatedComponent";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 

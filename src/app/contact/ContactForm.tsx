@@ -1,15 +1,16 @@
 "use client";
 import { useState, useTransition } from "react";
-import AnimatedComponent from "@/styles/AnimatedComponent";
 import {
   type FieldErrors,
   type UseFormRegister,
   useForm,
 } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
+import AnimatedComponent from "@/styles/AnimatedComponent";
 import { tryCatch } from "../utils/tryCatch";
-import ContactView from "./ContactView";
 import { saveContactSubmission } from "./actions";
+import ContactView from "./ContactView";
+
 type Inputs = {
   name: string;
   email: string;
@@ -22,7 +23,10 @@ export default function ContactForm() {
     watch,
     reset,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: { name: "", email: "", message: "" },
+    mode: "onBlur",
+  });
   const [isPending, startTransition] = useTransition();
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -57,11 +61,17 @@ export default function ContactForm() {
         className="flex flex-col items-center justify-center gap-2 p-4 text-slate-500 md:w-1/2"
       >
         <AnimatedComponent className="w-full">
-          <Input register={register} name={"name"} required errors={errors} />
-          <Input register={register} name={"email"} required errors={errors} />
+          <Input register={register} name="name" required errors={errors} />
           <Input
             register={register}
-            name={"message"}
+            name="email"
+            type="email"
+            required
+            errors={errors}
+          />
+          <Input
+            register={register}
+            name="message"
             required
             errors={errors}
             className="py-8"
@@ -74,9 +84,15 @@ export default function ContactForm() {
             {isPending ? "Submitting..." : "Submit"}
           </button>
           {submitMessage && (
-            <p className="text-sm text-emerald-400">{submitMessage}</p>
+            <p className="text-sm text-emerald-400" role="status">
+              {submitMessage}
+            </p>
           )}
-          {submitError && <p className="text-sm text-red-400">{submitError}</p>}
+          {submitError && (
+            <p className="text-sm text-red-400" role="alert">
+              {submitError}
+            </p>
+          )}
         </AnimatedComponent>
       </form>
       <div className="flex items-center p-4 md:w-1/2 md:justify-center">
@@ -88,10 +104,11 @@ export default function ContactForm() {
   );
 }
 
-const Input = ({
+function Input({
   register,
   name,
   placeholder,
+  type = "text",
   required,
   errors,
   className,
@@ -99,20 +116,48 @@ const Input = ({
   register: UseFormRegister<Inputs>;
   name: keyof Inputs;
   placeholder?: string;
+  type?: "text" | "email";
   required?: boolean;
   errors?: FieldErrors<Inputs>;
   className?: string;
-}) => (
-  <div className="flex w-full flex-col gap-2">
-    <p>_{name}:</p>
-    <input
-      {...register(name, { required })}
-      placeholder={name ?? placeholder}
-      className={twMerge(
-        "h-10 w-full min-w-72 rounded-lg border border-slate-500 bg-slate-950 p-2 shadow",
-        className,
+}) {
+  const errorMessage = errors?.[name]?.message;
+  const fieldProps = register(name, {
+    required: required ? "This field is required" : false,
+  });
+  const fieldClassName = twMerge(
+    "w-full min-w-72 rounded-lg border border-slate-500 bg-slate-950 p-2 shadow",
+    name === "message" ? "min-h-32 resize-y" : "h-10",
+    className,
+  );
+
+  return (
+    <div className="flex w-full flex-col gap-2">
+      <label htmlFor={name}>_{name}:</label>
+      {name === "message" ? (
+        <textarea
+          {...fieldProps}
+          id={name}
+          placeholder={placeholder ?? name}
+          aria-invalid={errorMessage ? "true" : "false"}
+          className={fieldClassName}
+          rows={5}
+        />
+      ) : (
+        <input
+          {...fieldProps}
+          id={name}
+          type={type}
+          placeholder={placeholder ?? name}
+          aria-invalid={errorMessage ? "true" : "false"}
+          className={fieldClassName}
+        />
       )}
-    />
-    {errors && errors[name] && <span>This field is required</span>}
-  </div>
-);
+      {errorMessage && (
+        <span className="text-sm text-red-400" role="alert">
+          {errorMessage}
+        </span>
+      )}
+    </div>
+  );
+}

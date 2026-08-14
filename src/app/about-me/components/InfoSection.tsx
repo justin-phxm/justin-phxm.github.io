@@ -1,5 +1,5 @@
-import type { DevInfo } from "@/public/devInfo";
 import { FaFileAlt } from "react-icons/fa";
+import type { DevInfo } from "@/public/devInfo";
 
 const folderColors = ["text-rose-400", "text-emerald-400", "text-indigo-800"];
 export default function InfoSection({
@@ -31,7 +31,8 @@ export default function InfoSection({
         infoMapIndex === infoDescriptionIndex
           ? "bg-gray-700 text-white"
           : "text-slate-500"
-      }`}>
+      }`}
+    >
       <FaFileAlt className={folderColors[infoMapIndex % folderColors.length]} />
       <p>{infoTitle}</p>
     </button>

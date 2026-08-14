@@ -1,10 +1,11 @@
-import AnimatedComponent from "@/styles/AnimatedComponent";
 import Link from "next/link";
-import { devInfo } from "@/public/devInfo";
 import { RxCrossCircled } from "react-icons/rx";
 import { twMerge } from "tailwind-merge";
+import { devInfo } from "@/public/devInfo";
+import AnimatedComponent from "@/styles/AnimatedComponent";
 import Circle from "./components/Circle";
 import Game from "./components/Game";
+
 const CROSS_STYLES = "absolute size-4 rounded-full shadow-inner opacity-20 ";
 export default function page() {
   return (
@@ -42,6 +43,7 @@ function Hero() {
             <Link
               href={devInfo.contacts.social.github.url}
               target="_blank"
+              rel="noreferrer"
               className="underline">
               {devInfo.contacts.social.github.url}
             </Link>

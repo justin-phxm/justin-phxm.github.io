@@ -5,14 +5,15 @@ import { useEffect, useState } from "react";
 import Board from "./Board";
 import GameControls from "./GameControls";
 import {
-  type Direction,
-  WINNING_BOARD,
   checkWin,
+  type Direction,
   findEmptyCell,
   move,
   shuffleArray,
+  WINNING_BOARD,
 } from "./GameLogic";
 import Timer from "./Timer";
+
 const KEY_MAP = {
   ArrowLeft: "left",
   ArrowUp: "up",
@@ -22,56 +23,64 @@ const KEY_MAP = {
 export default function Game() {
   const router = useRouter();
   const [board, setBoard] = useState(WINNING_BOARD);
-  const [emptyCell, setEmptyCell] = useState({ x: 2, y: 2 });
   const [moves, setMoves] = useState(0);
-  const [isReady, setIsReady] = useState(false);
+  const [gameState, setGameState] = useState<"ready" | "playing" | "won">(
+    "ready",
+  );
+  const [timerResetKey, setTimerResetKey] = useState(0);
 
   useEffect(() => {
     setBoard(shuffleArray(WINNING_BOARD));
-    setIsReady(true);
   }, []);
 
   useEffect(() => {
-    if (!isReady) {
+    if (gameState !== "playing" || !checkWin(board)) {
       return;
     }
 
-    if (checkWin(board)) {
-      setTimeout(() => {
-        router.push("/about-me");
-      }, 1000);
+    setGameState("won");
+    const timeoutId = setTimeout(() => router.push("/about-me"), 1000);
+    return () => clearTimeout(timeoutId);
+  }, [board, gameState, router]);
+
+  function moveEmptyCell(direction: Direction) {
+    if (gameState === "won") {
+      return;
     }
-    const newEmptyCell = findEmptyCell(board);
-    setEmptyCell(newEmptyCell);
-  }, [board, router, isReady]);
-  /* Randomize array in-place using Durstenfeld shuffle algorithm */
-  // https://stackoverflow.com/a/12646864/114157
+
+    const newBoard = move(board, findEmptyCell(board), direction);
+    if (newBoard === board) {
+      return;
+    }
+
+    setBoard(newBoard);
+    setMoves((count) => count + 1);
+    setGameState("playing");
+  }
 
   function getKeyAndMove(e: React.KeyboardEvent<HTMLElement>) {
-    const key = e.key;
-    if (key in KEY_MAP) {
-      const i = KEY_MAP[key as keyof typeof KEY_MAP];
-      const newBoard = move(board, emptyCell, i);
-      setBoard(newBoard);
-      setMoves(moves + 1);
+    const direction = KEY_MAP[e.key as keyof typeof KEY_MAP];
+    if (direction) {
+      e.preventDefault();
+      moveEmptyCell(direction);
     }
   }
-  function moveEmptyCell(direction: Direction) {
-    const newBoard = move(board, emptyCell, direction);
-    if (newBoard !== board) {
-      setBoard(newBoard);
-      setMoves(moves + 1);
-    }
-  }
-  function handleRestart() {
-    console.log("handleRestart");
-    setBoard(shuffleArray(board));
+
+  function startGame() {
+    setBoard(shuffleArray(WINNING_BOARD));
     setMoves(0);
+    setTimerResetKey((key) => key + 1);
+    setGameState("playing");
+  }
+
+  function handleRestart() {
+    startGame();
   }
 
   return (
     <div className="flex w-full items-center justify-center gap-2">
-      <section
+      <fieldset
+        aria-label="Sliding puzzle game"
         className="flex w-full cursor-pointer flex-col gap-4 rounded-lg bg-slate-900/80 p-4 shadow-inner outline-green-500 hover:outline focus:outline"
         onKeyDown={getKeyAndMove}
         tabIndex={0}
@@ -79,19 +88,12 @@ export default function Game() {
         <Board board={board} />
         <button
           type="button"
+          onClick={startGame}
           className="items-center justify-center rounded-lg bg-orange-300 p-3"
         >
-          <div
-            onClick={() => {
-              setBoard(shuffleArray(board));
-              setMoves(0);
-            }}
-            className="text-sm text-gray-950"
-          >
-            start-game
-          </div>
+          <span className="text-sm text-gray-950">start-game</span>
         </button>
-      </section>
+      </fieldset>
       <div className="flex w-full flex-col items-center gap-2 text-sm text-white">
         <div>
           <p className="whitespace-nowrap">{"// use keyboard"} </p>
@@ -104,7 +106,7 @@ export default function Game() {
             {moves}
           </div>
         </div>
-        <Timer />
+        <Timer isRunning={gameState === "playing"} resetKey={timerResetKey} />
         <div className="flex w-40 flex-row gap-2">
           <button
             type="button"

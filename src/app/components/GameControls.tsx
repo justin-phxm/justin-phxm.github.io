@@ -9,6 +9,8 @@ export default function GameControls({
   return (
     <div className="flex w-full flex-col items-center gap-1">
       <button
+        type="button"
+        aria-label="Move tile up"
         className="rounded bg-gray-950 text-3xl"
         onClick={() => move("up")}
       >
@@ -16,18 +18,24 @@ export default function GameControls({
       </button>
       <div className="space-x-1">
         <button
+          type="button"
+          aria-label="Move tile left"
           className="rounded bg-gray-950 text-3xl"
           onClick={() => move("left")}
         >
           <IoMdArrowDropup className="-rotate-90" />
         </button>
         <button
+          type="button"
+          aria-label="Move tile down"
           className="rounded bg-gray-950 text-3xl"
           onClick={() => move("down")}
         >
           <IoMdArrowDropup className="rotate-180" />
         </button>
         <button
+          type="button"
+          aria-label="Move tile right"
           className="rounded bg-gray-950 text-3xl"
           onClick={() => move("right")}
         >

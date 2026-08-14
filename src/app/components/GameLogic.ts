@@ -1,13 +1,17 @@
 export type Direction = "up" | "right" | "down" | "left";
+export type BoardState = number[][];
+
 export const WINNING_BOARD: number[][] = [
   [1, 2, 3],
   [4, 5, 6],
   [7, 8, 0],
 ] as const;
 const FLATTENED_WINNING_BOARD = WINNING_BOARD.flat();
-const ARRAY_SIZE = [WINNING_BOARD.length, WINNING_BOARD[0]!.length] as const;
+const BOARD_SIZE = WINNING_BOARD.length;
+const LAST_INDEX = BOARD_SIZE - 1;
+
 export function move(
-  board: number[][],
+  board: BoardState,
   emptyCell: { x: number; y: number },
   direction: Direction,
 ) {
@@ -21,14 +25,14 @@ export function move(
       }
       break;
     case "right":
-      if (emptyCell.x < 2) {
+      if (emptyCell.x < LAST_INDEX) {
         newEmptyCell = { x: emptyCell.x + 1, y: emptyCell.y };
       } else {
         return board;
       }
       break;
     case "down":
-      if (emptyCell.y < 2) {
+      if (emptyCell.y < LAST_INDEX) {
         newEmptyCell = { x: emptyCell.x, y: emptyCell.y + 1 };
       } else {
         return board;
@@ -42,14 +46,14 @@ export function move(
       }
       break;
   }
-  const newBoard = [...board];
+  const newBoard = board.map((row) => [...row]);
   newBoard[emptyCell.y]![emptyCell.x] =
     newBoard[newEmptyCell.y]![newEmptyCell.x]!;
   newBoard[newEmptyCell.y]![newEmptyCell.x] = 0;
   return newBoard;
 }
 // Must have an even number of inversions to be solvable
-export function isSo(arr: number[][]) {
+export function isSolvable(arr: BoardState) {
   const puzzle = arr.flat();
   const invCount = getInvCount(puzzle);
   const isSolvable = invCount % 2 === 0;
@@ -61,49 +65,45 @@ function getInvCount(arr: number[]) {
     return acc + arr.slice(i + 1).filter((x) => x < curr).length;
   }, 0);
 }
-export function checkWin(board: number[][]) {
+export function checkWin(board: BoardState) {
   const isWin = board
     .flat()
     .every((cell, i) => cell === FLATTENED_WINNING_BOARD[i]);
   return isWin;
 }
-export function findEmptyCell(array: number[][]) {
-  let emptyCell: { x: number; y: number } | undefined;
-  array.forEach((row, y) => {
-    row.forEach((cell, x) => {
-      if (cell === 0) {
-        emptyCell = { x, y };
-      }
-      if (emptyCell) return;
-    });
-    if (emptyCell) return emptyCell;
-  });
-  return emptyCell as { x: number; y: number };
-}
-export function shuffleArray(array: number[][]) {
-  let newBoard = array.flat();
-  newBoard = newBoard.reduceRight((_, __, idx, arr) => {
-    const j = Math.floor(Math.random() * (idx + 1));
-    [arr[idx], arr[j]] = [arr[j]!, arr[idx]!];
-    return arr;
-  }, newBoard);
-  const finalBoard = newBoard.reduce((acc, _, i) => {
-    const row = Math.floor(i / ARRAY_SIZE[1]);
-    if (!acc[row]) {
-      acc[row] = [];
+export function findEmptyCell(board: BoardState) {
+  for (const [y, row] of board.entries()) {
+    const x = row.indexOf(0);
+    if (x !== -1) {
+      return { x, y };
     }
-    acc[row].push(newBoard[i]!);
-    return acc;
-  }, [] as number[][]);
-  if (finalBoard[1]![1] !== 0) {
-    const emptyCell = findEmptyCell(finalBoard);
-    [finalBoard[emptyCell.x]![emptyCell.y], finalBoard[1]![1]] = [
-      finalBoard[1]![1]!,
-      finalBoard[emptyCell.x]![emptyCell.y]!,
-    ];
   }
-  if (isSo(finalBoard)) {
-    return finalBoard;
+
+  throw new Error("Board does not contain an empty cell");
+}
+
+export function shuffleArray(board: BoardState): BoardState {
+  const flattenedBoard = board.flat();
+
+  for (let attempt = 0; attempt < 100; attempt += 1) {
+    const shuffled = [...flattenedBoard];
+    for (let index = shuffled.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      [shuffled[index], shuffled[swapIndex]] = [
+        shuffled[swapIndex]!,
+        shuffled[index]!,
+      ];
+    }
+
+    const nextBoard = Array.from({ length: BOARD_SIZE }, (_, row) =>
+      shuffled.slice(row * BOARD_SIZE, (row + 1) * BOARD_SIZE),
+    );
+
+    if (isSolvable(nextBoard) && !checkWin(nextBoard)) {
+      return nextBoard;
+    }
   }
-  return shuffleArray(finalBoard);
+
+  // Keep shuffling bounded even if Math.random is mocked or unavailable.
+  return move(WINNING_BOARD, { x: LAST_INDEX, y: LAST_INDEX }, "left");
 }

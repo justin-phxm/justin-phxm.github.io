@@ -8,17 +8,15 @@ export default function Details({
   className?: string;
 }) {
   return (
-    <>
-      <details className={className} open>
-        <summary
-          className={
-            "cursor-pointer select-none whitespace-nowrap bg-slate-800 px-2 outline-none focus:underline lg:bg-inherit"
-          }
-        >
-          {title}
-        </summary>
-        <ul className="flex flex-col text-slate-500">{children}</ul>
-      </details>
-    </>
+    <details className={className} open>
+      <summary
+        className={
+          "cursor-pointer select-none whitespace-nowrap bg-slate-800 px-2 outline-none focus:underline lg:bg-inherit"
+        }
+      >
+        {title}
+      </summary>
+      <ul className="flex flex-col text-slate-500">{children}</ul>
+    </details>
   );
 }

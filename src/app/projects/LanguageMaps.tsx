@@ -1,9 +1,3 @@
-import CppImage from "@/public/Cpp.png";
-import ReactImage from "@/public/React_Hero.png";
-import CImage from "@/public/c.webp";
-import FallbackImage from "@/public/fallback.jpg";
-import JavaImage from "@/public/java.png";
-import PythonImage from "@/public/python.jpg";
 import type { StaticImageData } from "next/image";
 import type { JSX } from "react";
 import {
@@ -14,6 +8,14 @@ import {
   BiLogoTypescript,
 } from "react-icons/bi";
 import { SiCoursera } from "react-icons/si";
+import { TbCode } from "react-icons/tb";
+import CppImage from "@/public/Cpp.png";
+import CImage from "@/public/c.webp";
+import FallbackImage from "@/public/fallback.jpg";
+import JavaImage from "@/public/java.png";
+import PythonImage from "@/public/python.jpg";
+import ReactImage from "@/public/React_Hero.png";
+
 type LanguageMap = Record<
   string,
   {
@@ -49,6 +51,10 @@ export const languageMap = {
   "C++": {
     Icon: <BiLogoCPlusPlus />,
     Image: CppImage,
+  },
+  Other: {
+    Icon: <TbCode />,
+    Image: FallbackImage,
   },
 } as const satisfies LanguageMap;
 

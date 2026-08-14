@@ -1,7 +1,6 @@
-import { devInfo } from "@/public/devInfo";
 import Link from "next/link";
-import React from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { devInfo } from "@/public/devInfo";
 import Details from "../_components/Details";
 
 export default function ContactInfo() {
