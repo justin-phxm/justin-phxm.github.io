@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 const fadeLeftVariant = {
   initial: { opacity: 0, x: 100 },
@@ -57,10 +57,15 @@ export default function FadeUpAnimation({
   variants?: VO;
   className?: string;
 }) {
+  const shouldReduceMotion = useReducedMotion();
+  const animationVariants = shouldReduceMotion
+    ? { initial: { opacity: 0 }, animate: { opacity: 1 } }
+    : variantOptions[variants];
+
   return (
     <motion.div
       className={className}
-      variants={variantOptions[variants]}
+      variants={animationVariants}
       initial="initial"
       animate="animate"
     >

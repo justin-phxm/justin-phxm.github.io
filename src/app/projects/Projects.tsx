@@ -1,6 +1,6 @@
 "use client";
-import AnimatedComponent from "@/styles/AnimatedComponent";
 import { useState } from "react";
+import AnimatedComponent from "@/styles/AnimatedComponent";
 import type { Repo } from "../actions";
 import { languageMap } from "./LanguageMaps";
 import ProjectCard from "./ProjectCard";
@@ -22,15 +22,13 @@ export default function Projects({ repos }: { repos: Repo[] }) {
       <AnimatedComponent variants="fadeLeft">
         <ol className="flex flex-wrap justify-evenly gap-4 overflow-y-auto border-l border-slate-800 p-2 md:p-4">
           {repos
-            .filter((repo) =>
-              Object.keys(filterLanguages).some(
-                (language) =>
-                  filterLanguages[language as keyof typeof languageMap] &&
-                  repo.language === language,
-              ),
-            )
+            .filter((repo) => {
+              const language =
+                repo.language in languageMap ? repo.language : "Other";
+              return filterLanguages[language as keyof typeof languageMap];
+            })
             .map((repo: Repo, index: number) => (
-              <ProjectCard key={index} repo={repo} index={index} />
+              <ProjectCard key={repo.id} repo={repo} index={index} />
             ))}
         </ol>
       </AnimatedComponent>

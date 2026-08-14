@@ -9,7 +9,9 @@ export default function ProjectCard({
   repo: Repo;
   index: number;
 }) {
-  if (!repo.description) repo.description = `View ${repo.name} on Github`;
+  const language =
+    languageMap[repo.language as keyof typeof languageMap] ?? fallback;
+  const description = repo.description || `View ${repo.name} on GitHub`;
 
   return (
     <li className="w-full max-w-80">
@@ -25,27 +27,23 @@ export default function ProjectCard({
           className="h-36 w-full rounded-t-2xl border-b border-slate-800 object-cover"
           height={144}
           width={288}
-          src={
-            languageMap[repo.language as keyof typeof languageMap].Image ??
-            fallback.Image
-          }
-          alt={repo.language}
+          src={language.Image}
+          alt={`${repo.language} project preview`}
         />
         <div className="flex h-36 flex-col justify-between gap-2">
           <p className="max-h-20 overflow-auto p-2 text-white md:p-4">
-            {repo.description}
+            {description}
           </p>
           <div className="flex items-center justify-between pl-2">
             <Link
               href={repo.html_url}
               className="rounded-lg border border-slate-900 bg-slate-800 p-1 text-sm shadow-xl md:p-2 md:text-inherit"
               target={"_blank"}
+              rel="noreferrer"
             >
               view-project
             </Link>
-            <div className="p-2 text-4xl">
-              {languageMap[repo.language as keyof typeof languageMap].Icon}
-            </div>
+            <div className="p-2 text-4xl">{language.Icon}</div>
           </div>
         </div>
       </div>
