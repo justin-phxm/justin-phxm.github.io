@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",
-    "@vercel/blob": "^2.3.0",
+    "@vercel/blob": "^2.8.0",
     "@vercel/analytics": "^2.0.1",
     "geist": "^1.7.2",
     "highlight.js": "^11.11.1",
