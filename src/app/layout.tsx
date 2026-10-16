@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
+import Providers from "./providers";
 
 const firaCode = localFont({
   src: "../styles/fonts/FiraCode-Regular.ttf",
@@ -30,7 +31,7 @@ export default function RootLayout({
           </AnimatedComponent>
           <div className="relative flex flex-1 text-white">
             <div className="absolute inset-0 overflow-y-auto overflow-x-hidden">
-              {children}
+              <Providers>{children}</Providers>
             </div>
           </div>
           <AnimatedComponent>

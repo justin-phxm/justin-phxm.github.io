@@ -33,6 +33,23 @@ I’m a full-stack web developer focused on building clean, practical interfaces
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
+## Contact form database
+
+Contact submissions are validated by a Next.js server action and stored in Neon Postgres using
+Drizzle's [Neon HTTP driver](https://orm.drizzle.team/docs/get-started/neon-new).
+The `contact_submissions` table stores a UUID, name, email, message, and creation time.
+
+1. Install dependencies with `pnpm install` (Node.js 20.19+).
+2. Copy `.env.example` to `.env.local` and supply the Neon connection strings.
+3. Run `pnpm db:migrate` to apply the committed migrations.
+4. Run `pnpm dev` and submit the contact form.
+
+After changing `src/db/schema.ts`, run `pnpm db:generate`, review the SQL in
+`drizzle/`, and run `pnpm db:migrate`. `pnpm db:studio` opens the database browser.
+For Vercel, set `DATABASE_URL` and `DATABASE_URL_UNPOOLED` in the project's server
+environment and apply migrations before deploying. Never prefix these variables
+with `NEXT_PUBLIC_` or commit `.env.local`.
+
 ## Around the Web
 
 - University of Calgary, Class of 2027
