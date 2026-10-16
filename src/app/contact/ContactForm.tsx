@@ -1,6 +1,7 @@
 "use client";
 import { useState, useTransition } from "react";
 import AnimatedComponent from "@/styles/AnimatedComponent";
+import { useMutation } from "@tanstack/react-query";
 import {
   type FieldErrors,
   type UseFormRegister,
@@ -92,27 +93,32 @@ const Input = ({
   register,
   name,
   placeholder,
-  required,
   errors,
   className,
 }: {
   register: UseFormRegister<Inputs>;
   name: keyof Inputs;
   placeholder?: string;
-  required?: boolean;
   errors?: FieldErrors<Inputs>;
   className?: string;
 }) => (
   <div className="flex w-full flex-col gap-2">
-    <p>_{name}:</p>
+    <label htmlFor={`contact-${name}`}>_{name}:</label>
     <input
-      {...register(name, { required })}
-      placeholder={name ?? placeholder}
+      {...register(name, { required: "This field is required" })}
+      id={`contact-${name}`}
+      type={name === "email" ? "email" : "text"}
+      maxLength={name === "message" ? 5000 : name === "email" ? 254 : 100}
+      aria-invalid={Boolean(errors?.[name])}
+      aria-describedby={errors?.[name] ? `contact-${name}-error` : undefined}
+      placeholder={placeholder ?? name}
       className={twMerge(
         "h-10 w-full min-w-72 rounded-lg border border-slate-500 bg-slate-950 p-2 shadow",
         className,
       )}
     />
-    {errors && errors[name] && <span>This field is required</span>}
+    {errors?.[name] && (
+      <span id={`contact-${name}-error`}>{errors[name].message}</span>
+    )}
   </div>
 );
