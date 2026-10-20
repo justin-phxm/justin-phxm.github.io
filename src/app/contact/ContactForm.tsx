@@ -1,6 +1,4 @@
 "use client";
-import { useState, useTransition } from "react";
-import AnimatedComponent from "@/styles/AnimatedComponent";
 import { useMutation } from "@tanstack/react-query";
 import {
   type FieldErrors,
@@ -8,44 +6,39 @@ import {
   useForm,
 } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
-import { tryCatch } from "../utils/tryCatch";
+import { type ContactInput, contactSchema } from "@/lib/contact";
+import AnimatedComponent from "@/styles/AnimatedComponent";
+import { submitContact } from "./actions";
 import ContactView from "./ContactView";
-import { saveContactSubmission } from "./actions";
-type Inputs = {
-  name: string;
-  email: string;
-  message: string;
-};
+
+type Inputs = ContactInput;
 export default function ContactForm() {
   const {
     register,
     handleSubmit,
     watch,
     reset,
+    setError,
     formState: { errors },
   } = useForm<Inputs>();
-  const [isPending, startTransition] = useTransition();
-  const [submitMessage, setSubmitMessage] = useState<string | null>(null);
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const submission = useMutation({
+    mutationFn: submitContact,
+    retry: false,
+    onSuccess: () => reset({ name: "", email: "", message: "" }),
+  });
+  const { isPending, isSuccess, isError, mutate } = submission
   const submitData = handleSubmit((data) => {
-    setSubmitMessage(null);
-    setSubmitError(null);
-
-    startTransition(async () => {
-      const { error } = await tryCatch(saveContactSubmission(data));
-
-      if (error) {
-        setSubmitError(
-          error instanceof Error
-            ? error.message
-            : "Unable to save your message right now. Please try again.",
-        );
-        return;
+    if (isPending) return;
+    submission.reset();
+    const result = contactSchema.safeParse(data);
+    if (!result.success) {
+      for (const issue of result.error.issues) {
+        const field = issue.path[0] as keyof Inputs;
+        setError(field, { message: issue.message });
       }
-
-      setSubmitMessage("Thanks! Your message was saved successfully.");
-      reset();
-    });
+      return;
+    }
+    mutate(result.data);
   });
   const name = watch("name");
   const email = watch("email");
@@ -58,12 +51,11 @@ export default function ContactForm() {
         className="flex flex-col items-center justify-center gap-2 p-4 text-slate-500 md:w-1/2"
       >
         <AnimatedComponent className="w-full">
-          <Input register={register} name={"name"} required errors={errors} />
-          <Input register={register} name={"email"} required errors={errors} />
+          <Input register={register} name="name" errors={errors} />
+          <Input register={register} name="email" errors={errors} />
           <Input
             register={register}
-            name={"message"}
-            required
+            name="message"
             errors={errors}
             className="py-8"
           />
@@ -74,10 +66,18 @@ export default function ContactForm() {
           >
             {isPending ? "Submitting..." : "Submit"}
           </button>
-          {submitMessage && (
-            <p className="text-sm text-emerald-400">{submitMessage}</p>
-          )}
-          {submitError && <p className="text-sm text-red-400">{submitError}</p>}
+          <output aria-live="polite" className="mt-2 block text-sm">
+            {isSuccess && (
+              <span className="text-emerald-400">
+                Thanks! Your message was saved successfully.
+              </span>
+            )}
+            {isError && (
+              <span className="text-red-400">
+                Unable to send your message. Please try again later.
+              </span>
+            )}
+          </output>
         </AnimatedComponent>
       </form>
       <div className="flex items-center p-4 md:w-1/2 md:justify-center">
