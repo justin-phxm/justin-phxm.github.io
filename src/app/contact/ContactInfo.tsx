@@ -31,7 +31,7 @@ export default function ContactInfo() {
 const Contact = ({
   link,
   title,
-  type,
+  type = "",
 }: {
   link: string;
   title: string;

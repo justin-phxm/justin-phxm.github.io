@@ -1,9 +1,10 @@
-import Image from "next/image";
 import "highlight.js/styles/github-dark-dimmed.css";
 import Link from "next/link";
 import { AiFillStar } from "react-icons/ai";
 import { type Gist, getGists } from "@/app/actions";
 import "highlight.js/styles/default.css";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import CodeSnippetDetails from "./CodeSnippetDetails";
 export default async function CodeSnippets() {
   const gistData = await getGists();
@@ -18,14 +19,20 @@ export default async function CodeSnippets() {
             <div className="flex flex-row justify-between">
               <GistAuthor gist={gist} />
               <div className="flex text-sm font-bold text-slate-500">
-                <Link
-                  href={gist.html_url}
-                  className="flex flex-row items-center gap-2 hover:text-slate-400"
-                  target={"_blank"}
+                <Button
+                  asChild
+                  variant="ghost"
+                  className="h-auto gap-2 p-0 font-bold hover:bg-transparent hover:text-slate-400 has-[>svg]:px-0"
                 >
-                  <AiFillStar />
-                  <p>star</p>
-                </Link>
+                  <Link
+                    href={gist.html_url}
+                    target={"_blank"}
+                    rel="noopener noreferrer"
+                  >
+                    <AiFillStar />
+                    <p>star</p>
+                  </Link>
+                </Button>
               </div>
             </div>
             <CodeSnippetDetails gist={gist} />
@@ -50,13 +57,15 @@ export default async function CodeSnippets() {
 function GistAuthor({ gist }: { gist: Gist }) {
   return (
     <div className="flex flex-row items-center">
-      <Image
-        className="size-12 rounded-full"
-        src={gist.owner.avatar_url}
-        alt={""}
-        width={48}
-        height={48}
-      />
+      <Avatar className="size-12">
+        <AvatarImage
+          src={gist.owner.avatar_url}
+          alt={`${gist.owner.login}'s avatar`}
+        />
+        <AvatarFallback>
+          {gist.owner.login.slice(0, 2).toUpperCase()}
+        </AvatarFallback>
+      </Avatar>
       <div className="p-2">
         <Link
           className="text-sm font-bold text-indigo-500"
