@@ -53,7 +53,7 @@ export default function ContactView({
       </span>
       <span className="leading-relaxed text-indigo-500">message</span>
       <span className="leading-relaxed text-slate-500">: </span>
-      <span className="leading-relaxed text-orange-300">{`"${message}"`}</span>
+      <span className="whitespace-pre-wrap leading-relaxed text-orange-300">{`"${message}"`}</span>
       <span className="leading-relaxed text-indigo-500">
         ,
         <br /> date:{" "}

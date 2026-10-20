@@ -1,3 +1,11 @@
+import { ChevronRightIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+
 export default function Details({
   children,
   title,
@@ -8,17 +16,20 @@ export default function Details({
   className?: string;
 }) {
   return (
-    <>
-      <details className={className} open>
-        <summary
-          className={
-            "cursor-pointer select-none whitespace-nowrap bg-slate-800 px-2 outline-none focus:underline lg:bg-inherit"
-          }
+    <Collapsible className={className} defaultOpen>
+      <CollapsibleTrigger asChild>
+        <Button
+          type="button"
+          variant="ghost"
+          className="h-auto w-full justify-start gap-1 rounded-none bg-slate-800 px-2 py-0 text-base font-normal text-white has-[>svg]:px-2 lg:bg-inherit [&[data-state=open]>svg]:rotate-90"
         >
+          <ChevronRightIcon className="size-4 transition-transform" />
           {title}
-        </summary>
-        <ul className="flex flex-col text-slate-500">{children}</ul>
-      </details>
-    </>
+        </Button>
+      </CollapsibleTrigger>
+      <CollapsibleContent className="flex flex-col text-slate-500">
+        {children}
+      </CollapsibleContent>
+    </Collapsible>
   );
 }

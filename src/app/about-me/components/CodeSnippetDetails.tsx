@@ -1,22 +1,39 @@
 import Link from "next/link";
 import { FaLink } from "react-icons/fa";
 import type { Gist } from "@/app/actions";
+import { Button } from "@/components/ui/button";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
-function getFirstEntry<T extends Record<string, any>>(obj: T) {
-  const [key, value] = Object.entries(obj)[0] as [keyof T, T[keyof T]];
-  return { key, value };
-}
 export default function CodeSnippetDetails({ gist }: { gist: Gist }) {
-  const { key: fileName } = getFirstEntry(gist.files);
+  const fileName = Object.keys(gist.files)[0] ?? "Code snippet";
   return (
-    <details>
-      <summary className="flex cursor-pointer justify-between hover:text-slate-400">
-        <p className="select-none">{fileName}</p>
-        <Link href={gist.html_url} target="_blank">
-          <FaLink />
-        </Link>
-      </summary>
-      <div>{gist.description}</div>
-    </details>
+    <Collapsible>
+      <div className="flex items-center justify-between gap-2">
+        <CollapsibleTrigger asChild>
+          <Button
+            type="button"
+            variant="ghost"
+            className="h-auto min-w-0 flex-1 justify-start whitespace-normal rounded-none p-0 text-left text-base font-normal hover:bg-transparent hover:text-slate-400"
+          >
+            {fileName}
+          </Button>
+        </CollapsibleTrigger>
+        <Button asChild variant="ghost" size="icon" className="size-6">
+          <Link
+            href={gist.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View ${fileName} on GitHub`}
+          >
+            <FaLink />
+          </Link>
+        </Button>
+      </div>
+      <CollapsibleContent>{gist.description}</CollapsibleContent>
+    </Collapsible>
   );
 }

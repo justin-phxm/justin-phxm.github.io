@@ -1,17 +1,24 @@
 "use client";
+import { ChevronRightIcon } from "lucide-react";
 import { useState } from "react";
 import { AiFillCode } from "react-icons/ai";
 import { BiSolidUser } from "react-icons/bi";
 import { FaGamepad } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { devInfo } from "@/public/devInfo";
 import DesktopSidebar from "./DesktopSidebar";
 import InfoSection from "./InfoSection";
 import InfoView from "./InfoView";
 
 const sectionIcons = [
-  <AiFillCode key="code" />,
-  <BiSolidUser key="user" />,
-  <FaGamepad key="gamepad" />,
+  <AiFillCode key="code" className="size-7.5" />,
+  <BiSolidUser key="user" className="size-7.5" />,
+  <FaGamepad key="gamepad" className="size-7.5" />,
 ];
 export default function UserInfo() {
   const [aboutSectionIndex, setAboutSectionIndex] = useState(0);
@@ -22,25 +29,36 @@ export default function UserInfo() {
     <>
       <div className="flex flex-col gap-1 border-slate-800 lg:border-r">
         {devInfo.about.sections.map((section, sectionMapIndex) => (
-          <details key={section.title}>
-            <summary
-              tabIndex={-1}
-              className="cursor-pointer bg-slate-800 px-2 lg:list-none lg:bg-inherit lg:px-0"
-            >
-              <span className="text-sm lg:hidden">{section.title}</span>
-              <button
-                className={`hidden border-b border-slate-800 p-2 text-3xl lg:block ${
-                  aboutSectionIndex !== sectionMapIndex && "text-gray-600"
-                }`}
-                onClick={() => {
-                  setAboutSectionIndex(sectionMapIndex);
-                  setInfoDescriptionIndex(0);
-                }}
+          <Collapsible key={section.title}>
+            <CollapsibleTrigger asChild>
+              <Button
+                type="button"
+                variant="ghost"
+                className="h-auto w-full justify-start gap-1 rounded-none bg-slate-800 px-2 py-0 font-normal has-[>svg]:px-2 lg:hidden [&[data-state=open]>svg]:rotate-90"
               >
-                {sectionIcons[sectionMapIndex]}
-              </button>
-            </summary>
-            <div className="text-sm lg:hidden">
+                <ChevronRightIcon className="size-4 transition-transform" />
+                {section.title}
+              </Button>
+            </CollapsibleTrigger>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              aria-label={section.title}
+              aria-pressed={aboutSectionIndex === sectionMapIndex}
+              className={`hidden size-auto rounded-none border-b border-slate-800 p-2 lg:inline-flex ${
+                aboutSectionIndex !== sectionMapIndex
+                  ? "text-gray-600"
+                  : "text-white"
+              }`}
+              onClick={() => {
+                setAboutSectionIndex(sectionMapIndex);
+                setInfoDescriptionIndex(0);
+              }}
+            >
+              {sectionIcons[sectionMapIndex]}
+            </Button>
+            <CollapsibleContent className="text-sm lg:hidden">
               {devInfo.about.sections[sectionMapIndex]?.info.map(
                 (info, infoMapIndex) => (
                   <InfoSection
@@ -55,8 +73,8 @@ export default function UserInfo() {
                   />
                 ),
               )}
-            </div>
-          </details>
+            </CollapsibleContent>
+          </Collapsible>
         ))}
       </div>
       <DesktopSidebar

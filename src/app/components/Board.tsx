@@ -1,4 +1,4 @@
-import React from "react";
+import { Button } from "@/components/ui/button";
 
 export default function Board({ board }: { board: number[][] }) {
   return (
@@ -6,14 +6,18 @@ export default function Board({ board }: { board: number[][] }) {
       {board.map((row: number[], index) => (
         <div key={index} className="flex justify-around">
           {row.map((cell: number, index2) => (
-            <button
+            <Button
               key={index2}
-              className={`inline-flex size-16 items-center justify-center rounded-lg border border-white text-white transition ${
+              type="button"
+              variant="ghost"
+              size="icon"
+              aria-label={cell === 0 ? "Empty tile" : `Tile ${cell}`}
+              className={`size-16 rounded-lg border border-white text-base font-normal text-white transition ${
                 cell === 0 ? "scale-95 bg-transparent" : "bg-teal-600"
               } `}
             >
               {cell}
-            </button>
+            </Button>
           ))}
         </div>
       ))}

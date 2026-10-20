@@ -1,3 +1,5 @@
+export { cn } from "cn";
+
 type Result<T> = { data: T; error: null } | { data: null; error: Error };
 
 // Based on Theo's result pattern:

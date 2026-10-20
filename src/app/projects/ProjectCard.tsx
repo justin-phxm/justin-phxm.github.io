@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import type { Repo } from "../actions";
 import { fallback, languageMap } from "./LanguageMaps";
 export default function ProjectCard({
@@ -9,7 +11,9 @@ export default function ProjectCard({
   repo: Repo;
   index: number;
 }) {
-  if (!repo.description) repo.description = `View ${repo.name} on Github`;
+  const description = repo.description || `View ${repo.name} on Github`;
+  const language =
+    languageMap[repo.language as keyof typeof languageMap] ?? fallback;
 
   return (
     <li className="w-full max-w-80">
@@ -20,35 +24,36 @@ export default function ProjectCard({
           {repo.name}
         </h2>
       </article>
-      <div className="rounded-2xl border border-slate-800 bg-slate-950">
+      <Card className="gap-0 rounded-2xl border-slate-800 bg-slate-950 py-0 shadow-none">
         <Image
           className="h-36 w-full rounded-t-2xl border-b border-slate-800 object-cover"
           height={144}
           width={288}
-          src={
-            languageMap[repo.language as keyof typeof languageMap].Image ??
-            fallback.Image
-          }
+          src={language.Image}
           alt={repo.language}
         />
-        <div className="flex h-36 flex-col justify-between gap-2">
+        <CardContent className="flex h-36 flex-col justify-between gap-2 p-0">
           <p className="max-h-20 overflow-auto p-2 text-white md:p-4">
-            {repo.description}
+            {description}
           </p>
-          <div className="flex items-center justify-between pl-2">
-            <Link
-              href={repo.html_url}
-              className="rounded-lg border border-slate-900 bg-slate-800 p-1 text-sm shadow-xl md:p-2 md:text-inherit"
-              target={"_blank"}
+          <CardFooter className="justify-between p-0 pl-2">
+            <Button
+              asChild
+              variant="secondary"
+              className="h-auto rounded-lg border border-slate-900 p-1 font-normal shadow-xl md:p-2 md:text-base"
             >
-              view-project
-            </Link>
-            <div className="p-2 text-4xl">
-              {languageMap[repo.language as keyof typeof languageMap].Icon}
-            </div>
-          </div>
-        </div>
-      </div>
+              <Link
+                href={repo.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                view-project
+              </Link>
+            </Button>
+            <div className="p-2 text-4xl">{language.Icon}</div>
+          </CardFooter>
+        </CardContent>
+      </Card>
     </li>
   );
 }

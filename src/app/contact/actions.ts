@@ -9,5 +9,5 @@ export async function submitContact(data: ContactInput): Promise<void> {
   if (!result.success) {
     throw new Error(`Form Errors: ${result.error.issues}`);
   }
-    await getDb().insert(contactSubmissions).values(result.data);
+  await getDb().insert(contactSubmissions).values(result.data);
 }

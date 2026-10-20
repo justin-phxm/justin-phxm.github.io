@@ -23,7 +23,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={firaCode.className}>
+    <html
+      lang="en"
+      className={`dark ${firaCode.className} ${firaCode.variable}`}
+    >
       <body className="flex min-h-screen flex-col overflow-hidden bg-gray-950">
         <main className="m-4 flex flex-1 flex-col justify-center rounded-lg border border-slate-800 bg-slate-900">
           <AnimatedComponent variants="fadeDown">

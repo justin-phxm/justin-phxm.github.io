@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import Board from "./Board";
 import GameControls from "./GameControls";
 import {
@@ -80,16 +81,17 @@ export default function Game() {
         tabIndex={0}
       >
         <Board board={board} />
-        <button
+        <Button
           type="button"
+          variant="secondary"
           onClick={() => {
             setBoard(shuffleArray(board));
             setMoves(0);
           }}
-          className="items-center justify-center rounded-lg bg-orange-300 p-3"
+          className="h-auto rounded-lg bg-orange-300 p-3 font-normal hover:bg-orange-300/80"
         >
           <span className="text-sm text-gray-950">start-game</span>
-        </button>
+        </Button>
       </section>
       <div className="flex w-full flex-col items-center gap-2 text-sm text-white">
         <div>
@@ -105,19 +107,21 @@ export default function Game() {
         </div>
         <Timer />
         <div className="flex w-40 flex-row gap-2">
-          <button
+          <Button
             type="button"
+            variant="secondary"
             onClick={handleRestart}
-            className="text-nowrap rounded-md bg-orange-300 p-2 text-black outline-none ring-white transition-opacity hover:opacity-80 focus:ring-2"
+            className="h-auto rounded-md bg-orange-300 p-2 font-normal text-black hover:bg-orange-300/80"
           >
             restart-game
-          </button>
-          <Link
-            className="flex flex-1 items-center justify-center rounded-lg border border-white p-2"
-            href={"/about-me"}
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            className="h-auto flex-1 rounded-lg border-white bg-transparent p-2 font-normal text-white dark:border-white dark:bg-transparent dark:hover:bg-slate-800"
           >
-            skip
-          </Link>
+            <Link href="/about-me">skip</Link>
+          </Button>
         </div>
       </div>
     </div>
