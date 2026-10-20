@@ -1,9 +1,27 @@
+import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { contactSubmissions } from "@/db/schema";
 
-export const contactSchema = z.object({
-  name: z.string().trim().min(1, "Enter your name").max(100),
-  email: z.string().trim().max(254).email("Enter a valid email address"),
-  message: z.string().trim().min(1, "Enter a message").max(5000),
+const contactInsertSchema = createInsertSchema(contactSubmissions).pick({
+  name: true,
+  email: true,
+  message: true,
+});
+
+export const contactSchema = contactInsertSchema.extend({
+  name: z
+    .string()
+    .trim()
+    .pipe(contactInsertSchema.shape.name.min(1, "Enter your name")),
+  email: z
+    .string()
+    .trim()
+    .pipe(contactInsertSchema.shape.email)
+    .pipe(z.email("Enter a valid email address")),
+  message: z
+    .string()
+    .trim()
+    .pipe(contactInsertSchema.shape.message.min(1, "Enter a message")),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
