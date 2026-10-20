@@ -1,8 +1,8 @@
 import Image from "next/image";
 import "highlight.js/styles/github-dark-dimmed.css";
-import { type Gist, getGists } from "@/app/actions";
 import Link from "next/link";
 import { AiFillStar } from "react-icons/ai";
+import { type Gist, getGists } from "@/app/actions";
 import "highlight.js/styles/default.css";
 import CodeSnippetDetails from "./CodeSnippetDetails";
 export default async function CodeSnippets() {
@@ -21,7 +21,8 @@ export default async function CodeSnippets() {
                 <Link
                   href={gist.html_url}
                   className="flex flex-row items-center gap-2 hover:text-slate-400"
-                  target={"_blank"}>
+                  target={"_blank"}
+                >
                   <AiFillStar />
                   <p>star</p>
                 </Link>
@@ -60,7 +61,8 @@ function GistAuthor({ gist }: { gist: Gist }) {
         <Link
           className="text-sm font-bold text-indigo-500"
           href={gist.owner.html_url}
-          target="_blank">
+          target="_blank"
+        >
           @{gist.owner.login}
         </Link>
         <div className="text-xs text-slate-500">

@@ -76,7 +76,7 @@ export function findEmptyCell(array: number[][]) {
       }
       if (emptyCell) return;
     });
-    if (emptyCell) return emptyCell;
+    if (emptyCell) return;
   });
   return emptyCell as { x: number; y: number };
 }

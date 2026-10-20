@@ -1,6 +1,6 @@
 "use client";
-import AnimatedComponent from "@/styles/AnimatedComponent";
 import { useState } from "react";
+import AnimatedComponent from "@/styles/AnimatedComponent";
 import type { Repo } from "../actions";
 import { languageMap } from "./LanguageMaps";
 import ProjectCard from "./ProjectCard";

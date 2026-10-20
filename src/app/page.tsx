@@ -1,10 +1,11 @@
-import AnimatedComponent from "@/styles/AnimatedComponent";
 import Link from "next/link";
-import { devInfo } from "@/public/devInfo";
 import { RxCrossCircled } from "react-icons/rx";
 import { twMerge } from "tailwind-merge";
+import { devInfo } from "@/public/devInfo";
+import AnimatedComponent from "@/styles/AnimatedComponent";
 import Circle from "./components/Circle";
 import Game from "./components/Game";
+
 const CROSS_STYLES = "absolute size-4 rounded-full shadow-inner opacity-20 ";
 export default function page() {
   return (
@@ -42,7 +43,8 @@ function Hero() {
             <Link
               href={devInfo.contacts.social.github.url}
               target="_blank"
-              className="underline">
+              className="underline"
+            >
               {devInfo.contacts.social.github.url}
             </Link>
             ”
@@ -57,7 +59,7 @@ function GameContainer() {
     <div className="hidden w-full backdrop-blur-3xl lg:flex">
       <Circle className="-right-1/4 top-1/2 bg-indigo-600" />
       <Circle className="-left-1/4 bottom-1/2 bg-emerald-500" />
-      <div className="flex w-full rounded-lg border border-neutral-900 bg-gradient-to-br from-teal-900 via-transparent to-indigo-950 p-8 shadow-inner backdrop-blur">
+      <div className="flex w-full rounded-lg border border-neutral-900 bg-linear-to-br from-teal-900 via-transparent to-indigo-950 p-8 shadow-inner backdrop-blur">
         <div className={twMerge(CROSS_STYLES, "left-1 top-1")}>
           <RxCrossCircled />
         </div>
