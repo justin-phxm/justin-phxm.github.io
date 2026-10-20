@@ -1,6 +1,6 @@
-import type { Gist } from "@/app/actions";
 import Link from "next/link";
 import { FaLink } from "react-icons/fa";
+import type { Gist } from "@/app/actions";
 
 function getFirstEntry<T extends Record<string, any>>(obj: T) {
   const [key, value] = Object.entries(obj)[0] as [keyof T, T[keyof T]];

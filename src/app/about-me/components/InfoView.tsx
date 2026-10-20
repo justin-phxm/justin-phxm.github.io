@@ -1,4 +1,5 @@
 import { GrFormClose } from "react-icons/gr";
+
 interface InfoDescription {
   title: string;
   description: string;

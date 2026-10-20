@@ -5,14 +5,15 @@ import { useEffect, useState } from "react";
 import Board from "./Board";
 import GameControls from "./GameControls";
 import {
-  type Direction,
-  WINNING_BOARD,
   checkWin,
+  type Direction,
   findEmptyCell,
   move,
   shuffleArray,
+  WINNING_BOARD,
 } from "./GameLogic";
 import Timer from "./Timer";
+
 const KEY_MAP = {
   ArrowLeft: "left",
   ArrowUp: "up",
@@ -72,6 +73,8 @@ export default function Game() {
   return (
     <div className="flex w-full items-center justify-center gap-2">
       <section
+        role="application"
+        aria-label="Sliding puzzle. Use the arrow keys to move tiles."
         className="flex w-full cursor-pointer flex-col gap-4 rounded-lg bg-slate-900/80 p-4 shadow-inner outline-green-500 hover:outline focus:outline"
         onKeyDown={getKeyAndMove}
         tabIndex={0}
@@ -79,17 +82,13 @@ export default function Game() {
         <Board board={board} />
         <button
           type="button"
+          onClick={() => {
+            setBoard(shuffleArray(board));
+            setMoves(0);
+          }}
           className="items-center justify-center rounded-lg bg-orange-300 p-3"
         >
-          <div
-            onClick={() => {
-              setBoard(shuffleArray(board));
-              setMoves(0);
-            }}
-            className="text-sm text-gray-950"
-          >
-            start-game
-          </div>
+          <span className="text-sm text-gray-950">start-game</span>
         </button>
       </section>
       <div className="flex w-full flex-col items-center gap-2 text-sm text-white">
