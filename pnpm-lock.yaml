@@ -23,6 +23,9 @@ importers:
       drizzle-orm:
         specifier: ^0.45.4
         version: 0.45.4(@neondatabase/serverless@1.2.0)
+      drizzle-zod:
+        specifier: ^0.8.3
+        version: 0.8.3(drizzle-orm@0.45.4(@neondatabase/serverless@1.2.0))(zod@4.6.7)
       geist:
         specifier: ^1.7.2
         version: 1.7.2(next@16.3.3(@types/node@26.6.5)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
@@ -1226,6 +1229,12 @@ packages:
       sqlite3:
         optional: true
 
+  drizzle-zod@0.8.3:
+    resolution: {integrity: sha512-66yVOuvGhKJnTdiqj1/Xaaz9/qzOdRJADpDa68enqS6g3t0kpNkwNYjUuaeXgZfO/UWuIM9HIhSlJ6C5ZraMww==}
+    peerDependencies:
+      drizzle-orm: '>=0.36.0'
+      zod: ^3.25.0 || ^4.0.0
+
   enhanced-resolve@5.26.0:
     resolution: {integrity: sha512-9vhedylFonb2YGogzUKX6+Ja72gOJbN1QHAqdrvqLwhdl/QWbKopzoUC9EbQNVsAns/bx/4uyqalrQAoy1IByw==}
     engines: {node: '>=10.13.0'}
@@ -2134,6 +2143,11 @@ snapshots:
   drizzle-orm@0.45.4(@neondatabase/serverless@1.2.0):
     optionalDependencies:
       '@neondatabase/serverless': 1.2.0
+
+  drizzle-zod@0.8.3(drizzle-orm@0.45.4(@neondatabase/serverless@1.2.0))(zod@4.6.7):
+    dependencies:
+      drizzle-orm: 0.45.4(@neondatabase/serverless@1.2.0)
+      zod: 4.6.7
 
   enhanced-resolve@5.26.0:
     dependencies:
